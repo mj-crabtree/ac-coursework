@@ -16,4 +16,8 @@ public class Customer extends BaseEntity {
 	private LocalDateTime createdOn = LocalDateTime.now();
 	private LocalDateTime updatedAt;
 	private boolean active = true;
+
+	public String getFullName() {
+		return this.customerName.getFirstName() + " " + this.customerName.getLastName();
+	}
 }

@@ -3,6 +3,6 @@ package com.crabtree.hoyfc.model;
 import lombok.Data;
 
 @Data
-public class BaseEntity {
+public abstract class BaseEntity {
 	private Integer id;
 }
