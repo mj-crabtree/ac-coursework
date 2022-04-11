@@ -28,11 +28,11 @@ public class CustomerController {
 								@PathVariable(name = "pageNumber") Integer pageNumber,
 	                            @RequestParam(name = "sortColumn") String sortColumn,
 	                            @RequestParam(name = "sortDirection") String sortDirection) {
+
 		model.addAttribute("currentPageNumber", pageNumber);
-		model.addAttribute("customerList", customerService.getCustomers());
-		// model.addAttribute("customerList", customerService.getSortedCustomers(sortColumn, sortDirection));
-		model.addAttribute("sortField", sortColumn);
-		model.addAttribute("sortDir", sortDirection);
+		model.addAttribute("customerList", customerService.getPaginatedCustomers(pageNumber, 15));
+		model.addAttribute("sortColumn", sortColumn);
+		model.addAttribute("sortDirection", sortDirection);
 		model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
 
 		return "customers/ListCustomers";

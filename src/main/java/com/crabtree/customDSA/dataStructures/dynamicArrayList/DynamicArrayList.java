@@ -47,6 +47,15 @@ public class DynamicArrayList<T> extends AbstractDynamicDataStructure<T> impleme
 		this.collection[index] = element;
 	}
 
+	@Override
+	public DynamicArrayList<T> subList(Integer firstElement, Integer lastElement) {
+		DynamicArrayList<T> output = new DynamicArrayList<>();
+		for (int i = firstElement; i < lastElement; i++) {
+			output.add(this.get(i));
+		}
+		return output;
+	}
+
 	private void initialise() {
 		this.collection = new Object[INITIAL_CAPACITY];
 		this.currentCapacity = 0;

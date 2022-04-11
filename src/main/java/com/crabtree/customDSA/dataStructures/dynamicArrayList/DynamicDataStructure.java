@@ -26,4 +26,6 @@ public interface DynamicDataStructure<T> {
 	void put(int index, T element);
 
 	int newMaxCapacity(int newMaxCapacity);
+
+	DynamicDataStructure<T> subList(Integer firstElement, Integer lastElement);
 }

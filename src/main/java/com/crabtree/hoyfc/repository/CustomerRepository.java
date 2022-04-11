@@ -2,6 +2,7 @@ package com.crabtree.hoyfc.repository;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
+import com.crabtree.hoyfc.service.pagination.Pagination;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,5 +23,10 @@ public class CustomerRepository {
 
 	public DynamicArrayList<Customer> getCustomers() {
 		return customers;
+	}
+
+	public DynamicArrayList<Customer> getPaginatedCustomers(int pageNumber, int pageSize) {
+		DynamicArrayList<Customer> out = (DynamicArrayList<Customer>) Pagination.paginateCollection(this.customers, pageNumber, pageSize);
+		return out;
 	}
 }
