@@ -44,6 +44,6 @@
         <a th:href="@{'/customers/page/' + ${currentPageNumber - 1} + '?sortColumn=' + ${sortColumn} + '&sortDirection=' + ${sortDirection}}"
            class="btn btn-primary" th:classappend="${currentPageNumber == 1 ? 'disabled' : ''}"> << </a>
         <a th:href="@{'/customers/page/' + ${currentPageNumber + 1} + '?sortColumn=' + ${sortColumn} + '&sortDirection=' + ${sortDirection}}"
-           class="btn btn-primary" th:classappend="${currentPageNumber == 100 ? 'disabled' : ''}"> >> </a>
+           class="btn btn-primary" th:classappend="${currentPageNumber == maxPages ? 'disabled' : ''}"> >> </a>
     </div>
 </div>

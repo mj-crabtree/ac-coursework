@@ -31,6 +31,7 @@ public class CustomerController {
 
 		model.addAttribute("currentPageNumber", pageNumber);
 		model.addAttribute("customerList", customerService.getPaginatedCustomers(pageNumber, 15));
+		model.addAttribute("maxPages", Math.ceil((customerService.getTotalCustomers() / (double) 15)));
 		model.addAttribute("sortColumn", sortColumn);
 		model.addAttribute("sortDirection", sortDirection);
 		model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");

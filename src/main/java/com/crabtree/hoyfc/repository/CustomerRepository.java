@@ -25,6 +25,10 @@ public class CustomerRepository {
 		return customers;
 	}
 
+	public Integer count() {
+		return this.customers.count();
+	}
+
 	public DynamicArrayList<Customer> getPaginatedCustomers(int pageNumber, int pageSize) {
 		DynamicArrayList<Customer> out = (DynamicArrayList<Customer>) Pagination.paginateCollection(this.customers, pageNumber, pageSize);
 		return out;
