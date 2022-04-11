@@ -71,7 +71,7 @@ public class CustomerService {
 		return customerRepository.count();
 	}
 
-	public DynamicArrayList<Customer> getPaginatedCustomers(Integer pageNumber, Integer pageSize) {
-		return customerRepository.getPaginatedCustomers(pageNumber, pageSize);
+	public DynamicArrayList<Customer> getPaginatedCustomers(Integer pageNumber, Integer pageSize, String sortColumn, String sortDirection) {
+		return customerRepository.getPaginatedCustomers(pageNumber, pageSize, sortColumn, sortDirection);
 	}
 }
