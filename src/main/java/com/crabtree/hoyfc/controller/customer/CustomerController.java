@@ -30,7 +30,7 @@ public class CustomerController {
 	                            @RequestParam(name = "sortDirection") String sortDirection) {
 
 		model.addAttribute("currentPageNumber", pageNumber);
-		model.addAttribute("customerList", customerService.getPaginatedCustomers(pageNumber, 15, sortColumn, sortDirection));
+		model.addAttribute("customerList", customerService.getSortedPaginatedCustomers(pageNumber, 15, sortColumn, sortDirection));
 		model.addAttribute("maxPages", Math.ceil((customerService.getTotalCustomers() / (double) 15)));
 		model.addAttribute("sortColumn", sortColumn);
 		model.addAttribute("sortDirection", sortDirection);

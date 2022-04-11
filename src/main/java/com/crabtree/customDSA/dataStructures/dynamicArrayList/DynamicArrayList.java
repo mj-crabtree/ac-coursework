@@ -1,5 +1,8 @@
 package com.crabtree.customDSA.dataStructures.dynamicArrayList;
 
+import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
+
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class DynamicArrayList<T> extends AbstractDynamicDataStructure<T> implements Iterable<T> {
@@ -45,6 +48,10 @@ public class DynamicArrayList<T> extends AbstractDynamicDataStructure<T> impleme
 
 	public void put(int index, T element) {
 		this.collection[index] = element;
+	}
+
+	public void sort(Comparator<?> comparator) {
+
 	}
 
 	@Override
