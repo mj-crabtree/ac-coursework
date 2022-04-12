@@ -36,7 +36,7 @@ public class CustomerController {
 		model.addAttribute("sortDirection", sortDirection);
 		model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
 
-		return "customers/ListCustomers";
+		return "customers/list";
 	}
 
 	@GetMapping(value = "/search/")
@@ -46,11 +46,14 @@ public class CustomerController {
 	                              @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
 
 		model.addAttribute("searchTerm", searchTerm);
+
+		// todo: make this sortable and paginated
 		model.addAttribute("customerList", customerService.findCustomers(searchTerm));
 		model.addAttribute("maxPages", (int) Math.ceil((customerService.getTotalCustomers() / (double) 15)));
 		model.addAttribute("sortColumn", sortColumn);
 		model.addAttribute("sortDirection", sortDirection);
 		model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
+
 		return "customers/search";
 	}
 }

@@ -1,6 +1,6 @@
 package com.crabtree.hoyfc.model.customer;
 
-import com.crabtree.hoyfc.model.BaseEntity;
+import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

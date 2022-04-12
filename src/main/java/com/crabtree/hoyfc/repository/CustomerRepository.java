@@ -4,7 +4,7 @@ import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearchImpl;
 import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.model.customer.comparator.CustomerComparatorFactory;
+import com.crabtree.hoyfc.model.customer.comparatorFactory.CustomerComparatorFactory;
 import com.crabtree.hoyfc.service.pagination.Pagination;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,7 @@
-package com.crabtree.hoyfc.model.customer;
+package com.crabtree.hoyfc.model.customer.editCustomer;
+
+import com.crabtree.hoyfc.model.customer.*;
+import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
 
 import java.time.LocalDate;
 

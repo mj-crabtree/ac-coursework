@@ -1,7 +1,7 @@
 package com.crabtree.hoyfc.service;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
-import com.crabtree.hoyfc.model.customer.CreateCustomerParameters;
+import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.repository.CustomerRepository;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model.customer.comparator;
+package com.crabtree.hoyfc.model.customer.comparatorFactory;
 
 import com.crabtree.hoyfc.model.customer.Customer;
 

@@ -6,7 +6,7 @@
 <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
-<div layout:fragment="page-content">
+<section layout:fragment="content">
     <div class="container py-5">
         <div class="d-flex justify-content-between">
             <div class="d-flex align-content-center">
@@ -26,7 +26,17 @@
         </div>
     </div>
     <div class="container">
-        <div th:if="${customerList.isEmpty()}">Create a new customer to get started</div>
+        <div th:if="${customerList.isEmpty()}">
+            <div class="d-flex justify-content-center py-5">
+                <h2 class="display-5 text-center">No records found!</h2>
+            </div>
+            <div class="d-flex justify-content-center">
+                <h2 class="display-4 text-center">🦗</h2>
+            </div>
+            <div class="d-flex justify-content-center py-5">
+                <a class="btn btn-lg btn-outline-secondary" href="/customers/">Back</a>
+            </div>
+        </div>
         <div th:unless="${customerList.isEmpty()}">
             <table class="table">
                 <tr>
@@ -46,6 +56,7 @@
                         <a th:href="@{'/customers/page/' + ${currentPageNumber} + '?sortColumn=birthday&sortDirection=' + ${reverseSortDirection}}">Birthday</a>
                     </th>
                     <th></th>
+                    <th></th>
                 </tr>
                 <tr th:each="customer : ${customerList}">
                     <td th:text="${customer.id}"></td>
@@ -53,11 +64,12 @@
                     <td th:text="${customer.getCustomerName().getLastName()}"></td>
                     <td th:text="${customer.email.email}">john@email.com</td>
                     <td th:text="${customer.birthday}">09-03-1987</td>
-                    <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
+                    <td><a th:href="'/customers/delete/' + ${customer.id}" class="btn btn-outline text-danger"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>
             </table>
             <a class="btn btn-primary" href="/customers/">Back</a>
         </div>
     </div>
-</div>
+</section>

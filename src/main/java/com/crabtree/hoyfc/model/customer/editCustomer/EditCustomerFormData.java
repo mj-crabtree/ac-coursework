@@ -1,5 +1,10 @@
-package com.crabtree.hoyfc.model.customer;
+package com.crabtree.hoyfc.model.customer.editCustomer;
 
+import com.crabtree.hoyfc.model.customer.Customer;
+import com.crabtree.hoyfc.model.customer.CustomerName;
+import com.crabtree.hoyfc.model.customer.Email;
+import com.crabtree.hoyfc.model.customer.PhoneNumber;
+import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerFormData;
 import lombok.Data;
 
 @Data

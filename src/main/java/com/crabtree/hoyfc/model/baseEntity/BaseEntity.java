@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model;
+package com.crabtree.hoyfc.model.baseEntity;
 
 import lombok.Data;
 

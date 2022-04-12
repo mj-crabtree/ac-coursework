@@ -1,7 +1,7 @@
 package com.crabtree.customDSA.algorithms.sort.InsertionSort;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicDataStructure;
-import com.crabtree.hoyfc.model.BaseEntity;
+import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 
 import java.util.Comparator;
 
