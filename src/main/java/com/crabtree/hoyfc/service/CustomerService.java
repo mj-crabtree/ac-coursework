@@ -74,4 +74,8 @@ public class CustomerService {
 	public DynamicArrayList<Customer> getSortedPaginatedCustomers(Integer pageNumber, Integer pageSize, String sortColumn, String sortDirection) {
 		return customerRepository.getSortedPaginatedCustomers(pageNumber, pageSize, sortColumn, sortDirection);
 	}
+
+	public DynamicArrayList<Customer> findCustomers(String searchTerm) {
+		return customerRepository.findCustomers(searchTerm);
+	}
 }
