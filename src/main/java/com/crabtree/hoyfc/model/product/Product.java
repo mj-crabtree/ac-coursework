@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class Product extends BaseEntity {
+	private ProductSku productSku;
 	private ProductType productType;
 	private ProductName productName;
 	private StockCount stockCount;

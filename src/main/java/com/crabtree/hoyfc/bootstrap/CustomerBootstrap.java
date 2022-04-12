@@ -29,7 +29,7 @@ public class CustomerBootstrap implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		for (int i = 0; i < 100; i++) {
 			CreateCustomerParameters parameters = newRandomUserParameters();
-			customerService.customCreateCustomer(parameters);
+			customerService.createCustomer(parameters);
 		}
 	}
 

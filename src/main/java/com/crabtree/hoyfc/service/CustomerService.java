@@ -3,6 +3,7 @@ package com.crabtree.hoyfc.service;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
 import com.crabtree.hoyfc.model.customer.Customer;
+import com.crabtree.hoyfc.model.modelFactory.ModelFactory;
 import com.crabtree.hoyfc.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class CustomerService {
 		this.customerIdService = customerIdService;
 	}
 
-	public void customCreateCustomer(CreateCustomerParameters customer) {
-		Customer newCustomer = new Customer();
+	public void createCustomer(CreateCustomerParameters customer) {
+		var newCustomer = ModelFactory.newCustomer();
 
 		newCustomer.setId(customerIdService.getNext());
 		newCustomer.setCustomerName(customer.getUserName());
@@ -34,19 +35,6 @@ public class CustomerService {
 
 	public Customer getCustomer(Integer id) {
 		return customerRepository.getById(id);
-	}
-
-	public Customer createCustomer(CreateCustomerParameters customer) {
-
-		Customer newCustomer = new Customer();
-
-		newCustomer.setCustomerName(customer.getUserName());
-		newCustomer.setEmail(customer.getEmail());
-		newCustomer.setGender(customer.getGender());
-		newCustomer.setPhoneNumber(customer.getPhoneNumber());
-		newCustomer.setBirthday(customer.getBirthday());
-
-		return customerRepository.save(newCustomer);
 	}
 
 	public Customer updateCustomer(Integer id, Customer request) {
