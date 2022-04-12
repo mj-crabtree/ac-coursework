@@ -1,4 +1,4 @@
 package com.crabtree.hoyfc.model.product.editProduct;
 
-public class EditProductPrarmeters {
+public class EditProductParameters {
 }
