@@ -2,7 +2,9 @@ package com.crabtree.hoyfc.service.pagination;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
+import lombok.*;
 
+@Data
 public class PaginationHelper {
 
 	private Integer totalItems;
@@ -90,107 +92,4 @@ public class PaginationHelper {
 		}
 	}
 
-	public Integer getTotalItems() {
-		return totalItems;
-	}
-
-	public void setTotalItems(Integer totalItems) {
-		this.totalItems = totalItems;
-	}
-
-	public Integer getTotalPages() {
-		return totalPages;
-	}
-
-	public void setTotalPages(Integer totalPages) {
-		this.totalPages = totalPages;
-	}
-
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
-
-	public Integer getPageNumber() {
-		return pageNumber;
-	}
-
-	public void setPageNumber(Integer pageNumber) {
-		this.pageNumber = pageNumber;
-	}
-
-	public Integer getPageOffset() {
-		return pageOffset;
-	}
-
-	public void setPageOffset(Integer pageOffset) {
-		this.pageOffset = pageOffset;
-	}
-
-	public Integer getNextPage() {
-		return nextPage;
-	}
-
-	public void setNextPage(Integer nextPage) {
-		this.nextPage = nextPage;
-	}
-
-	public Integer getPreviousPage() {
-		return previousPage;
-	}
-
-	public void setPreviousPage(Integer previousPage) {
-		this.previousPage = previousPage;
-	}
-
-	public Boolean getHasNextPage() {
-		return hasNextPage;
-	}
-
-	public void setHasNextPage(Boolean hasNextPage) {
-		this.hasNextPage = hasNextPage;
-	}
-
-	public Boolean getHasPreviousPage() {
-		return hasPreviousPage;
-	}
-
-	public void setHasPreviousPage(Boolean hasPreviousPage) {
-		this.hasPreviousPage = hasPreviousPage;
-	}
-
-	public Integer getFromPosition() {
-		return fromPosition;
-	}
-
-	public void setFromPosition(Integer fromPosition) {
-		this.fromPosition = fromPosition;
-	}
-
-	public DynamicArrayList<? extends BaseEntity> getCollection() {
-		return collection;
-	}
-
-	public void setCollection(DynamicArrayList<? extends BaseEntity> collection) {
-		this.collection = collection;
-	}
-
-	public Boolean getIsLastPage() {
-		return isLastPage;
-	}
-
-	public void setIsLastPage(Boolean isLastPage) {
-		this.isLastPage = isLastPage;
-	}
-
-	public Boolean getIsFirstPage() {
-		return isFirstPage;
-	}
-
-	public void setIsFirstPage(Boolean isFirstPage) {
-		this.isFirstPage = isFirstPage;
-	}
 }
