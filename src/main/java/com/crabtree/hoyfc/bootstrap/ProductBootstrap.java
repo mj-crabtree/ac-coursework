@@ -2,6 +2,7 @@ package com.crabtree.hoyfc.bootstrap;
 
 import com.crabtree.hoyfc.model.product.*;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
+import com.crabtree.hoyfc.model.product.createProduct.ProductPrice;
 import com.crabtree.hoyfc.service.ProductService;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
@@ -43,19 +44,27 @@ public class ProductBootstrap implements CommandLineRunner {
 
 		var productDescriptionString = faker
 				.lorem()
-				.paragraph();
+				.sentence();
 
-		var productColour = faker
+		var productColour = new ProductColour(faker
 				.color()
-				.name();
+				.name());
 
-		var productSku = ProductSku.createSku(productType, productName, new ProductColour(productColour));
+		var productSku = ProductSku.createSku(productType, productName, productColour);
+
+		var productStatus = ProductStatus.getRandomProductType();
+
+		var productPrice = faker
+				.number()
+				.randomDouble(2, 1, 10);
 
 		return new CreateProductParameters(
 				productSku,
 				productType,
 				new ProductName(productName),
 				new StockCount(currentStockCount, restockTrigger),
-				new ProductDescription(productDescriptionString, new ProductColour(productColour)));
+				new ProductDescription(productDescriptionString, productColour),
+				productStatus,
+				new ProductPrice(productPrice));
 	}
 }

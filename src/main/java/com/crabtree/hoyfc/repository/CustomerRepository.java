@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
+// todo: make interface
 @Service
 public class CustomerRepository {
 	private DynamicArrayList<Customer> customers;
@@ -19,15 +20,15 @@ public class CustomerRepository {
 	}
 
 	public Customer getById(int id) {
-		return customers.get(id);
+		return this.customers.get(id);
 	}
 
 	public Customer save(Customer customer) {
-		return customers.add(customer);
+		return this.customers.add(customer);
 	}
 
 	public DynamicArrayList<Customer> getCustomers() {
-		return customers;
+		return this.customers;
 	}
 
 	public Integer count() {

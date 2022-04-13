@@ -25,6 +25,7 @@ public class ProductService {
 		newProduct.setStockCount(parameters.getStockCount());
 		newProduct.setProductSku(parameters.getProductSku());
 		newProduct.setProductType(parameters.getProductType());
+		newProduct.setProductStatus(parameters.getProductStatus());
 
 		productRepository.save(newProduct);
 	}

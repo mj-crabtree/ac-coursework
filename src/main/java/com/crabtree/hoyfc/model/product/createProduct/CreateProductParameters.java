@@ -12,6 +12,8 @@ public class CreateProductParameters {
 	private final ProductName productName;
 	private final StockCount stockCount;
 	private final ProductDescription productDescription;
+	private final ProductStatus productStatus;
+	private final ProductPrice productPrice;
 	// private final ProductImage productImage;
 	// private final ProductQr productQr;
 }

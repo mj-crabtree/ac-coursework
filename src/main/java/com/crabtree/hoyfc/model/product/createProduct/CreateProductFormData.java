@@ -13,6 +13,8 @@ public class CreateProductFormData {
 	private ProductType productType;
 	private Integer stockCount;
 	private Integer restockTrigger;
+	private ProductStatus productStatus;
+	private Double productPrice;
 	// todo: handle the image somehow?
 
 	public CreateProductParameters toParameters() {
@@ -21,7 +23,9 @@ public class CreateProductFormData {
 				productType,
 				new ProductName(productName),
 				new StockCount(stockCount, restockTrigger),
-				new ProductDescription(productDescription, productColour)
+				new ProductDescription(productDescription, productColour),
+				productStatus,
+				new ProductPrice(productPrice)
 		);
 	}
 

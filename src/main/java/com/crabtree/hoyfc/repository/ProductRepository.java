@@ -15,6 +15,18 @@ public class ProductRepository {
 	}
 
 	public Product save(Product product) {
-		return products.add(product);
+		return this.products.add(product);
+	}
+
+	public Product getById(int id) {
+		return this.products.get(id);
+	}
+
+	public DynamicArrayList<Product> getProducts() {
+		return this.products;
+	}
+
+	public Integer count() {
+		return this.products.count();
 	}
 }
