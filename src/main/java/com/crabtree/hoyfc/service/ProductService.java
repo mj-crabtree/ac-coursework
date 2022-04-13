@@ -18,5 +18,14 @@ public class ProductService {
 
 	public void createProduct(CreateProductParameters parameters) {
 		var newProduct = ModelFactory.newProduct();
+
+		newProduct.setId(ProductIdService.getNext());
+		newProduct.setProductName(parameters.getProductName());
+		newProduct.setProductDescription(parameters.getProductDescription());
+		newProduct.setStockCount(parameters.getStockCount());
+		newProduct.setProductSku(parameters.getProductSku());
+		newProduct.setProductType(parameters.getProductType());
+
+		productRepository.save(newProduct);
 	}
 }

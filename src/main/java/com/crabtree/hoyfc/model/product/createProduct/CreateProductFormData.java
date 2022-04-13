@@ -9,7 +9,7 @@ public class CreateProductFormData {
 	// same with the product QR
 	private String productName;
 	private String productDescription;
-	private String productColour;
+	private ProductColour productColour;
 	private ProductType productType;
 	private Integer stockCount;
 	private Integer restockTrigger;
@@ -21,7 +21,7 @@ public class CreateProductFormData {
 				productType,
 				new ProductName(productName),
 				new StockCount(stockCount, restockTrigger),
-				new ProductDescription(productDescription)
+				new ProductDescription(productDescription, productColour)
 		);
 	}
 

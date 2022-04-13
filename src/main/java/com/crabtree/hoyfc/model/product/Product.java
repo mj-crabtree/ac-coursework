@@ -12,4 +12,5 @@ public class Product extends BaseEntity {
 	private ProductDescription productDescription;
 	private ProductImage productImage;
 	private ProductQr productQr;
+	private ProductStatus productStatus;
 }

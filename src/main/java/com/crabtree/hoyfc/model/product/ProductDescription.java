@@ -6,5 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductDescription {
+
 	private String productDescription;
+	private ProductColour productColour;
 }

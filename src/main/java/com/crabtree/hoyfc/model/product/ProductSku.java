@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductSku {
-	public static ProductSku createSku(ProductType productType, String productName, String productColour) {
+	public static ProductSku createSku(ProductType productType, String productName, ProductColour productColour) {
 		return new ProductSku();
 	}
 }
