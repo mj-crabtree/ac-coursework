@@ -2,7 +2,7 @@ package com.crabtree.hoyfc.service.pagination;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public class PaginationHelper {
@@ -19,9 +19,10 @@ public class PaginationHelper {
 	private Boolean hasNextPage;
 	private Boolean hasPreviousPage;
 	private Integer fromPosition;
+	private Integer toPosition;
 	private DynamicArrayList<? extends BaseEntity> collection;
 
-	public <T extends BaseEntity> PaginationHelper paginationHelper(DynamicArrayList<T> collection, Integer totalItems, Integer limit, Integer pageNumber) {
+	public <T extends BaseEntity> PaginationHelper paginateCollection(DynamicArrayList<T> collection, Integer totalItems, Integer limit, Integer pageNumber) {
 		PaginationHelper paginationHelper = new PaginationHelper();
 
 		paginationHelper.setTotalItems(totalItems);
@@ -35,21 +36,20 @@ public class PaginationHelper {
 		Integer toPosition = 0;
 
 		if (paginationHelper.getFromPosition() + paginationHelper.getLimit() >= paginationHelper.getTotalItems()) {
-			toPosition = paginationHelper.getTotalItems();
+			paginationHelper.setToPosition(paginationHelper.getTotalItems());
 		}
 		else {
-			toPosition = paginationHelper.getFromPosition() + paginationHelper.getLimit();
+			paginationHelper.setToPosition(paginationHelper.getFromPosition() + paginationHelper.getLimit());
 		}
 
-		if (paginationHelper.getFromPosition() > toPosition) {
+		if (paginationHelper.getFromPosition() > paginationHelper.getToPosition()) {
 			this.collection = null;
 		}
 		else {
-			this.collection = collection.subList(paginationHelper.getFromPosition(), toPosition);
+			this.collection = collection.subList(paginationHelper.getFromPosition(), paginationHelper.getToPosition());
 		}
 
 		paginationHelper.setCollection(this.collection);
-
 		determinePaginationAttributes(pageNumber, paginationHelper, paginationHelper.getTotalPages());
 
 		return paginationHelper;
@@ -60,14 +60,15 @@ public class PaginationHelper {
 
 			// in-between the first and last pages
 			paginationHelper.setIsFirstPage(false);
+			paginationHelper.setIsLastPage(false);
 			paginationHelper.setHasPreviousPage(true);
+			paginationHelper.setHasNextPage(true);
 			paginationHelper.setNextPage(pageNumber + 1);
 			paginationHelper.setPreviousPage(pageNumber - 1);
 		}
-		else if (pageNumber.equals(totalPages) && pageNumber != 1) {
+		else if (pageNumber == totalPages && pageNumber != 1) {
 
 			// on the last page of data
-			isLastPage = true;
 			paginationHelper.setIsLastPage(true);
 			paginationHelper.setIsFirstPage(false);
 			paginationHelper.setHasNextPage(false);
@@ -80,11 +81,12 @@ public class PaginationHelper {
 			paginationHelper.setIsLastPage(false);
 			paginationHelper.setHasNextPage(true);
 			paginationHelper.setIsFirstPage(true);
+			paginationHelper.setHasPreviousPage(false);
 			paginationHelper.setNextPage(pageNumber + 1);
 		}
 		else if (pageNumber.equals(totalPages) && totalPages == 1) {
 
-			// only one page of data
+			// single page of data
 			paginationHelper.setIsFirstPage(true);
 			paginationHelper.setIsLastPage(true);
 			paginationHelper.setHasNextPage(false);

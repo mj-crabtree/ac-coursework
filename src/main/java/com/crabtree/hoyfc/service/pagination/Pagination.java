@@ -5,6 +5,7 @@ import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicDataStructu
 
 public class Pagination {
 
+	// todo: delete this class && migrate usages to PaginationHelper.paginateCollection
 	public static <T> DynamicDataStructure<T> paginateCollection(DynamicDataStructure<T> data, Integer pageNumber, Integer pageSize) {
 		if (pageSize <= 0 || pageNumber <= 0) throw new IllegalArgumentException();
 

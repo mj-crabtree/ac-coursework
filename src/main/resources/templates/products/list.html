@@ -4,31 +4,82 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/layout}">
 <head>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <title></title>
 </head>
 <section layout:fragment="content">
-    <table class="table">
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>type</th>
-            <th>Status</th>
-            <th>Count</th>
-            <th>price</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr th:each="product : ${productList}">
-            <td th:text="${product.getId()}"></td>
-            <td th:text="${product.getProductName().getProductName()}"></td>
-            <td th:text="${product.getProductType().toString()}"></td>
-            <td th:text="${product.getProductStatus().toString()}"></td>
-            <td th:text="${product.getStockCount().getCurrentStock()}"></td>
-            <td th:text="${product.getProductPrice().getProductPrice()}"></td>
-            <td>xx</td>
-            <td>xx</td>
-        </tr>
-    </table>
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-content-center">
+                <h2 class="display-4">Inventory</h2>
+            </div>
+            <div class="d-flex align-content-center">
+                <form th:action="@{/products/search/}" class="form-inline my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" minlength="3" class="form-control" placeholder="Inventory search"
+                               aria-label="search"
+                               th:name="term">
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-primary" value="Search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-content-center">
+                    <a th:href="@{/products/create}" class="btn btn-outline-primary">New Product</a>
+                </div>
+                <div class="d-flex btn-group align-content-center">
+                    <a th:href="@{'/products/page/1'}"
+                       class="btn btn-outline-primary"
+                       th:classappend="${paginationData.getIsFirstPage() ? 'disabled' : ''}"><i class="bi bi-skip-backward"></i></a>
+                    <a th:href="@{'/products/page/' + ${paginationData.getPreviousPage()}}"
+                       class="btn btn-outline-primary"
+                       th:classappend="${paginationData.getIsFirstPage() ? 'disabled' : ''}"><i class="bi bi-arrow-left"></i></a>
+                    <a th:href="@{'/products/page/' + ${paginationData.getNextPage()}}"
+                       class="btn btn-outline-primary"
+                        th:classappend="${paginationData.getIsLastPage() ? 'disabled' : ''}"><i class="bi bi-arrow-right"></i></a>
+                    <a th:href="@{'/products/page/' + ${paginationData.getTotalPages()}}"
+                       class="btn btn-outline-primary"
+                       th:classappend="${paginationData.getIsLastPage() ? 'disabled' : ''}"><i class="bi bi-skip-forward"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <table class="table">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>type</th>
+                    <th>Status</th>
+                    <th>Count</th>
+                    <th>price</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:each="product : ${productList}">
+                    <td th:text="${product.getId()}"></td>
+                    <td th:text="${product.getProductName().getProductName()}"></td>
+                    <td th:text="${product.getProductType().toString()}"></td>
+                    <td th:text="${product.getProductStatus().toString()}"></td>
+                    <td th:text="${product.getStockCount().getCurrentStock()}"></td>
+                    <td th:text="${product.getProductPrice().getProductPrice()}"></td>
+                    <td>xx</td>
+                    <td>xx</td>
+                </tr>
+            </table>
+            <div class="py-3">
+                <p>Showing results <b th:text="${paginationData.getFromPosition() + 1}"></b> to <b th:text="${paginationData.getToPosition()}"></b> of <b th:text="${paginationData.getTotalItems()}"></b> results</p>
+            </div>
+        </div>
+    </div>
 </section>

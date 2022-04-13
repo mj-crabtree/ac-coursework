@@ -31,11 +31,9 @@ public class ProductController {
 
 		var ph = new PaginationHelper();
 
-		// making a single call to the repo
-		// var products = productService.getProducts();
-		var paginationData = ph.paginationHelper(this.products, this.products.count(), 15, pageNumber);
+		var paginationData = ph.paginateCollection(this.products, this.products.count(), 15, pageNumber);
 
-		model.addAttribute("paginationHelper", paginationData);
+		model.addAttribute("paginationData", paginationData);
 		model.addAttribute("productList", paginationData.getCollection());
 
 		return "products/list";

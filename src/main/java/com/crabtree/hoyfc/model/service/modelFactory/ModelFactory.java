@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model.modelFactory;
+package com.crabtree.hoyfc.model.service.modelFactory;
 
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.model.order.CustomerOrder;
