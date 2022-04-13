@@ -1,5 +1,7 @@
 package com.crabtree.hoyfc.controller.customer;
 
+import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
+import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CustomerController {
 
 	private final CustomerService customerService;
+	private DynamicArrayList<Customer> customers;
 
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
+		this.customers = customerService.getCustomers();
 	}
 
 	@GetMapping
-	public String index() {
+	public String showCustomers() {
 		return "redirect:page/1";
 	}
 
@@ -28,6 +32,8 @@ public class CustomerController {
 	                            @PathVariable(name = "pageNumber", required = false) Integer pageNumber,
 	                            @RequestParam(name = "sortColumn", required = false, defaultValue = "id") String sortColumn,
 	                            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
+
+		// todo: refactor to use new PaginationHelper class
 
 		model.addAttribute("currentPageNumber", pageNumber);
 		model.addAttribute("customerList", customerService.getSortedPaginatedCustomers(pageNumber, 15, sortColumn, sortDirection));
