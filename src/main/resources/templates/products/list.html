@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}">
+<head>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <title></title>
+</head>
+<section layout:fragment="content">
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>type</th>
+            <th>Status</th>
+            <th>Count</th>
+            <th>price</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="product : ${productList}">
+            <td th:text="${product.getId()}"></td>
+            <td th:text="${product.getProductName().getProductName()}"></td>
+            <td th:text="${product.getProductType().toString()}"></td>
+            <td th:text="${product.getProductStatus().toString()}"></td>
+            <td th:text="${product.getStockCount().getCurrentStock()}"></td>
+            <td th:text="${product.getProductPrice().getProductPrice()}"></td>
+            <td>xx</td>
+            <td>xx</td>
+        </tr>
+    </table>
+</section>
