@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="pagination(linkURL)" class="d-flex btn-group align-content-center">
-    <a th:href="@{${linkURL} + '/1'}"
+    <a th:href="@{${linkURL} + '1'}"
        class="btn btn-outline-primary"
        th:classappend="${paginationData.getIsFirstPage() ? 'disabled' : ''}"><i class="bi bi-skip-backward"></i></a>
     <a th:href="@{${linkURL} + ${paginationData.getPreviousPage()}}"
