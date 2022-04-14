@@ -72,8 +72,8 @@
                     <td th:text="${product.getProductStatus().toString()}"></td>
                     <td th:text="${product.getStockCount().getCurrentStock()}"></td>
                     <td th:text="${product.getProductPrice().getProductPrice()}"></td>
-                    <td>xx</td>
-                    <td>xx</td>
+                    <td><a th:href="'/products/info/' + ${product.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
+                    <td><a th:href="'/products/delete/' + ${product.id}" class="btn btn-outline text-danger"><i class="bi bi-trash"></i></a>
                 </tr>
             </table>
             <div th:replace="fragments/pagination :: paginationInfo"></div>

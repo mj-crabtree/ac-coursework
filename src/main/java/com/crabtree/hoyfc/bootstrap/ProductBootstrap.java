@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 public class ProductBootstrap implements CommandLineRunner {
 
 	private final ProductService productService;
+	private final SKUGenerator skuGenerator;
 	private final Faker faker;
 
-	public ProductBootstrap(ProductService productService, Faker faker) {
+	public ProductBootstrap(ProductService productService, SKUGenerator skuGenerator, Faker faker) {
 		this.productService = productService;
+		this.skuGenerator = skuGenerator;
 		this.faker = faker;
 	}
 
@@ -50,7 +52,7 @@ public class ProductBootstrap implements CommandLineRunner {
 				.color()
 				.name());
 
-		var productSku = ProductSku.createSku(productType, productName, productColour);
+		var productSku = skuGenerator.createSku(productType, productName, productColour);
 
 		var productStatus = ProductStatus.getRandomProductType();
 

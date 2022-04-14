@@ -18,8 +18,9 @@ public class CreateProductFormData {
 	// todo: handle the image somehow?
 
 	public CreateProductParameters toParameters() {
+		var sku = new SKUGenerator();
 		return new CreateProductParameters(
-				ProductSku.createSku(productType, productName, productColour),
+				sku.createSku(productType, productName, productColour),
 				productType,
 				new ProductName(productName),
 				new StockCount(stockCount, restockTrigger),

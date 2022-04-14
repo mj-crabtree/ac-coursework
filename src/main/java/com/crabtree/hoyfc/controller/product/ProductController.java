@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.Registration;
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -57,4 +59,11 @@ public class ProductController {
 		productService.sort(sortingData, this.products);
 		return "redirect:/products/";
 	}
+
+	// @GetMapping(value = "search")
+	// // http://localhost:8080/products/search?searchTerm=fooBar
+	// public String searchProducts(Model model,
+	//                              @RequestParam(name = "searchTerm") String searchTerm) {
+	//
+	// }
 }

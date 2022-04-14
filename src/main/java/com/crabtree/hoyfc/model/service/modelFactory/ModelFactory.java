@@ -28,6 +28,4 @@ public class ModelFactory {
 	private static Customer getCustomer() {
 		return new Customer();
 	}
-
-
 }
