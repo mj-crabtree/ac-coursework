@@ -5,6 +5,8 @@ import com.crabtree.hoyfc.model.customer.Customer;
 import java.util.Comparator;
 
 public class CustomerComparatorFactory {
+
+	// todo: make this not generic
 	public static <T extends Customer> Comparator<T> getComparator(String sortColumn, String sortDirection) {
 		switch (sortColumn) {
 			case "id":

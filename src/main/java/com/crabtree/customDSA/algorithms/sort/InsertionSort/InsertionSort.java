@@ -2,9 +2,11 @@ package com.crabtree.customDSA.algorithms.sort.InsertionSort;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicDataStructure;
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 
+@Service
 public class InsertionSort implements CustomSort {
 
 	@Override
