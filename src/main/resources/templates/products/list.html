@@ -48,6 +48,9 @@
                         <a th:href="@{'/products/sort/?sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
                     </th>
                     <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Sku&sortDirection=' + ${sortData.reverseSortDirection()}}">SKU</a>
+                    </th>
+                    <th>
                         <a th:href="@{'/products/sort/?sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
                     </th>
                     <th>
@@ -67,6 +70,7 @@
                 </tr>
                 <tr th:each="product : ${productList}">
                     <td th:text="${product.getId()}"></td>
+                    <td th:text="${product.getProductSku().getProductSku}"></td>
                     <td th:text="${product.getProductName().getProductName()}"></td>
                     <td th:text="${product.getProductType().toString()}"></td>
                     <td th:text="${product.getProductStatus().toString()}"></td>
