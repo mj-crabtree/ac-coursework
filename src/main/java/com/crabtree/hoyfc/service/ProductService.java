@@ -46,4 +46,8 @@ public class ProductService {
 		var comparator = ProductComparatorFactory.getComparator(sortingData.getSortColumn(), sortingData.getSortDirection());
 		insertionSort.sort(data, comparator);
 	}
+
+	public DynamicArrayList<Product> search(String searchTerm) {
+		return productRepository.search(searchTerm);
+	}
 }
