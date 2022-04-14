@@ -45,9 +45,9 @@ public class ProductController {
 		return "products/list";
 	}
 
-	@GetMapping(value = "sort/page/{pageNumber}")
+	@GetMapping(value = "sort")
+	// http://localhost:8080/products/sort?sortColumn=Name&sortDirection=ASC
 	public String sortProducts(Model model,
-	                           @PathVariable(name="pageNumber") Integer pageNumber,
 	                           @RequestParam(name = "sortColumn") String sortColumn,
 	                           @RequestParam(name = "sortDirection") String sortDirection) {
 
@@ -55,7 +55,6 @@ public class ProductController {
 		this.sortingData.setSortDirection(SortDirection.valueOf(sortDirection.toUpperCase()));
 
 		productService.sort(sortingData, this.products);
-		System.out.println();
 		return "redirect:/products/";
 	}
 }
