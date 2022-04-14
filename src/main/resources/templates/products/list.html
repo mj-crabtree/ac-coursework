@@ -44,12 +44,24 @@
         <div class="container py-3">
             <table class="table">
                 <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>type</th>
-                    <th>Status</th>
-                    <th>Count</th>
-                    <th>price</th>
+                    <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Type&sortDirection=' + ${sortData.reverseSortDirection()}}">Type</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Status&sortDirection=' + ${sortData.reverseSortDirection()}}">Status</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Count&sortDirection=' + ${sortData.reverseSortDirection()}}">Count</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort/?sortColumn=Price&sortDirection=' + ${sortData.reverseSortDirection()}}">Price</a>
+                    </th>
                     <th></th>
                     <th></th>
                 </tr>

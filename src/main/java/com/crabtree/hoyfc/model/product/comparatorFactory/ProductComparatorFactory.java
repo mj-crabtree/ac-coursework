@@ -8,6 +8,8 @@ import java.util.Comparator;
 public class ProductComparatorFactory {
 	public static Comparator<Product> getComparator(String sortColumn, SortDirection sortDirection) {
 		switch (sortColumn) {
+			case "Id":
+				return getProductIdComparator(sortDirection);
 			case "Sku":
 				return getSkuComparator(sortDirection);
 			case "Name":
@@ -23,6 +25,12 @@ public class ProductComparatorFactory {
 			default:
 				throw new IllegalStateException("Unexpected value: " + sortColumn);
 		}
+	}
+
+	private static Comparator<Product> getProductIdComparator(SortDirection sortDirection) {
+		return sortDirection
+				.getDirection()
+				.equals("ASC") ? ProductIdComparator.ascending() : ProductIdComparator.descending();
 	}
 
 	private static Comparator<Product> getProductPriceComparator(SortDirection sortDirection) {
@@ -165,6 +173,20 @@ public class ProductComparatorFactory {
 					.compareTo(o1
 							.getProductSku()
 							.getProductSku());
+		}
+	}
+
+	private static class ProductIdComparator {
+		public static Comparator<Product> ascending() {
+			return (o1, o2) -> o1
+					.getId()
+					.compareTo(o2.getId());
+		}
+
+		public static Comparator<Product> descending() {
+			return (o1, o2) -> o2
+					.getId()
+					.compareTo(o1.getId());
 		}
 	}
 }

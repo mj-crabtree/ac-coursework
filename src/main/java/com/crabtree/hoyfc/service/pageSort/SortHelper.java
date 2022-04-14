@@ -23,4 +23,8 @@ import org.springframework.stereotype.Service;
 		public Boolean isDescending() {
 			return this.sortDirection == SortDirection.DESC;
 		}
+
+		public String reverseSortDirection() {
+			return this.sortDirection == SortDirection.ASC ? "DESC" : "ASC";
+		}
 	}
