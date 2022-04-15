@@ -42,48 +42,40 @@ public class OrdersBootstrap implements CommandLineRunner {
 		for (Customer customer : customerService.getCustomers()) {
 
 			// how many orders have they placed?
-			var pastOrdersPlaced = faker
-					.number()
-					.numberBetween(1, 5);
+			int pastOrdersPlaced = getRandomIntegersBetween(1, 5);
 
 			// which items did they order
-			var lineItems = faker
-					.number()
-					.numberBetween(1, 10);
-
-			// how many of those items did they order?
-			var itemsPerLine = faker
-					.number()
-					.numberBetween(1, 5);
+			int lineItems = getRandomIntegersBetween(1, 10);
 
 			for (int i = 0; i < pastOrdersPlaced; i++) {
-				CustomerOrder order = buildNewCustomerOrder(customer, lineItems, itemsPerLine);
+				CustomerOrder order = buildNewCustomerOrder(customer, lineItems);
 				order.setId(this.orders.size() + 1);
 				orders.add(order);
 			}
+			System.out.println();
 		}
-		System.out.println();
 	}
 
-	private CustomerOrder buildNewCustomerOrder(Customer customer, int lineItems, int itemsPerLine) {
+	private CustomerOrder buildNewCustomerOrder(Customer customer, int lineItems) {
 
 		var customerOrder = new CustomerOrder();
 		double orderedItemsTotalCost = 0.0;
 
 		customerOrder.setPublicOrderId(OrderIdService.getNextOrderId());
-		customerOrder.setCustomer(customer);
+		customerOrder.setCustomerId(customer.getId());
 
 		for (int i = 0; i < lineItems; i++) {
 
 			var orderLineItem = new OrderLineItem();
 
-			orderLineItem.setOrderId(customerOrder.getId());
+			orderLineItem.setOrderId(this.orders.size() + 1);
 
-			Product randomProduct = productService.getProductByIndex(faker
-					.number()
-					.numberBetween(0, 100));
+			Product randomProduct = getRandomProductId();
 
 			orderLineItem.setProduct(randomProduct);
+
+			var itemsPerLine = getRandomIntegersBetween(1, 3);
+
 			orderLineItem.setCount(itemsPerLine);
 
 			var totalLineAmount = randomProduct
@@ -101,7 +93,20 @@ public class OrdersBootstrap implements CommandLineRunner {
 		customerOrder.setShippingCost(ShippingCostService.getShippingCost(customerOrder.getShippingType()));
 		customerOrder.setTotalOrderCost(roundDoubleToTwoDecimalPlaces(orderedItemsTotalCost + customerOrder.getShippingCost()));
 		customerOrder.setOrderStatus(getRandomOrderStatus(customerOrder.getOrderDateTime()));
+
+		customer.addOrderToOrderHistory(customerOrder);
+
 		return customerOrder;
+	}
+
+	private Integer getRandomIntegersBetween(Integer min, Integer max) {
+		return this.faker
+				.number()
+				.numberBetween(min, max);
+	}
+
+	private Product getRandomProductId() {
+		return productService.getProductByIndex(getRandomIntegersBetween(0, 100));
 	}
 
 	private OrderStatus getRandomOrderStatus(DateTime orderDateTime) {
@@ -120,8 +125,12 @@ public class OrdersBootstrap implements CommandLineRunner {
 	private DateTime getRandomDateTime() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-		var beginTime = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
-		var endTime = Timestamp.valueOf("2022-04-15 00:58:00").getTime();
+		var beginTime = Timestamp
+				.valueOf("2015-01-01 00:00:00")
+				.getTime();
+		var endTime = Timestamp
+				.valueOf("2022-04-15 00:58:00")
+				.getTime();
 
 		long diff = endTime - beginTime + 1;
 

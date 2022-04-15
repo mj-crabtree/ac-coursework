@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class CustomerOrder extends BaseEntity {
 	private String publicOrderId;
-	private Customer customer;
+	private Integer customerId;
 	private List<OrderLineItem> lineItems = new ArrayList<>();
 	private OrderStatus orderStatus;
 	private DateTime orderDateTime;

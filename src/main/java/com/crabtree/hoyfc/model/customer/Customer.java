@@ -6,20 +6,24 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
 public class Customer extends BaseEntity {
 	private CustomerName customerName;
-	// todo: customer address
-	// private CustomerAddress customerAddress;
 	private PhoneNumber phoneNumber;
 	private Email email;
 	private Gender gender;
 	private LocalDate birthday;
 	private LocalDateTime createdOn = LocalDateTime.now();
 	private LocalDateTime updatedAt;
-	private List<CustomerOrder> orders;
+	private List<CustomerOrder> orderHistory = new ArrayList<>();
+
 	private boolean active = true;
+
+	public void addOrderToOrderHistory(CustomerOrder order) {
+		this.orderHistory.add(order);
+	}
 }
