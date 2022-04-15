@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model.order;
+package com.crabtree.hoyfc.model.customerOrder;
 
 import java.util.List;
 import java.util.Random;

@@ -1,6 +1,6 @@
 package com.crabtree.hoyfc.service;
 
-import com.crabtree.hoyfc.model.order.ShippingType;
+import com.crabtree.hoyfc.model.customerOrder.ShippingType;
 import org.springframework.stereotype.Service;
 
 @Service

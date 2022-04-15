@@ -1,6 +1,6 @@
 package com.crabtree.hoyfc.repository;
 
-import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearchImpl;
+import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
 import org.springframework.stereotype.Service;
@@ -46,10 +46,10 @@ public class ProductRepository {
 					.getProductSku()
 					.toLowerCase();
 
-			if (KMPSearchImpl.knuthMorrisPratt(nameHaystack, needle) == 1) {
+			if (KMPSearch.search(nameHaystack, needle) == 1) {
 				result.add(product);
 			}
-			else if (KMPSearchImpl.knuthMorrisPratt(skuHaystack, needle) == 1) {
+			else if (KMPSearch.search(skuHaystack, needle) == 1) {
 				result.add(product);
 			}
 		}

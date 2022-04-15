@@ -63,7 +63,7 @@ public class CustomerService {
 		return customerRepository.getSortedPaginatedCustomers(pageNumber, pageSize, sortColumn, sortDirection);
 	}
 
-	public DynamicArrayList<Customer> findCustomers(String searchTerm) {
-		return customerRepository.findCustomers(searchTerm);
+	public DynamicArrayList<Customer> search(String searchTerm) {
+		return customerRepository.search(searchTerm);
 	}
 }

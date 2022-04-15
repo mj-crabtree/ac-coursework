@@ -1,8 +1,11 @@
 package com.crabtree.customDSA.algorithms.search.KMPSearch;
 
-public class KMPSearchImpl implements CustomSearch {
+public class KMPSearch {
+	public static int search(String haystack, String needle) {
+		return knuthMorrisPratt(haystack, needle);
+	}
 
-	public static int knuthMorrisPratt(String haystack, String needle) {
+	private static int knuthMorrisPratt(String haystack, String needle) {
 		int haystackLength = haystack.length();
 		int needleLength = needle.length();
 

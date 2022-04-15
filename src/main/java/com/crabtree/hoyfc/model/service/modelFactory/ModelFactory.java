@@ -1,7 +1,7 @@
 package com.crabtree.hoyfc.model.service.modelFactory;
 
 import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.model.order.CustomerOrder;
+import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.product.Product;
 
 public class ModelFactory {

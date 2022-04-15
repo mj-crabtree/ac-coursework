@@ -1,6 +1,6 @@
 package com.crabtree.hoyfc.repository;
 
-import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearchImpl;
+import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
 import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
@@ -45,7 +45,7 @@ public class CustomerRepository {
 		return (DynamicArrayList<Customer>) Pagination.paginateCollection(this.customers, pageNumber, pageSize);
 	}
 
-	public DynamicArrayList<Customer> findCustomers(String needle) {
+	public DynamicArrayList<Customer> search(String needle) {
 		DynamicArrayList<Customer> result = new DynamicArrayList<>();
 
 		for (Customer customer : customers) {
@@ -59,10 +59,10 @@ public class CustomerRepository {
 					.asString()
 					.toLowerCase(Locale.ROOT);
 
-			if (KMPSearchImpl.knuthMorrisPratt(nameHaystack, needle) == 1) {
+			if (KMPSearch.search(nameHaystack, needle) == 1) {
 				result.add(customer);
 			}
-			else if (KMPSearchImpl.knuthMorrisPratt(emailHaystack, needle) == 1) {
+			else if (KMPSearch.search(emailHaystack, needle) == 1) {
 				result.add(customer);
 			}
 		}

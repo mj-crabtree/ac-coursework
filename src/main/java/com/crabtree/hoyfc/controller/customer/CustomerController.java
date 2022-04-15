@@ -54,7 +54,7 @@ public class CustomerController {
 		model.addAttribute("searchTerm", searchTerm);
 
 		// todo: make this sortable and paginated
-		model.addAttribute("customerList", customerService.findCustomers(searchTerm));
+		model.addAttribute("customerList", customerService.search(searchTerm));
 		model.addAttribute("maxPages", (int) Math.ceil((customerService.getTotalCustomers() / (double) 15)));
 		model.addAttribute("sortColumn", sortColumn);
 		model.addAttribute("sortDirection", sortDirection);

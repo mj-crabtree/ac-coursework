@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model.order;
+package com.crabtree.hoyfc.model.customerOrder;
 
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 import com.crabtree.hoyfc.model.customer.Customer;
@@ -12,6 +12,7 @@ import java.util.List;
 public class CustomerOrder extends BaseEntity {
 	private String publicOrderId;
 	private Integer customerId;
+	private Customer orderCustomer;
 	private List<OrderLineItem> lineItems = new ArrayList<>();
 	private OrderStatus orderStatus;
 	private DateTime orderDateTime;

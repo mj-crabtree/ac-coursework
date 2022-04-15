@@ -1,7 +1,7 @@
 package com.crabtree.hoyfc.model.customer;
 
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
-import com.crabtree.hoyfc.model.order.CustomerOrder;
+import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -25,5 +25,21 @@ public class Customer extends BaseEntity {
 
 	public void addOrderToOrderHistory(CustomerOrder order) {
 		this.orderHistory.add(order);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"customerName=" + customerName +
+				", phoneNumber=" + phoneNumber +
+				", email=" + email +
+				", gender=" + gender +
+				", birthday=" + birthday +
+				", createdOn=" + createdOn +
+				", updatedAt=" + updatedAt +
+				", orderHistory=" + orderHistory +
+				", active=" + active +
+				'}';
 	}
 }

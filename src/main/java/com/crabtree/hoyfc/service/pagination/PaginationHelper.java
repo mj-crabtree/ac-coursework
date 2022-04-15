@@ -5,7 +5,7 @@ import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 import lombok.Data;
 
 @Data
-public class PaginationHelper {
+public class PaginationHelper<T extends BaseEntity> {
 
 	private Integer totalItems;
 	private Integer totalPages;
@@ -20,9 +20,9 @@ public class PaginationHelper {
 	private Boolean hasPreviousPage;
 	private Integer fromPosition;
 	private Integer toPosition;
-	private DynamicArrayList<? extends BaseEntity> collection;
+	private DynamicArrayList<T> collection;
 
-	public <T extends BaseEntity> PaginationHelper paginateCollection(DynamicArrayList<T> collection, Integer totalItems, Integer limit, Integer pageNumber) {
+	public PaginationHelper<T> paginateCollection(DynamicArrayList<T> collection, Integer totalItems, Integer limit, Integer pageNumber) {
 		PaginationHelper paginationHelper = new PaginationHelper();
 
 		paginationHelper.setTotalItems(totalItems);

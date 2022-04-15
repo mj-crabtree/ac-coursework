@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<section layout:fragment="content">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-content-center">
+                <h2 class="display-4">Orders</h2>
+            </div>
+            <div class="d-flex align-content-center">
+                <form th:action="@{/orders/search/}" class="form-inline my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" minlength="3" class="form-control" placeholder="Order Search"
+                               aria-label="search"
+                               th:name="searchTerm">
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-primary" value="Search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-content-center hidden">
+                    <p> </p>
+                </div>
+                <div th:replace="fragments/pagination :: pagination('/orders/page/')"></div>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <table class="table">
+                <tr>
+                    <th>
+                        <a th:href="@{'/products/sort?sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort?sortColumn=Sku&sortDirection=' + ${sortData.reverseSortDirection()}}">ID</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort?sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort?sortColumn=Type&sortDirection=' + ${sortData.reverseSortDirection()}}">Date</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort?sortColumn=Status&sortDirection=' + ${sortData.reverseSortDirection()}}">Total</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/products/sort?sortColumn=Count&sortDirection=' + ${sortData.reverseSortDirection()}}">Status</a>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr th:each="order : ${orderList}">
+                    <td th:text="${order.getId()}"></td>
+                    <td th:text="${order.getPublicOrderId}"></td>
+                    <td th:text="${customerService.getCustomer(order.getCustomerId() - 1).getCustomerName().getFullName()}"></td>
+                    <td th:text="${order.getOrderDateTime}"></td>
+                    <td th:text="${order.getTotalOrderCost()}"></td>
+                    <td th:text="${order.getOrderStatus()}"></td>
+                </tr>
+            </table>
+            <div th:replace="fragments/pagination :: paginationInfo"></div>
+        </div>
+    </div>
+</section>

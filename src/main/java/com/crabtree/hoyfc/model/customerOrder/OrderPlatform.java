@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model.order;
+package com.crabtree.hoyfc.model.customerOrder;
 
 public enum OrderPlatform {
 	ETSY, FAIRE, SHOPIFY

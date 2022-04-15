@@ -1,10 +1,10 @@
 package com.crabtree.hoyfc.bootstrap;
 
 import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.model.order.CustomerOrder;
-import com.crabtree.hoyfc.model.order.OrderLineItem;
-import com.crabtree.hoyfc.model.order.OrderStatus;
-import com.crabtree.hoyfc.model.order.ShippingType;
+import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
+import com.crabtree.hoyfc.model.customerOrder.OrderLineItem;
+import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
+import com.crabtree.hoyfc.model.customerOrder.ShippingType;
 import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.service.*;
 import com.github.javafaker.Faker;
@@ -41,18 +41,13 @@ public class OrdersBootstrap implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		for (Customer customer : customerService.getCustomers()) {
 
-			// how many orders have they placed?
-			int pastOrdersPlaced = getRandomIntegersBetween(1, 5);
-
-			// which items did they order
+			// how many unique items did this customer order?
 			int lineItems = getRandomIntegersBetween(1, 10);
 
-			for (int i = 0; i < pastOrdersPlaced; i++) {
-				CustomerOrder order = buildNewCustomerOrder(customer, lineItems);
-				order.setId(this.orders.size() + 1);
-				orders.add(order);
-			}
-			System.out.println();
+			CustomerOrder order = buildNewCustomerOrder(customer, lineItems);
+			order.setId(orderService.getOrderCount() + 1);
+			// orders.add(order);
+			orderService.save(order);
 		}
 	}
 
@@ -95,6 +90,7 @@ public class OrdersBootstrap implements CommandLineRunner {
 		customerOrder.setOrderStatus(getRandomOrderStatus(customerOrder.getOrderDateTime()));
 
 		customer.addOrderToOrderHistory(customerOrder);
+		customerOrder.setOrderCustomer(customer);
 
 		return customerOrder;
 	}

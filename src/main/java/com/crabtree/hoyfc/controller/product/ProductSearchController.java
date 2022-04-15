@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.controller.customer;
+package com.crabtree.hoyfc.controller.product;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/products/search")
-public class CustomerSearch {
+public class ProductSearchController {
 
 	private final ProductService productService;
 	private DynamicArrayList<Product> searchResults;
 	private SortHelper sortingData;
 
-	public CustomerSearch(ProductService productService, SortHelper sortHelper) {
+	public ProductSearchController(ProductService productService, SortHelper sortHelper) {
 		this.productService = productService;
 		this.sortingData = sortHelper;
 		this.searchResults = new DynamicArrayList<>();
@@ -30,12 +30,13 @@ public class CustomerSearch {
 
 		this.searchResults = productService.search(searchTerm);
 
-		var ph = new PaginationHelper();
+		PaginationHelper<Product> ph = new PaginationHelper<>();
 		var paginationData = ph.paginateCollection(this.searchResults, this.searchResults.count(), 30, 1);
 
 		model.addAttribute("sortData", sortingData);
 		model.addAttribute("paginationData", paginationData);
 		model.addAttribute("productList", paginationData.getCollection());
+
 		return "products/search";
 	}
 }

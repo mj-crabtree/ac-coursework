@@ -34,7 +34,7 @@ public class ProductController {
 	@GetMapping(value = "/page/{pageNumber}")
 	public String listProduct(Model model, @PathVariable(value = "pageNumber") Integer pageNumber) {
 
-		var ph = new PaginationHelper();
+		PaginationHelper<Product> ph = new PaginationHelper<>();
 		var paginationData = ph.paginateCollection(this.products, this.products.count(), 15, pageNumber);
 
 		model.addAttribute("sortData", sortingData);

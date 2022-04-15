@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.model.order;
+package com.crabtree.hoyfc.model.customerOrder;
 
 import com.crabtree.hoyfc.model.product.Product;
 import lombok.Data;
