@@ -15,20 +15,24 @@ public class EditCustomerFormData extends CreateCustomerFormData {
 	public static EditCustomerFormData fromCustomer(Customer customer) {
 		EditCustomerFormData result = new EditCustomerFormData();
 
-		result.setFirstName(customer.getCustomerName()
+		result.setFirstName(customer
+				.getCustomerName()
 				.getFirstName());
 
-		result.setLastName(customer.getCustomerName()
+		result.setLastName(customer
+				.getCustomerName()
 				.getLastName());
 
 		result.setGender(customer.getGender());
 
 		result.setBirthday(customer.getBirthday());
 
-		result.setEmail(customer.getEmail()
+		result.setEmail(customer
+				.getEmail()
 				.asString());
 
-		result.setPhoneNumber(customer.getPhoneNumber()
+		result.setPhoneNumber(customer
+				.getPhoneNumber()
 				.asString());
 
 		return result;

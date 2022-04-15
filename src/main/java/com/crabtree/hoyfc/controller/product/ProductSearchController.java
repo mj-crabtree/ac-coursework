@@ -17,7 +17,7 @@ public class ProductSearchController {
 
 	private final ProductService productService;
 	private DynamicArrayList<Product> searchResults;
-	private SortHelper sortingData;
+	private final SortHelper sortingData;
 
 	public ProductSearchController(ProductService productService, SortHelper sortHelper) {
 		this.productService = productService;

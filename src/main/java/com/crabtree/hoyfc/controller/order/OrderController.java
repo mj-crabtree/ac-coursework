@@ -18,8 +18,8 @@ public class OrderController {
 
 	private final OrderService orderService;
 	private final CustomerService customerService;
-	private DynamicArrayList<CustomerOrder> orders;
-	private SortHelper sortingData;
+	private final DynamicArrayList<CustomerOrder> orders;
+	private final SortHelper sortingData;
 
 	public OrderController(OrderService orderService, CustomerService customerService, SortHelper sortHelper) {
 		this.orderService = orderService;

@@ -27,7 +27,7 @@ public class OrdersBootstrap implements CommandLineRunner {
 	private final OrderService orderService;
 	private final Faker faker;
 
-	private List<CustomerOrder> orders;
+	private final List<CustomerOrder> orders;
 
 	public OrdersBootstrap(CustomerService customerService, ProductService productService, OrderService orderService, Faker faker) {
 		this.customerService = customerService;

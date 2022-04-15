@@ -115,6 +115,7 @@ public class ProductComparatorFactory {
 					.getProductStatus()
 					.compareTo(o2.getProductStatus());
 		}
+
 		public static Comparator<Product> descending() {
 			return (o1, o2) -> o2
 					.getProductStatus()

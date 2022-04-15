@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/products")
 public class ProductController {
 	private final ProductService productService;
-	private DynamicArrayList<Product> products;
-	private SortHelper sortingData;
+	private final DynamicArrayList<Product> products;
+	private final SortHelper sortingData;
 
 	public ProductController(ProductService productService, SortHelper sortHelper) {
 		this.productService = productService;

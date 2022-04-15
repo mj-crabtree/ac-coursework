@@ -10,7 +10,7 @@ import java.util.Locale;
 @Service
 public class ProductRepository {
 
-	private DynamicArrayList<Product> products;
+	private final DynamicArrayList<Product> products;
 
 	public ProductRepository() {
 		this.products = new DynamicArrayList<>();

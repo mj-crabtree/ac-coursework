@@ -1,6 +1,9 @@
 package com.crabtree.hoyfc.bootstrap;
 
-import com.crabtree.hoyfc.model.customer.*;
+import com.crabtree.hoyfc.model.customer.CustomerName;
+import com.crabtree.hoyfc.model.customer.Email;
+import com.crabtree.hoyfc.model.customer.Gender;
+import com.crabtree.hoyfc.model.customer.PhoneNumber;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
 import com.crabtree.hoyfc.service.CustomerService;
 import com.github.javafaker.Faker;

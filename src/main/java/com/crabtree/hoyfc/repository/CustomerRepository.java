@@ -13,7 +13,7 @@ import java.util.Locale;
 // todo: make interface
 @Service
 public class CustomerRepository {
-	private DynamicArrayList<Customer> customers;
+	private final DynamicArrayList<Customer> customers;
 
 	public CustomerRepository() {
 		this.customers = new DynamicArrayList<>();

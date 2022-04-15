@@ -18,7 +18,7 @@ public class OrderSearchController {
 
 	private final OrderService orderService;
 	private final CustomerService customerService;
-	private SortHelper sortingData;
+	private final SortHelper sortingData;
 	private DynamicArrayList<CustomerOrder> searchResults;
 
 	public OrderSearchController(OrderService orderService, CustomerService customerService, SortHelper sortingData) {

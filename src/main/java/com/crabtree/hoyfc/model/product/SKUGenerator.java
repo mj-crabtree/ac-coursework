@@ -48,7 +48,7 @@ public class SKUGenerator {
 				.of(input
 						.toUpperCase()
 						.split(" "))
-				.map(substring -> new String(substring))
+				.map(substring -> substring)
 				.collect(Collectors.toList());
 		return strings;
 	}

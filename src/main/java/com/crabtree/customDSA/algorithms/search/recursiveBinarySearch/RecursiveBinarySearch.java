@@ -5,8 +5,6 @@ import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicDataStructu
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.PublicOrderIdComparator;
 
-import java.util.Comparator;
-
 public class RecursiveBinarySearch {
 
 	public <T extends CustomerOrder> int search(DynamicDataStructure<T> collection, String key) {
@@ -21,7 +19,9 @@ public class RecursiveBinarySearch {
 		if (right <= left) return -1;
 
 		int median = (left + right) >>> 1;
-		int comparison = key.compareTo(collection.get(median).getPublicOrderId());
+		int comparison = key.compareTo(collection
+				.get(median)
+				.getPublicOrderId());
 
 		if (comparison == 0) {
 			return median;
