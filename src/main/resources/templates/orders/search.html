@@ -1,0 +1,26 @@
+<!doctype html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}">
+<head>
+    <title>Document</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div th:if="${orderList.isEmpty()}">
+        Not found
+    </div>
+    <table class="table">
+        <tr th:each="order : ${orderList}">
+            <td th:text="${order.getId()}"></td>
+            <td th:text="${order.getPublicOrderId}"></td>
+            <td th:text="${order.getOrderCustomer().getCustomerName().getFullName()}"></td>
+            <td th:text="${order.getOrderDateTime}"></td>
+            <td th:text="${order.getTotalOrderCost()}"></td>
+            <td th:text="${order.getOrderStatus()}"></td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>

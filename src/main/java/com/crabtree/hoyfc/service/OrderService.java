@@ -3,6 +3,7 @@ package com.crabtree.hoyfc.service;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.repository.OrderRepository;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +27,6 @@ public class OrderService {
 	}
 
 	public DynamicArrayList<CustomerOrder> search(String searchTerm) {
-		return OrderRepository.search(searchTerm);
+		return searchTerm.startsWith("HOYFC") || NumberUtils.isParsable(searchTerm) ? orderRepository.searchByUniqueOrderId(searchTerm) : orderRepository.search(searchTerm);
 	}
 }

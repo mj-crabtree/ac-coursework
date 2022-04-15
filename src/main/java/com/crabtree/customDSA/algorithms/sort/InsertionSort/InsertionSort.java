@@ -26,4 +26,21 @@ public class InsertionSort implements CustomSort {
 			collection.put(j, firstElement);
 		}
 	}
+
+	// public <T extends BaseEntity> void sortTest(DynamicDataStructure<T> collection, Comparator<Object> comparator) {
+	// 	for (int i = 1; i < collection.count(); i++) {
+	// 		T firstElement = collection.get(i);
+	// 		int j = i;
+	//
+	// 		while (j > 0) {
+	// 			T secondElement = collection.get(j - 1);
+	// 			if (comparator.compare(firstElement, secondElement) >= 0) {
+	// 				break;
+	// 			}
+	// 			collection.put(j, secondElement);
+	// 			j--;
+	// 		}
+	// 		collection.put(j, firstElement);
+	// 	}
+	// }
 }

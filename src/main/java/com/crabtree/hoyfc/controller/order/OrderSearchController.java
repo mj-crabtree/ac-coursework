@@ -31,15 +31,16 @@ public class OrderSearchController {
 	@GetMapping
 	public String searchOrders(Model model, @RequestParam(name = "searchTerm") String searchTerm) {
 
+		PaginationHelper<CustomerOrder> ph = new PaginationHelper<>();
+
 		this.searchResults = orderService.search(searchTerm);
 
-		PaginationHelper<CustomerOrder> ph = new PaginationHelper<>();
 		var paginationData = ph.paginateCollection(this.searchResults, this.searchResults.count(), 30, 1);
 
 		model.addAttribute("sortData", sortingData);
 		model.addAttribute("paginationData", paginationData);
-		model.addAttribute("productList", paginationData.getCollection());
+		model.addAttribute("orderList", paginationData.getCollection());
 
-		return "products/search";
+		return "orders/search";
 	}
 }
