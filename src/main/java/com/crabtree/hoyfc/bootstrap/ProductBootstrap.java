@@ -6,9 +6,11 @@ import com.crabtree.hoyfc.model.product.createProduct.ProductPrice;
 import com.crabtree.hoyfc.service.ProductService;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(2)
 public class ProductBootstrap implements CommandLineRunner {
 
 	private final ProductService productService;
@@ -23,6 +25,7 @@ public class ProductBootstrap implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println("Hello World from product");
 		for (int i = 0; i < 100; i++) {
 			CreateProductParameters parameters = newRandomProductParameters();
 			productService.createProduct(parameters);

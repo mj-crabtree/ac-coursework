@@ -1,9 +1,12 @@
 package com.crabtree.hoyfc.model.customer;
 
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
+import com.crabtree.hoyfc.model.order.CustomerOrder;
 import lombok.Data;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -17,5 +20,6 @@ public class Customer extends BaseEntity {
 	private LocalDate birthday;
 	private LocalDateTime createdOn = LocalDateTime.now();
 	private LocalDateTime updatedAt;
+	private List<CustomerOrder> orders;
 	private boolean active = true;
 }

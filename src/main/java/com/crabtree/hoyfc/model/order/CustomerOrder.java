@@ -1,22 +1,26 @@
 package com.crabtree.hoyfc.model.order;
 
-import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicDataStructure;
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.model.product.Product;
 import lombok.Data;
+import org.joda.time.DateTime;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class CustomerOrder extends BaseEntity {
-	private Customer orderCustomer;
-	private DynamicDataStructure<Product> orderItems;
+	private String publicOrderId;
+	private Customer customer;
+	private List<OrderLineItem> lineItems = new ArrayList<>();
 	private OrderStatus orderStatus;
-	private LocalDateTime orderDateTime;
-	private Double orderAmount;
-	private OrderPlatform orderPlatform;
+	private DateTime orderDateTime;
+	private Double lineItemsTotalCost;
 	private ShippingType shippingType;
-	private Double shippingAmount;
-	private Double orderTotal;
+	private Double shippingCost;
+	private Double totalOrderCost;
+
+	public void addLineItem(OrderLineItem lineItem) {
+		this.lineItems.add(lineItem);
+	}
 }

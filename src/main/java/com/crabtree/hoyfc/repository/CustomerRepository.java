@@ -20,6 +20,7 @@ public class CustomerRepository {
 	}
 
 	public Customer getById(int id) {
+		// todo: refactor me
 		return this.customers.get(id);
 	}
 

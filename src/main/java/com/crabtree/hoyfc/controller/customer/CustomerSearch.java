@@ -8,7 +8,6 @@ import com.crabtree.hoyfc.service.pagination.PaginationHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,8 +26,7 @@ public class CustomerSearch {
 	}
 
 	@GetMapping
-	public String searchProducts(Model model,
-	                             @RequestParam(name = "searchTerm") String searchTerm) {
+	public String searchProducts(Model model, @RequestParam(name = "searchTerm") String searchTerm) {
 
 		this.searchResults = productService.search(searchTerm);
 

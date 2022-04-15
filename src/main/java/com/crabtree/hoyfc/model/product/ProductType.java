@@ -8,9 +8,9 @@ public enum ProductType {
 	PIN, PATCH, STICKER;
 
 	private static final List<ProductType> TYPES = List.of(values());
-	private static final Integer SIZE = TYPES.size();
+
 	public static ProductType getRandomProductType() {
 		var random = new Random();
-		return TYPES.get(random.nextInt(SIZE));
+		return TYPES.get(random.nextInt(TYPES.size()));
 	}
 }

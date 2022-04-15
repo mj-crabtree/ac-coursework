@@ -6,6 +6,7 @@ import com.crabtree.hoyfc.service.CustomerService;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.Locale;
 import static org.apache.commons.lang3.StringUtils.remove;
 
 @Component
+@Order(1)
 public class CustomerBootstrap implements CommandLineRunner {
 
 	private final CustomerService customerService;
@@ -27,6 +29,7 @@ public class CustomerBootstrap implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println("Hello World from customer");
 		for (int i = 0; i < 100; i++) {
 			CreateCustomerParameters parameters = newRandomUserParameters();
 			customerService.createCustomer(parameters);

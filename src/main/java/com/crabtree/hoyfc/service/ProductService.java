@@ -2,10 +2,10 @@ package com.crabtree.hoyfc.service;
 
 import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
-import com.crabtree.hoyfc.model.product.comparatorFactory.ProductComparatorFactory;
-import com.crabtree.hoyfc.model.service.modelFactory.ModelFactory;
 import com.crabtree.hoyfc.model.product.Product;
+import com.crabtree.hoyfc.model.product.comparatorFactory.ProductComparatorFactory;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
+import com.crabtree.hoyfc.model.service.modelFactory.ModelFactory;
 import com.crabtree.hoyfc.repository.ProductRepository;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.springframework.stereotype.Service;
@@ -49,5 +49,10 @@ public class ProductService {
 
 	public DynamicArrayList<Product> search(String searchTerm) {
 		return productRepository.search(searchTerm);
+	}
+
+	public Product getProductByIndex(int index) {
+		// todo: refactor me
+		return productRepository.getById(index);
 	}
 }
