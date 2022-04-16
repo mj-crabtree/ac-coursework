@@ -32,6 +32,10 @@ public class ProductRepository {
 		return this.products.count();
 	}
 
+	public void replace(Product product) {
+		products.put(product.getId() -1, product);
+	}
+
 	public DynamicArrayList<Product> search(String needle) {
 		DynamicArrayList<Product> result = new DynamicArrayList<>();
 

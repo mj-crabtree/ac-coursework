@@ -5,6 +5,7 @@ import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.model.product.comparatorFactory.ProductComparatorFactory;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
+import com.crabtree.hoyfc.model.product.editProduct.EditProductFormData;
 import com.crabtree.hoyfc.model.service.modelFactory.ModelFactory;
 import com.crabtree.hoyfc.repository.ProductRepository;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
@@ -26,7 +27,7 @@ public class ProductService {
 	public void createProduct(CreateProductParameters parameters) {
 		var newProduct = ModelFactory.newProduct();
 
-		newProduct.setId(ProductIdService.getNext());
+		newProduct.setId(parameters.getProductId());
 		newProduct.setProductName(parameters.getProductName());
 		newProduct.setProductDescription(parameters.getProductDescription());
 		newProduct.setStockCount(parameters.getStockCount());
@@ -35,6 +36,10 @@ public class ProductService {
 		newProduct.setProductStatus(parameters.getProductStatus());
 		newProduct.setProductPrice(parameters.getProductPrice());
 
+		save(newProduct);
+	}
+
+	private void save(Product newProduct) {
 		productRepository.save(newProduct);
 	}
 
@@ -54,5 +59,25 @@ public class ProductService {
 	public Product getProductByIndex(int index) {
 		// todo: refactor me
 		return productRepository.getById(index);
+	}
+
+	public void updateProduct(EditProductFormData productFormData) {
+		var updatedProduct = makeProduct(productFormData.toParameters());
+		productRepository.replace(updatedProduct);
+	}
+
+	public Product makeProduct(CreateProductParameters parameters) {
+		var newProduct = ModelFactory.newProduct();
+
+		newProduct.setId(parameters.getProductId());
+		newProduct.setProductName(parameters.getProductName());
+		newProduct.setProductDescription(parameters.getProductDescription());
+		newProduct.setStockCount(parameters.getStockCount());
+		newProduct.setProductSku(parameters.getProductSku());
+		newProduct.setProductType(parameters.getProductType());
+		newProduct.setProductStatus(parameters.getProductStatus());
+		newProduct.setProductPrice(parameters.getProductPrice());
+
+		return newProduct;
 	}
 }

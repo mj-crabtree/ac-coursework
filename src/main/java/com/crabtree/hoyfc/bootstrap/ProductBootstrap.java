@@ -3,6 +3,7 @@ package com.crabtree.hoyfc.bootstrap;
 import com.crabtree.hoyfc.model.product.*;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
 import com.crabtree.hoyfc.model.product.createProduct.ProductPrice;
+import com.crabtree.hoyfc.service.product.ProductIdService;
 import com.crabtree.hoyfc.service.product.ProductService;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
@@ -64,6 +65,7 @@ public class ProductBootstrap implements CommandLineRunner {
 				.randomDouble(2, 1, 10);
 
 		return new CreateProductParameters(
+				ProductIdService.getNext(),
 				productSku,
 				productType,
 				new ProductName(productName),

@@ -2,16 +2,16 @@ package com.crabtree.hoyfc.controller.product;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
+import com.crabtree.hoyfc.model.product.ProductStatus;
+import com.crabtree.hoyfc.model.product.ProductType;
+import com.crabtree.hoyfc.model.product.editProduct.EditProductFormData;
 import com.crabtree.hoyfc.service.product.ProductService;
 import com.crabtree.hoyfc.service.pageSort.SortDirection;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pagination.PaginationHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/products")
@@ -42,6 +42,26 @@ public class ProductController {
 		model.addAttribute("productList", paginationData.getCollection());
 
 		return "products/list";
+	}
+
+	@GetMapping(value = "/info/{productId}")
+	public String viewProductInfo(Model model, @PathVariable(value = "productId") Integer productId) {
+
+		var chosenProduct = productService.getProductByIndex(productId - 1);
+		var chosenProductFormData = EditProductFormData.fromProduct(chosenProduct);
+
+		model.addAttribute("productTypesList", ProductType.values());
+		model.addAttribute("productStatusList", ProductStatus.values());
+		model.addAttribute("product", chosenProductFormData);
+
+		return "products/info";
+	}
+
+	@PostMapping(value = "/info/submit")
+	public String doEditExistingProduct(Model model, EditProductFormData productFormData) {
+
+		productService.updateProduct(productFormData);
+		return "redirect:/products/";
 	}
 
 	@GetMapping(value = "sort")

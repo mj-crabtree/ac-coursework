@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateProductParameters {
+	private final Integer productId;
 	private final ProductSku productSku;
 	private final ProductType productType;
 	private final ProductName productName;
