@@ -1,0 +1,99 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<section layout:fragment="content">
+    <div class="container">
+        <h2 class="display-4">New Product</h2>
+        <form th:action="@{/newproduct/submit}" th:object="${newProduct}" method="post" class="py-3">
+            <div class="form-row">
+
+                <!--                product name -->
+                <div class="form-group col-md 6">
+                    <label for="productName">Product name</label>
+                    <input type="text" class="form-control" th:field="*{productName}" id="productName"
+                           placeholder="Cool new product!">
+                </div>
+
+                <!--                product type -->
+                <div class="form-group col-md-3">
+                    <label for="productType">Product Type</label>
+                    <select class="form-control" name="productTypeSelection" id="productType" th:field="*{productType}">
+                        <option th:each="type : ${productTypesList}" th:value="${type}" th:text="${type}"></option>
+                    </select>
+                </div>
+
+                <!--                status -->
+                <div class="form-group col-md-3">
+                    <label for="productStatus">Product Status</label>
+                    <select class="form-control" name="productStatusSelection" id="productStatus" th:field="*{productStatus}">
+                        <option th:each="status : ${productStatusList}" th:value="${status}" th:text="${status}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <!--            second row -->
+            <div class="form-row">
+                <!--                product colour -->
+                <div class="form-group col-md 9">
+                    <label for="productColour">Product colour</label>
+                    <input type="text" class="form-control" th:field="*{productColour}" id="productColour"
+                           placeholder="e.g. Rainbow, Pan Flag, Blue">
+                </div>
+
+                <!--                product price -->
+                <div class="form-group col-md 9">
+                    <label for="productPrice">Product price</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">£</div>
+                        </div>
+                        <input type="number" min="0" class="form-control" th:field="*{productPrice}" id="productPrice"
+                               placeholder="e.g. 2.50">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+
+                <!--                held stock -->
+                <div class="form-group col-md 9">
+                    <label for="productStockCount">Held stock</label>
+                    <input type="number" class="form-control" th:field="*{stockCount}" id="productStockCount"
+                           placeholder="e.g. 250">
+                </div>
+
+                <!--                restock @ -->
+                <div class="form-group col-md 9">
+                    <label for="productRestockTrigger">Restock notification count</label>
+                    <input type="number" class="form-control" th:field="*{restockTrigger}" id="productRestockTrigger"
+                           placeholder="e.g. 15">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="productDescription">Description</label>
+                    <textarea class="form-control" th:field="*{productDescription}" id="productDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="internalNotes">Notes</label>
+                    <textarea class="form-control" id="internalNotes" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row py-3">
+                <a href="/products/" class="btn btn-outline-secondary">Cancel</a>
+                <button type="reset" class="btn btn-outline-danger mx-3">Reset</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>

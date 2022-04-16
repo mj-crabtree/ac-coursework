@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.service;
+package com.crabtree.hoyfc.service.customer;
 
 import org.springframework.stereotype.Service;
 

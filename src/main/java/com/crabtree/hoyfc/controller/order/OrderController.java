@@ -2,8 +2,8 @@ package com.crabtree.hoyfc.controller.order;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
-import com.crabtree.hoyfc.service.CustomerService;
-import com.crabtree.hoyfc.service.OrderService;
+import com.crabtree.hoyfc.service.customer.CustomerService;
+import com.crabtree.hoyfc.service.order.OrderService;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pagination.PaginationHelper;
 import org.springframework.stereotype.Controller;

@@ -1,11 +1,10 @@
-package com.crabtree.hoyfc.service;
+package com.crabtree.hoyfc.service.order;
 
 import com.crabtree.hoyfc.model.customerOrder.ShippingType;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ShippingCostService {
-
+public class OrderShippingCostService {
 	public static Double getShippingCost(ShippingType shippingType) {
 		switch (shippingType) {
 			case FIRST_CLASS:

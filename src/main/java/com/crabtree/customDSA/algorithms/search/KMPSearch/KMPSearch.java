@@ -51,5 +51,4 @@ public class KMPSearch {
 		}
 		return prefix;
 	}
-
 }

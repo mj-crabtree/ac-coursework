@@ -5,7 +5,7 @@ import com.crabtree.hoyfc.model.customer.Email;
 import com.crabtree.hoyfc.model.customer.Gender;
 import com.crabtree.hoyfc.model.customer.PhoneNumber;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
-import com.crabtree.hoyfc.service.CustomerService;
+import com.crabtree.hoyfc.service.customer.CustomerService;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;

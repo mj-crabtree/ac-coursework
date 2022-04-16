@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.service;
+package com.crabtree.hoyfc.service.product;
 
 import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;

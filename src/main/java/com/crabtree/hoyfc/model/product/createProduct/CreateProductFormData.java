@@ -1,33 +1,31 @@
 package com.crabtree.hoyfc.model.product.createProduct;
 
 import com.crabtree.hoyfc.model.product.*;
-import lombok.Data;
+import lombok.*;
 
 @Data
 public class CreateProductFormData {
-	// product sku's going to have a generation function for making skus as and when
-	// same with the product QR
-	private String productName;
-	private String productDescription;
-	private ProductColour productColour;
-	private ProductType productType;
-	private Integer stockCount;
-	private Integer restockTrigger;
-	private ProductStatus productStatus;
 	private Double productPrice;
-	// todo: handle the image somehow?
+	private Integer stockCount;
+	// private Integer secondsCount
+	private Integer restockTrigger;
+	public String productName;
+	private String productDescription;
+	private String productColour;
+	private ProductType productType;
+	private ProductStatus productStatus;
 
 	public CreateProductParameters toParameters() {
 		var sku = new SKUGenerator();
-		return new CreateProductParameters(
-				sku.createSku(productType, productName, productColour),
-				productType,
-				new ProductName(productName),
-				new StockCount(stockCount, restockTrigger),
-				new ProductDescription(productDescription, productColour),
-				productStatus,
-				new ProductPrice(productPrice)
-		);
+
+		var newProductName = new ProductName(this.productName);
+		var newStockCount = new StockCount(this.stockCount, this.restockTrigger);
+		var newProductColour = new ProductColour(this.productColour);
+		var newProductDescription = new ProductDescription(this.productDescription, newProductColour);
+		var newProductPrice = new ProductPrice(this.productPrice);
+		var newProductSku = sku.createSku(this.productType, this.productName, newProductColour);
+
+		return new CreateProductParameters(newProductSku, productType, newProductName, newStockCount, newProductDescription, productStatus, newProductPrice);
 	}
 
 }

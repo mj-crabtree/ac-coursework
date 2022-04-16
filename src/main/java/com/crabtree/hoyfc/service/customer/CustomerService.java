@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.service;
+package com.crabtree.hoyfc.service.customer;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;

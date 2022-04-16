@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.service;
+package com.crabtree.hoyfc.service.order;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;

@@ -6,7 +6,11 @@ import com.crabtree.hoyfc.model.customerOrder.OrderLineItem;
 import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
 import com.crabtree.hoyfc.model.customerOrder.ShippingType;
 import com.crabtree.hoyfc.model.product.Product;
-import com.crabtree.hoyfc.service.*;
+import com.crabtree.hoyfc.service.customer.CustomerService;
+import com.crabtree.hoyfc.service.order.OrderIdService;
+import com.crabtree.hoyfc.service.order.OrderService;
+import com.crabtree.hoyfc.service.order.OrderShippingCostService;
+import com.crabtree.hoyfc.service.product.ProductService;
 import com.github.javafaker.Faker;
 import org.joda.time.DateTime;
 import org.springframework.boot.CommandLineRunner;
@@ -85,7 +89,7 @@ public class OrdersBootstrap implements CommandLineRunner {
 		customerOrder.setLineItemsTotalCost(roundDoubleToTwoDecimalPlaces(orderedItemsTotalCost));
 		customerOrder.setOrderDateTime(getRandomDateTime());
 		customerOrder.setShippingType(ShippingType.getRandomShippingType());
-		customerOrder.setShippingCost(ShippingCostService.getShippingCost(customerOrder.getShippingType()));
+		customerOrder.setShippingCost(OrderShippingCostService.getShippingCost(customerOrder.getShippingType()));
 		customerOrder.setTotalOrderCost(roundDoubleToTwoDecimalPlaces(orderedItemsTotalCost + customerOrder.getShippingCost()));
 		customerOrder.setOrderStatus(getRandomOrderStatus(customerOrder.getOrderDateTime()));
 

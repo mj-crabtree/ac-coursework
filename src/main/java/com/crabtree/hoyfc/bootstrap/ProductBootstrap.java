@@ -3,7 +3,7 @@ package com.crabtree.hoyfc.bootstrap;
 import com.crabtree.hoyfc.model.product.*;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
 import com.crabtree.hoyfc.model.product.createProduct.ProductPrice;
-import com.crabtree.hoyfc.service.ProductService;
+import com.crabtree.hoyfc.service.product.ProductService;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;

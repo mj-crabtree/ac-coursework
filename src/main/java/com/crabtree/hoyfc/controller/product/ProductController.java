@@ -2,7 +2,7 @@ package com.crabtree.hoyfc.controller.product;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
-import com.crabtree.hoyfc.service.ProductService;
+import com.crabtree.hoyfc.service.product.ProductService;
 import com.crabtree.hoyfc.service.pageSort.SortDirection;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pagination.PaginationHelper;

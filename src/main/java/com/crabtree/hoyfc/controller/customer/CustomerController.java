@@ -2,7 +2,7 @@ package com.crabtree.hoyfc.controller.customer;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.service.CustomerService;
+import com.crabtree.hoyfc.service.customer.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
