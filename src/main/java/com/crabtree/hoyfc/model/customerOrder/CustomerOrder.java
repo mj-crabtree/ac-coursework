@@ -24,4 +24,12 @@ public class CustomerOrder extends BaseEntity {
 	public void addLineItem(OrderLineItem lineItem) {
 		this.lineItems.add(lineItem);
 	}
+
+
+	@Override
+	public String toString() {
+		return "CustomerOrder{" +
+				"orderCustomer=" + orderCustomer.toString() +
+				'}';
+	}
 }

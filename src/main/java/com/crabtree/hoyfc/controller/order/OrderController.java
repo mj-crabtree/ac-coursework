@@ -26,9 +26,6 @@ public class OrderController {
 		this.customerService = customerService;
 		this.sortingData = sortHelper;
 		this.orders = this.orderService.getOrders();
-
-		// this.sortingData.setSortColumn("Date");
-		// this.sortingData.setSortDirection(SortDirection.DESC);
 	}
 
 	@GetMapping
@@ -49,5 +46,12 @@ public class OrderController {
 		return "orders/list";
 	}
 
+	@GetMapping(value = "/info/{orderId}")
+	public String viewOrderInfo(Model model, @PathVariable(value = "orderId") Integer orderId) {
+		var order = orderService.getOrderById(orderId);
 
+		model.addAttribute("order", order);
+		model.addAttribute("orderItems", order.getLineItems());
+		return "orders/info";
+	}
 }

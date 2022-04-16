@@ -2,6 +2,7 @@ package com.crabtree.hoyfc.model.product.createProduct;
 
 import com.crabtree.hoyfc.model.product.*;
 import com.crabtree.hoyfc.service.product.ProductIdService;
+import com.crabtree.hoyfc.service.product.ProductSkuService;
 import lombok.Data;
 
 @Data
@@ -18,8 +19,8 @@ public class CreateProductFormData {
 	private ProductStatus productStatus;
 
 	public CreateProductParameters toParameters() {
-		var sku = new SKUGenerator();
-		var newProductId = ProductIdService.getNext();
+		var sku = new ProductSkuService();
+		var newProductId = ProductIdService.getNextId();
 		var newProductName = new ProductName(this.productName);
 		var newStockCount = new StockCount(this.stockCount, this.restockTrigger);
 		var newProductColour = new ProductColour(this.productColour);

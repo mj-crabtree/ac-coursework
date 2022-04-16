@@ -5,6 +5,7 @@ import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
 import com.crabtree.hoyfc.model.product.createProduct.ProductPrice;
 import com.crabtree.hoyfc.service.product.ProductIdService;
 import com.crabtree.hoyfc.service.product.ProductService;
+import com.crabtree.hoyfc.service.product.ProductSkuService;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -15,10 +16,10 @@ import org.springframework.stereotype.Component;
 public class ProductBootstrap implements CommandLineRunner {
 
 	private final ProductService productService;
-	private final SKUGenerator skuGenerator;
+	private final ProductSkuService skuGenerator;
 	private final Faker faker;
 
-	public ProductBootstrap(ProductService productService, SKUGenerator skuGenerator, Faker faker) {
+	public ProductBootstrap(ProductService productService, ProductSkuService skuGenerator, Faker faker) {
 		this.productService = productService;
 		this.skuGenerator = skuGenerator;
 		this.faker = faker;
@@ -66,7 +67,7 @@ public class ProductBootstrap implements CommandLineRunner {
 				.randomDouble(2, 1, 10);
 
 		return new CreateProductParameters(
-				ProductIdService.getNext(),
+				ProductIdService.getNextId(),
 				productSku,
 				productType,
 				new ProductName(productName),

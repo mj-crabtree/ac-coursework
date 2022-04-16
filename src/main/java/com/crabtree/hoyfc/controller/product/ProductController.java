@@ -28,6 +28,9 @@ public class ProductController {
 
 	@GetMapping
 	public String showProducts() {
+		this.sortingData.setSortColumn("Status");
+		this.sortingData.setSortDirection(SortDirection.ASC);
+		productService.sort(sortingData, this.products);
 		return "redirect:page/1";
 	}
 
@@ -67,13 +70,15 @@ public class ProductController {
 	@GetMapping(value = "sort")
 	// http://localhost:8080/products/sort?sortColumn=Name&sortDirection=ASC
 	public String sortProducts(Model model,
+							   @RequestParam(name = "p") Integer pageNumber,
 	                           @RequestParam(name = "sortColumn") String sortColumn,
 	                           @RequestParam(name = "sortDirection") String sortDirection) {
 
+		var x = model.getAttribute("paginationData");
 		this.sortingData.setSortColumn(sortColumn);
 		this.sortingData.setSortDirection(SortDirection.valueOf(sortDirection.toUpperCase()));
 
 		productService.sort(sortingData, this.products);
-		return "redirect:/products/";
+		return "redirect:/products/page/" + pageNumber;
 	}
 }

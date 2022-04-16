@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public class EditCustomerParameters extends CreateCustomerParameters {
 
-	public EditCustomerParameters(CustomerName userName, Gender gender, Email email, LocalDate birthday, PhoneNumber phoneNumber) {
-		super(userName, gender, email, birthday, phoneNumber);
+	public EditCustomerParameters(Address address, CustomerName userName, Gender gender, Email email, LocalDate birthday, PhoneNumber phoneNumber) {
+		super(userName, address, gender, email, birthday, phoneNumber);
 	}
 
 	public void updateCustomer(Customer customer) {

@@ -1,9 +1,11 @@
-package com.crabtree.hoyfc.model.service.modelFactory;
+package com.crabtree.hoyfc.service.factory;
 
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.product.Product;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ModelFactory {
 	public static Customer newCustomer() {
 		return getCustomer();

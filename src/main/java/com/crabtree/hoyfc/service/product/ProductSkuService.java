@@ -1,5 +1,8 @@
-package com.crabtree.hoyfc.model.product;
+package com.crabtree.hoyfc.service.product;
 
+import com.crabtree.hoyfc.model.product.ProductColour;
+import com.crabtree.hoyfc.model.product.ProductSku;
+import com.crabtree.hoyfc.model.product.ProductType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,9 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class SKUGenerator {
-
-	private int skuCount = 1;
+public class ProductSkuService {
 
 	private static String productTypeSkuifier(ProductType productType) {
 		var string = productType.name();
@@ -32,13 +33,9 @@ public class SKUGenerator {
 		var out = new StringBuilder();
 
 		for (String string : strings) {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 2 && out.length() < 4; i++) {
 				out.append(string.charAt(i));
 			}
-		}
-
-		if (out.length() < 6) {
-			out.append("XX");
 		}
 		return out.toString();
 	}
@@ -64,7 +61,7 @@ public class SKUGenerator {
 				.append(productNameSkuifier(productName))
 				.append("-");
 
-		sku.append(String.format("%05d", this.skuCount++));
+		sku.append(String.format("%05d", ProductIdService.getNextProductSkuId()));
 
 		return new ProductSku(sku.toString());
 	}

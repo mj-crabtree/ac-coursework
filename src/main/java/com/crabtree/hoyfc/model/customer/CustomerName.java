@@ -15,4 +15,14 @@ public class CustomerName {
 	public String getFullName() {
 		return String.format("%s %s", firstName, lastName);
 	}
+
+
+	@Override
+	public String toString() {
+		return "CustomerName{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", fullName='" + getFullName() + '\'' +
+				'}';
+	}
 }

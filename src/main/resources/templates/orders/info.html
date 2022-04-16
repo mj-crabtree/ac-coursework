@@ -1,0 +1,69 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}">
+<section layout:fragment="content">
+    <div class="container py-3">
+        <div class="row justify-content-between">
+            <div class="">
+                <h2 class="display-4" th:text="'Order Info - ' + ${order.getPublicOrderId()}">Order Info</h2>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="h3 py-2">Details</h3>
+                <p class="text-capitalize"
+                   th:text="${order.getOrderCustomer().getCustomerName().getFullName()}"></p>
+                <p class="" th:text="${order.getOrderCustomer.getEmail().asString()}"></p>
+                <p class="text-capitalize" th:text="${order.getOrderDateTime()}"></p>
+                <p class="my-2 text-capitalize font-italic font-weight-bold"
+                   th:text="'Total: ' + ${#numbers.formatCurrency(order.getTotalOrderCost())}"></p>
+            </div>
+            <div class="col-md-6">
+                <h3 class=" h3 text-right py-2">Address</h3>
+                <p class="text-capitalize text-right"
+                   th:text="${order.getOrderCustomer().getAddress().getBuildingNumber()} + ' ' + ${order.getOrderCustomer().getAddress().getFirstLine()}"></p>
+                <p class="text-capitalize text-right"
+                   th:text="${order.getOrderCustomer().getAddress().getTownCity()} + ' ' + ${order.getOrderCustomer().getAddress().getPostalCode()}"></p>
+                <p class="text-capitalize text-right"
+                   th:text="${order.getOrderCustomer().getAddress().getCountry()}"></p>
+            </div>
+        </div>
+        <hr class="mt-4">
+        <div class="row">
+            <h3 class="h3 py-3">Order Items</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Product</td>
+                    <td>SKU</td>
+                    <td>Count</td>
+                    <td>Price</td>
+                    <td>Total</td>
+                </tr>
+                </thead>
+                <tr th:each="lineItem, idx : ${orderItems}">
+                    <td th:text="${idx.count}"></td>
+                    <td th:text="${lineItem.getProduct().productName.getProductName()}"></td>
+                    <td th:text="${lineItem.getProduct().getProductSku().getProductSku()}"></td>
+                    <td th:text="${lineItem.getCount()}"></td>
+                    <td th:text="${#numbers.formatCurrency(lineItem.getProduct().getProductPrice().getProductPrice())}"></td>
+                    <td th:text="${#numbers.formatCurrency(lineItem.getTotalCost())}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row py-2 float-right">
+            <div class="col">
+                <p class="text-right font-weight-bold"
+                   th:text="'Items: ' + ${#numbers.formatCurrency(order.getLineItemsTotalCost())}"></p>
+                <p class="text-right font-weight-bold"
+                   th:text="'Shipping: ' + ${#numbers.formatCurrency(order.getShippingCost())}"></p>
+                <h4 class="h4 text-right"
+                    th:text="'Total: ' + ${#numbers.formatCurrency(order.getTotalOrderCost())}"></h4>
+            </div>
+        </div>
+        <button class="btn btn-primary my-3" onclick="window.history.back()">Back to Orders</button>
+    </div>
+</section>

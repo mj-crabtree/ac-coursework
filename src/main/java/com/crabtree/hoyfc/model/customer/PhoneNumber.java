@@ -18,4 +18,12 @@ public class PhoneNumber {
 	public String asString() {
 		return phoneNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "PhoneNumber{" +
+				"phoneNumber='" + phoneNumber + '\'' +
+				", asString='" + asString() + '\'' +
+				'}';
+	}
 }

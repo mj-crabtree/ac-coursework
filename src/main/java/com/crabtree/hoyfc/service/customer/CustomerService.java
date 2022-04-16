@@ -3,11 +3,9 @@ package com.crabtree.hoyfc.service.customer;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
-import com.crabtree.hoyfc.model.service.modelFactory.ModelFactory;
+import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class CustomerService {
@@ -26,6 +24,7 @@ public class CustomerService {
 		newCustomer.setId(customerIdService.getNext());
 		newCustomer.setCustomerName(customer.getUserName());
 		newCustomer.setEmail(customer.getEmail());
+		newCustomer.setAddress(customer.getCustomerAddress());
 		newCustomer.setGender(customer.getGender());
 		newCustomer.setPhoneNumber(customer.getPhoneNumber());
 		newCustomer.setBirthday(customer.getBirthday());
@@ -46,7 +45,6 @@ public class CustomerService {
 		customerById.setBirthday(request.getBirthday());
 		customerById.setActive(request.isActive());
 		customerById.setPhoneNumber(request.getPhoneNumber());
-		customerById.setUpdatedAt(LocalDateTime.now());
 
 		return customerRepository.save(customerById);
 	}

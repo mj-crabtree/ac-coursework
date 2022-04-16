@@ -6,7 +6,7 @@ import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.model.product.comparatorFactory.ProductComparatorFactory;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
 import com.crabtree.hoyfc.model.product.editProduct.EditProductFormData;
-import com.crabtree.hoyfc.model.service.modelFactory.ModelFactory;
+import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.repository.ProductRepository;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,6 @@
 package com.crabtree.hoyfc.bootstrap;
 
-import com.crabtree.hoyfc.model.customer.CustomerName;
-import com.crabtree.hoyfc.model.customer.Email;
-import com.crabtree.hoyfc.model.customer.Gender;
-import com.crabtree.hoyfc.model.customer.PhoneNumber;
+import com.crabtree.hoyfc.model.customer.*;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
 import com.crabtree.hoyfc.service.customer.CustomerService;
 import com.github.javafaker.Faker;
@@ -37,6 +34,7 @@ public class CustomerBootstrap implements CommandLineRunner {
 			CreateCustomerParameters parameters = newRandomUserParameters();
 			customerService.createCustomer(parameters);
 		}
+		System.out.println();
 	}
 
 	private CreateCustomerParameters newRandomUserParameters() {
@@ -61,7 +59,9 @@ public class CustomerBootstrap implements CommandLineRunner {
 				.phoneNumber()
 				.phoneNumber());
 
-		return new CreateCustomerParameters(userName, gender, email, birthday, phoneNumber);
+		Address address = generateAddress();
+
+		return new CreateCustomerParameters(userName, address, gender, email, birthday, phoneNumber);
 	}
 
 	private String generateEmail(CustomerName userName) {
@@ -72,5 +72,29 @@ public class CustomerBootstrap implements CommandLineRunner {
 				remove(userName
 						.getLastName()
 						.toLowerCase(Locale.ROOT), "'"));
+	}
+
+	private Address generateAddress() {
+		var buildingNumber = faker
+				.address()
+				.buildingNumber();
+
+		var firstLine = faker
+				.address()
+				.streetName();
+
+		var townCity = faker
+				.elderScrolls()
+				.city();
+
+		var postalCode = faker
+				.address()
+				.zipCode();
+
+		var country = faker
+				.elderScrolls()
+				.region();
+
+		return new Address(buildingNumber, firstLine, townCity, postalCode, country);
 	}
 }

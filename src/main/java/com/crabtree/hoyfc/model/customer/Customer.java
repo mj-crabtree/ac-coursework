@@ -18,27 +18,24 @@ public class Customer extends BaseEntity {
 	private Gender gender;
 	private LocalDate birthday;
 	private LocalDateTime createdOn = LocalDateTime.now();
-	private LocalDateTime updatedAt;
+	private Address address;
 	private List<CustomerOrder> orderHistory = new ArrayList<>();
-
 	private boolean active = true;
 
 	public void addOrderToOrderHistory(CustomerOrder order) {
 		this.orderHistory.add(order);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Customer{" +
-				"customerName=" + customerName +
-				", phoneNumber=" + phoneNumber +
-				", email=" + email +
-				", gender=" + gender +
-				", birthday=" + birthday +
-				", createdOn=" + createdOn +
-				", updatedAt=" + updatedAt +
-				", orderHistory=" + orderHistory +
+				"customerName=" + customerName.toString() +
+				", phoneNumber=" + phoneNumber.toString() +
+				", email=" + email.toString() +
+				", gender=" + gender.toString() +
+				", birthday=" + birthday.toString() +
+				", createdOn=" + createdOn.toString() +
+				", orderHistory=" + orderHistory.toString() +
 				", active=" + active +
 				'}';
 	}

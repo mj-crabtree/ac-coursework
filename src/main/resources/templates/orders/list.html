@@ -63,7 +63,6 @@
                         <a th:href="@{'/products/sort?sortColumn=Count&sortDirection=' + ${sortData.reverseSortDirection()}}">Status</a>
                     </th>
                     <th></th>
-                    <th></th>
                 </tr>
                 <tr th:each="order : ${orderList}">
                     <td th:text="${order.getId()}"></td>
@@ -72,6 +71,7 @@
                     <td th:text="${order.getOrderDateTime}"></td>
                     <td th:text="${order.getTotalOrderCost()}"></td>
                     <td th:text="${order.getOrderStatus()}"></td>
+                    <td><a th:href="'/orders/info/' + ${order.getId()}" class="btn btn-outline"><i class="bi bi-search"></i></a>
                 </tr>
             </table>
             <div th:replace="fragments/pagination :: paginationInfo"></div>

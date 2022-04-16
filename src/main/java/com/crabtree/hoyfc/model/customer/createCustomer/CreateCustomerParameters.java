@@ -1,9 +1,6 @@
 package com.crabtree.hoyfc.model.customer.createCustomer;
 
-import com.crabtree.hoyfc.model.customer.CustomerName;
-import com.crabtree.hoyfc.model.customer.Email;
-import com.crabtree.hoyfc.model.customer.Gender;
-import com.crabtree.hoyfc.model.customer.PhoneNumber;
+import com.crabtree.hoyfc.model.customer.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CreateCustomerParameters {
 	private final CustomerName userName;
+	private final Address customerAddress;
 	private final Gender gender;
 	private final Email email;
 	private final LocalDate birthday;

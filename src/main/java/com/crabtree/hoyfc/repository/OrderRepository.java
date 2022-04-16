@@ -56,4 +56,8 @@ public class OrderRepository {
 		}
 		return result;
 	}
+
+	public CustomerOrder getOrderById(Integer orderId) {
+		return this.customerOrders.get(orderId - 1);
+	}
 }

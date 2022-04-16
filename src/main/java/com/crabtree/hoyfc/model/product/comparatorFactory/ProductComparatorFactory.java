@@ -2,6 +2,7 @@ package com.crabtree.hoyfc.model.product.comparatorFactory;
 
 import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.service.pageSort.SortDirection;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 
 import java.util.Comparator;
 
@@ -111,9 +112,22 @@ public class ProductComparatorFactory {
 
 	private static class ProductStatusComparator {
 		public static Comparator<Product> ascending() {
-			return (o1, o2) -> o1
-					.getProductStatus()
-					.compareTo(o2.getProductStatus());
+			return (o1, o2) -> {
+				int result = o1
+						.getProductStatus()
+						.compareTo(o2.getProductStatus());
+				if (result != 0) {
+					return result;
+				}
+				else {
+					return o1
+							.getProductName()
+							.getProductName()
+							.compareTo(o2
+									.getProductName()
+									.getProductName());
+				}
+			};
 		}
 
 		public static Comparator<Product> descending() {
@@ -125,9 +139,22 @@ public class ProductComparatorFactory {
 
 	private static class ProductTypeComparator {
 		public static Comparator<Product> ascending() {
-			return (o1, o2) -> o1
-					.getProductType()
-					.compareTo(o2.getProductType());
+			return (o1, o2) -> {
+				int result = o1
+						.getProductType()
+						.compareTo(o2.getProductType());
+				if (result != 0) {
+					return result;
+				}
+				else {
+					return o1
+							.getProductName()
+							.getProductName()
+							.compareTo(o2
+									.getProductName()
+									.getProductName());
+				}
+			};
 		}
 
 		public static Comparator<Product> descending() {

@@ -1,9 +1,6 @@
 package com.crabtree.hoyfc.model.customer.editCustomer;
 
-import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.model.customer.CustomerName;
-import com.crabtree.hoyfc.model.customer.Email;
-import com.crabtree.hoyfc.model.customer.PhoneNumber;
+import com.crabtree.hoyfc.model.customer.*;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerFormData;
 import lombok.Data;
 
@@ -35,11 +32,32 @@ public class EditCustomerFormData extends CreateCustomerFormData {
 				.getPhoneNumber()
 				.asString());
 
+		result.setBuildingNumber(customer
+				.getAddress()
+				.getBuildingNumber());
+
+		result.setFirstLine(customer
+				.getAddress()
+				.getFirstLine());
+
+		result.setTownCity(customer
+				.getAddress()
+				.getTownCity());
+
+		result.setPostalCode(customer
+				.getAddress()
+				.getPostalCode());
+
+		result.setCountry(customer
+				.getAddress()
+				.getCountry());
+
 		return result;
 	}
 
 	public EditCustomerParameters toParameters() {
 		return new EditCustomerParameters(
+				new Address(getBuildingNumber(), getFirstLine(), getTownCity(), getPostalCode(), getCountry()),
 				new CustomerName(getFirstName(), getLastName()),
 				getGender(),
 				new Email(getEmail()),
