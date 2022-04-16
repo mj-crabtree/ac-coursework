@@ -13,11 +13,17 @@ public class EditProductFormData extends CreateProductFormData {
 		EditProductFormData result = new EditProductFormData();
 
 		result.setId(product.getId());
-		result.setSku(product.getProductSku().getProductSku());
-		result.setProductName(product.getProductName().getProductName());
+		result.setSku(product
+				.getProductSku()
+				.getProductSku());
+		result.setProductName(product
+				.getProductName()
+				.getProductName());
 		result.setProductType(product.getProductType());
 		result.setProductStatus(product.getProductStatus());
-		result.setProductDescription(product.getProductDescription().getProductDescription());
+		result.setProductDescription(product
+				.getProductDescription()
+				.getProductDescription());
 
 		result.setProductColour(product
 				.getProductDescription()

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/newproduct")
 public class CreateProductController {
 
-	private ProductService productService;
+	private final ProductService productService;
 
 	public CreateProductController(ProductService productService) {
 		this.productService = productService;
@@ -32,7 +32,8 @@ public class CreateProductController {
 
 	@PostMapping("submit")
 	public String doCreateNewProduct(CreateProductFormData newProduct) {
-		productService.createProduct(newProduct.toParameters());
+		var product = productService.makeProduct(newProduct.toParameters());
+		productService.save(product);
 		return "redirect:/products/";
 	}
 }

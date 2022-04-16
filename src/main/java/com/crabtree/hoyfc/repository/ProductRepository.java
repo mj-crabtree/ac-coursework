@@ -32,8 +32,8 @@ public class ProductRepository {
 		return this.products.count();
 	}
 
-	public void replace(Product product) {
-		products.put(product.getId() -1, product);
+	public void update(Product product) {
+		products.put(product.getId() - 1, product);
 	}
 
 	public DynamicArrayList<Product> search(String needle) {

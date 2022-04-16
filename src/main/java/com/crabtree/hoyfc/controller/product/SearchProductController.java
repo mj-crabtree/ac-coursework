@@ -2,9 +2,9 @@ package com.crabtree.hoyfc.controller.product;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
-import com.crabtree.hoyfc.service.product.ProductService;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pagination.PaginationHelper;
+import com.crabtree.hoyfc.service.product.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchProductController {
 
 	private final ProductService productService;
-	private DynamicArrayList<Product> searchResults;
 	private final SortHelper sortingData;
+	private DynamicArrayList<Product> searchResults;
 
 	public SearchProductController(ProductService productService, SortHelper sortHelper) {
 		this.productService = productService;

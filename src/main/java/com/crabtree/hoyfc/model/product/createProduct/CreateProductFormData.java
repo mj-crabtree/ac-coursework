@@ -2,16 +2,16 @@ package com.crabtree.hoyfc.model.product.createProduct;
 
 import com.crabtree.hoyfc.model.product.*;
 import com.crabtree.hoyfc.service.product.ProductIdService;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public class CreateProductFormData {
+	public String productName;
 	private String sku;
 	private Double productPrice;
 	private Integer stockCount;
 	// private Integer secondsCount
 	private Integer restockTrigger;
-	public String productName;
 	private String productDescription;
 	private String productColour;
 	private ProductType productType;
