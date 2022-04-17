@@ -44,9 +44,6 @@
         <div class="container py-3">
             <table class="table">
                 <tr>
-<!--                    <th>-->
-<!--                        <a th:href="@{'/products/sort?sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>-->
-<!--                    </th>-->
                     <th>
                         <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
                     </th>
