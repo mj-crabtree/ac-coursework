@@ -49,7 +49,9 @@ public class PickPackController {
 	@PostMapping("/list")
 	public String getPickList(Model model, PickList pickList) {
 		var itemsToPick = pickPackService.createPickList(pickList.orderIdCollection);
-		System.out.println();
+
+		model.addAttribute("itemsToPick", itemsToPick);
+		
 		return "pickpack/list";
 	}
 

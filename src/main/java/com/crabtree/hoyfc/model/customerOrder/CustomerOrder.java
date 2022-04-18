@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class CustomerOrder extends BaseEntity {
+public class CustomerOrder extends BaseEntity implements Comparable<CustomerOrder> {
 	private String publicOrderId;
 	private Integer customerId;
 	private Customer orderCustomer;
@@ -41,5 +41,12 @@ public class CustomerOrder extends BaseEntity {
 				", shippingCost=" + shippingCost +
 				", totalOrderCost=" + totalOrderCost +
 				'}';
+	}
+
+	@Override
+	public int compareTo(CustomerOrder o) {
+		return this
+				.getPublicOrderId()
+				.compareTo(o.getPublicOrderId());
 	}
 }

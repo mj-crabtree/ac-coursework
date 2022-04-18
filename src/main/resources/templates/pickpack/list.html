@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <section layout:fragment="content">
-    <div th:each="order : ${orders}">
-        <div th:each="item : ${order.getLineItems()}">
-            <p th:text="${item.getProduct().toString()}"></p>
-        </div>
+    <div th:each="item : ${itemsToPick}">
+        <p th:text="${item.product.getProductName().getProductName()}"></p>
+        <p th:text="${item.getQuantityToPick()}"></p>
+        <hr>
     </div>
 </section>
