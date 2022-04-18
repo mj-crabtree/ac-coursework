@@ -26,17 +26,17 @@ public class Customer extends BaseEntity {
 		this.orderHistory.add(order);
 	}
 
+
 	@Override
 	public String toString() {
 		return "Customer{" +
-				"customerName=" + customerName.toString() +
-				", phoneNumber=" + phoneNumber.toString() +
-				", email=" + email.toString() +
-				", gender=" + gender.toString() +
-				", birthday=" + birthday.toString() +
-				", createdOn=" + createdOn.toString() +
-				", orderHistory=" + orderHistory.toString() +
-				", active=" + active +
+				"customerName=" + customerName +
+				", phoneNumber=" + phoneNumber +
+				", email=" + email +
+				", gender=" + gender +
+				", birthday=" + birthday +
+				", createdOn=" + createdOn +
+				", address=" + address +
 				'}';
 	}
 }

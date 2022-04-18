@@ -1,10 +1,10 @@
 package com.crabtree.hoyfc.service.order;
 
+import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.repository.OrderRepository;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,5 +33,13 @@ public class OrderService {
 
 	public CustomerOrder getOrderById(Integer orderId) {
 		return orderRepository.getOrderById(orderId);
+	}
+
+	public DequeImpl<CustomerOrder> getPendingCustomerOrdersByDateDescending() {
+		return orderRepository.getPendingCustomerOrdersByDateDescending();
+	}
+
+	public Integer getPendingOrderCount() {
+		return orderRepository.getPendingCustomerOrdersByDateDescending().size();
 	}
 }

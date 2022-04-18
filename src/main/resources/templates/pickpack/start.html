@@ -3,10 +3,37 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/layout}">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <section layout:fragment="content">
-    hello world
+    <div class="container">
+        <form th:action="@{/pickpack/list}" th:object="${pickList}" method="post" class="form-control">
+            <button type="submit">Pick</button>
+            <div th:each="order: ${pendingOrders}">
+                <hr>
+                <div class="row">
+                    <div class="col-md-1">
+                        <input type="checkbox" th:value="${order.getId()}" th:field="*{orderIdCollection}">
+                    </div>
+                    <div class="col">
+                        <p th:text="${order.getOrderDateTime()}"></p>
+                        <p th:text="${order.getPublicOrderId()} + ' ' + ${order.getOrderCustomer().getCustomerName().getFullName()}"></p>
+                        <p th:text="${order.getOrderStatus()} + ' ' + ${#numbers.formatCurrency(order.getTotalOrderCost().toString())}"></p>
+                    </div>
+                    <div class="col-md-1 d-flex">
+                        <div class="justify-content-center">
+                            <a href="#" class="bi h3 bi-info-circle"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
 </section>

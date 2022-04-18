@@ -4,6 +4,7 @@ import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 import com.crabtree.hoyfc.model.customer.Customer;
 import lombok.Data;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class CustomerOrder extends BaseEntity {
 	private Customer orderCustomer;
 	private List<OrderLineItem> lineItems = new ArrayList<>();
 	private OrderStatus orderStatus;
-	private DateTime orderDateTime;
+	private LocalDateTime orderDateTime;
 	private Double lineItemsTotalCost;
 	private ShippingType shippingType;
 	private Double shippingCost;
@@ -29,7 +30,16 @@ public class CustomerOrder extends BaseEntity {
 	@Override
 	public String toString() {
 		return "CustomerOrder{" +
-				"orderCustomer=" + orderCustomer.toString() +
+				"publicOrderId='" + publicOrderId + '\'' +
+				", customerId=" + customerId +
+				", orderCustomer=" + orderCustomer.toString() +
+				", lineItems=" + lineItems +
+				", orderStatus=" + orderStatus +
+				", orderDateTime=" + orderDateTime +
+				", lineItemsTotalCost=" + lineItemsTotalCost +
+				", shippingType=" + shippingType +
+				", shippingCost=" + shippingCost +
+				", totalOrderCost=" + totalOrderCost +
 				'}';
 	}
 }

@@ -19,12 +19,4 @@ public class Email {
 	public String asString() {
 		return this.email.toLowerCase();
 	}
-
-	@Override
-	public String toString() {
-		return "Email{" +
-				"email='" + email + '\'' +
-				", asString='" + asString() + '\'' +
-				'}';
-	}
 }

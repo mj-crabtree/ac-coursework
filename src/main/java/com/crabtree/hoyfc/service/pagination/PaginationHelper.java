@@ -32,7 +32,6 @@ public class PaginationHelper<T extends BaseEntity> {
 		paginationHelper.setPageOffset(limit);
 		paginationHelper.setFromPosition(limit * (pageNumber - 1));
 
-
 		Integer toPosition = 0;
 
 		if (paginationHelper.getFromPosition() + paginationHelper.getLimit() >= paginationHelper.getTotalItems()) {

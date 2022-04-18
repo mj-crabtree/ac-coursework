@@ -2,13 +2,14 @@ package com.crabtree.hoyfc.repository;
 
 import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
 import com.crabtree.customDSA.algorithms.search.recursiveBinarySearch.RecursiveBinarySearch;
+import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
+import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderRepository {
-
 	private final DynamicArrayList<CustomerOrder> customerOrders;
 
 	public OrderRepository() {
@@ -59,5 +60,19 @@ public class OrderRepository {
 
 	public CustomerOrder getOrderById(Integer orderId) {
 		return this.customerOrders.get(orderId - 1);
+	}
+
+	public DequeImpl<CustomerOrder> getPendingCustomerOrdersByDateDescending() {
+		var result = new DequeImpl<CustomerOrder>();
+		for (int i = customerOrders.count() - 1; i >= 0; i--) {
+			var order = getOrderById(i);
+			if (getOrderById(i).getOrderStatus() == OrderStatus.PENDING) {
+				result.addFirst(order);
+			}
+			else {
+				break;
+			}
+		}
+		return result;
 	}
 }
