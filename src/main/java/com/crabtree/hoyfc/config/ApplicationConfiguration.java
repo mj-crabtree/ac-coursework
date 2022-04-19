@@ -1,6 +1,7 @@
 package com.crabtree.hoyfc.config;
 
 import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
+import com.crabtree.hoyfc.controller.pickpack.PickPackController;
 import com.github.javafaker.Faker;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.springframework.context.annotation.Bean;

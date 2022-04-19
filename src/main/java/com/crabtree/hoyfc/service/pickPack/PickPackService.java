@@ -2,6 +2,7 @@ package com.crabtree.hoyfc.service.pickPack;
 
 import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
+import com.crabtree.hoyfc.controller.pickpack.PickList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.pickListEntry.PickListEntry;
 import com.crabtree.hoyfc.repository.PickPackRepository;
@@ -26,5 +27,13 @@ public class PickPackService {
 
 	public DynamicArrayList<PickListEntry> createPickList(List<Integer> orderIdCollection) {
 		return pickPackRepository.getItemsToPick(orderIdCollection);
+	}
+
+	public DynamicArrayList<CustomerOrder> getPickedOrders(PickList pickList) {
+		var result = new DynamicArrayList<CustomerOrder>();
+		for (Integer orderId : pickList.getOrderIdCollection()) {
+			result.add(orderService.getOrderById(orderId));
+		}
+		return result;
 	}
 }

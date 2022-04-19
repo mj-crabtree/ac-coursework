@@ -13,27 +13,47 @@
 </head>
 <section layout:fragment="content">
     <div class="container">
-        <form th:action="@{/pickpack/list}" th:object="${pickList}" method="post" class="form-control">
-            <button type="submit">Pick</button>
+        <h2 class="display-4 py-3">Pick List</h2>
+        <form th:action="@{/pickpack/list}" th:object="${pickList}" method="post">
+            <div class="row d-flex align-items-center justify-content-between">
+                <div class="col">
+                    <button class="btn btn-lg btn-outline-secondary my-3" type="submit">Back</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-lg btn-primary my-3 float-right" type="submit">Pick</button>
+                </div>
+            </div>
+            <hr>
             <div th:each="order: ${pendingOrders}">
-                <hr>
-                <div class="row">
+                <div class="row d-flex align-items-center">
                     <div class="col-md-1">
-                        <input type="checkbox" th:value="${order.getId()}" th:field="*{orderIdCollection}">
+                        <input type="checkbox" style="width: 1.55rem; height: 1.55rem;" th:value="${order.getId()}" th:field="*{orderIdCollection}">
                     </div>
                     <div class="col">
-                        <p th:text="${order.getOrderDateTime()}"></p>
-                        <p th:text="${order.getPublicOrderId()} + ' ' + ${order.getOrderCustomer().getCustomerName().getFullName()}"></p>
-                        <p th:text="${order.getOrderStatus()} + ' ' + ${#numbers.formatCurrency(order.getTotalOrderCost().toString())}"></p>
+                        <table>
+                            <tr>
+                                <td><p th:text="${#dates.format(order.getOrderDateTime(), 'dd-MM-yyyy')}"></p></td>
+                                <td><p class="mx-5" th:text="${#dates.format(order.getOrderDateTime(), 'HH:mm')}"></p></td>
+                            </tr>
+                            <tr>
+                                <td><p th:text="${order.getPublicOrderId()}"></p></td>
+                                <td><p class="mx-5" th:text="${order.getOrderCustomer().getCustomerName().getFullName()}"></p></td>
+                            </tr>
+                            <tr>
+                                <td><p th:text="${order.getOrderStatus()}"></p></td>
+                                <td><p class="mx-5" th:text="${#numbers.formatCurrency(order.getTotalOrderCost().toString())}"></p></td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="col-md-1 d-flex">
                         <div class="justify-content-center">
                             <a href="#" class="bi h3 bi-info-circle"></a>
+                            <!--                            todo: make this a modal -->
                         </div>
                     </div>
                 </div>
+                <hr>
             </div>
         </form>
     </div>
-    <hr>
 </section>
