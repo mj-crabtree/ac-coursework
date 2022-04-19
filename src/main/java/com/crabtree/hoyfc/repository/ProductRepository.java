@@ -3,6 +3,7 @@ package com.crabtree.hoyfc.repository;
 import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
+import com.crabtree.hoyfc.model.product.StockCount;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -58,5 +59,19 @@ public class ProductRepository {
 			}
 		}
 		return result;
+	}
+
+	public void deductFromStockCount(Integer productId, Integer quantity) {
+		var product = getById(productId -1);
+		var oldCount = product
+				.getStockCount().getCurrentStock();
+
+		var newcount = oldCount -= quantity;
+
+		product.setStockCount(new StockCount(newcount, product
+				.getStockCount()
+				.getRestockTrigger()));
+
+		update(product);
 	}
 }

@@ -3,14 +3,15 @@ package com.crabtree.customDSA.algorithms.search.recursiveBinarySearch;
 import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicDataStructure;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
-import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.PublicOrderIdComparator;
+import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.OrderComparatorFactory;
+import com.crabtree.hoyfc.service.pageSort.SortDirection;
 
 public class RecursiveBinarySearch {
 
 	public <T extends CustomerOrder> int search(DynamicDataStructure<T> collection, String key) {
 
 		var is = new InsertionSort();
-		is.sort(collection, new PublicOrderIdComparator());
+		is.sort(collection, OrderComparatorFactory.getComparator("Id", SortDirection.ASC));
 
 		return recursiveBinarySearch(collection, key, 0, collection.count());
 	}

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/products/search")
-public class SearchProductController {
+public class ProductSearchController {
 
 	private final ProductService productService;
 	private final SortHelper sortingData;
 	private DynamicArrayList<Product> searchResults;
 
-	public SearchProductController(ProductService productService, SortHelper sortHelper) {
+	public ProductSearchController(ProductService productService, SortHelper sortHelper) {
 		this.productService = productService;
 		this.sortingData = sortHelper;
 		this.searchResults = new DynamicArrayList<>();

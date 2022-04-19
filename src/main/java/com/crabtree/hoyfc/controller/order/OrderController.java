@@ -4,6 +4,7 @@ import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.service.customer.CustomerService;
 import com.crabtree.hoyfc.service.order.OrderService;
+import com.crabtree.hoyfc.service.pageSort.SortDirection;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pagination.PaginationHelper;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/orders")
@@ -30,6 +32,9 @@ public class OrderController {
 
 	@GetMapping
 	public String showOrders() {
+		this.sortingData.setSortColumn("Id");
+		this.sortingData.setSortDirection(SortDirection.DESC);
+		orderService.sort(this.sortingData, this.orders);
 		return "redirect:page/1";
 	}
 
@@ -53,5 +58,16 @@ public class OrderController {
 		model.addAttribute("order", order);
 		model.addAttribute("orderItems", order.getLineItems());
 		return "orders/info";
+	}
+
+	@GetMapping(value = "sort")
+	public String sortOrders(Model model,
+	                         @RequestParam(name = "p") Integer pageNumber,
+	                         @RequestParam(name = "sortColumn") String sortColumn,
+	                         @RequestParam(name = "sortDirection") String sortDirection) {
+		this.sortingData.setSortColumn(sortColumn);
+		this.sortingData.setSortDirection(SortDirection.valueOf(sortDirection.toUpperCase()));
+		orderService.sort(sortingData, this.orders);
+		return "redirect:/orders/page/" + pageNumber;
 	}
 }

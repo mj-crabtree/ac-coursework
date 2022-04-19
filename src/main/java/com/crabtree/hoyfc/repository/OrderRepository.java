@@ -75,4 +75,10 @@ public class OrderRepository {
 		}
 		return result;
 	}
+
+	public void setOrderStatus(CustomerOrder order, OrderStatus status) {
+		var updatedOrder = getOrderById(order.getId());
+		updatedOrder.setOrderStatus(status);
+		this.customerOrders.put(order.getId() -1, updatedOrder);
+	}
 }

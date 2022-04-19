@@ -30,7 +30,7 @@ public class ProductController {
 	public String showProducts() {
 		this.sortingData.setSortColumn("Status");
 		this.sortingData.setSortDirection(SortDirection.ASC);
-		productService.sort(sortingData, this.products);
+		productService.sort(this.sortingData, this.products);
 		return "redirect:page/1";
 	}
 

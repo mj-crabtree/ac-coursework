@@ -64,4 +64,8 @@ public class ProductService {
 		var product = makeProduct(productFormData.toParameters());
 		productRepository.update(product);
 	}
+
+	public void deductFromStockCount(Integer productId, Integer quantity) {
+		this.productRepository.deductFromStockCount(productId, quantity);
+	}
 }

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
-
 	private final CustomerService customerService;
 	private final DynamicArrayList<Customer> customers;
+
 
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;

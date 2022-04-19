@@ -20,7 +20,7 @@
                     <a href="/orders/" class="btn btn-outline-secondary btn-lg">Back</a>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-lg float-right">Picked!</button>
+                    <button type="button" onclick="selectAll()" class="btn btn-primary btn-lg float-right">Select All</button>
                 </div>
             </div>
             <hr>
@@ -42,8 +42,8 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        <input type="checkbox" th:field="*{items[__${itemStat.index}__].id}"
-                               th:value="${item.product.id}"/>
+                        <input class="check" style="width: 1.55rem; height: 1.55rem;" type="checkbox" th:field="*{items[__${itemStat.index}__].id}"
+                               th:value="${item.product.id}" name="chk"/>
                     </div>
                 </div>
                 <hr>
@@ -53,4 +53,14 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript">
+        function selectAll() {
+            var elements = document.getElementsByClassName('check');
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].type === 'checkbox') {
+                    elements[i].checked = true;
+                }
+            }
+        }
+    </script>
 </section>

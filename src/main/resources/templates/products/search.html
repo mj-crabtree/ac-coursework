@@ -45,39 +45,34 @@
             <table class="table">
                 <tr>
                     <th>
-                        <a th:href="@{'/products/sort?sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
+                        Name
                     </th>
                     <th>
-                        <a th:href="@{'/products/sort?sortColumn=Sku&sortDirection=' + ${sortData.reverseSortDirection()}}">SKU</a>
+                        SKU
                     </th>
                     <th>
-                        <a th:href="@{'/products/sort?sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
+                        Type
                     </th>
                     <th>
-                        <a th:href="@{'/products/sort?sortColumn=Type&sortDirection=' + ${sortData.reverseSortDirection()}}">Type</a>
+                        Status
                     </th>
                     <th>
-                        <a th:href="@{'/products/sort?sortColumn=Status&sortDirection=' + ${sortData.reverseSortDirection()}}">Status</a>
+                        Count
                     </th>
                     <th>
-                        <a th:href="@{'/products/sort?sortColumn=Count&sortDirection=' + ${sortData.reverseSortDirection()}}">Count</a>
+                        Price
                     </th>
-                    <th>
-                        <a th:href="@{'/products/sort?sortColumn=Price&sortDirection=' + ${sortData.reverseSortDirection()}}">Price</a>
-                    </th>
-                    <th></th>
                     <th></th>
                 </tr>
                 <tr th:each="product : ${productList}">
-                    <td th:text="${product.getId()}"></td>
-                    <td th:text="${product.getProductSku().getProductSku}"></td>
+                    <!--                    <td th:text="${product.getId()}"></td>-->
                     <td th:text="${product.getProductName().getProductName()}"></td>
+                    <td th:text="${product.getProductSku().getProductSku}"></td>
                     <td th:text="${product.getProductType().toString()}"></td>
                     <td th:text="${product.getProductStatus().toString()}"></td>
                     <td th:text="${product.getStockCount().getCurrentStock()}"></td>
-                    <td th:text="${product.getProductPrice().getProductPrice()}"></td>
+                    <td th:text="${#numbers.formatCurrency(product.getProductPrice().getProductPrice())}"></td>
                     <td><a th:href="'/products/info/' + ${product.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
-                    <td><a th:href="'/products/delete/' + ${product.id}" class="btn btn-outline text-danger"><i class="bi bi-trash"></i></a>
                 </tr>
             </table>
             <div th:replace="fragments/pagination :: paginationInfo"></div>

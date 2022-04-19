@@ -2,9 +2,11 @@ package com.crabtree.hoyfc.controller.pickpack;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
+import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
 import com.crabtree.hoyfc.service.order.OrderService;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pickPack.PickPackService;
+import com.crabtree.hoyfc.service.product.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +21,13 @@ import java.util.List;
 @RequestMapping("/pickpack")
 public class PickPackController {
 	private final OrderService orderService;
+	private final ProductService productService;
 	private final PickPackService pickPackService;
 	private final SortHelper sortingData;
 	private DynamicArrayList<CustomerOrder> pickedOrders;
 
-	public PickPackController(OrderService orderService, PickPackService pickPackService, SortHelper sortingData) {
+	public PickPackController(OrderService orderService, ProductService productService, PickPackService pickPackService, SortHelper sortingData) {
+		this.productService = productService;
 		this.pickPackService = pickPackService;
 		this.orderService = orderService;
 		this.sortingData = sortingData;
@@ -64,9 +68,18 @@ public class PickPackController {
 
 	@PostMapping("/commit")
 	public String commitPickedList(Model model, @ModelAttribute PickedThingsDto form) {
-
+		// change the order status for each picked order from pending to picked
+		for (CustomerOrder pickedOrder : pickedOrders) {
+			orderService.setOrderStatus(pickedOrder, OrderStatus.PICKED);
+		}
+		// change the stock count for each picked SKU
+		for (PickThing item : form.getItems()) {
+			if (item.id != null) {
+				productService.deductFromStockCount(item.id, item.quantity);
+			}
+		}
 		System.out.println();
-		return null;
+		return "redirect:/orders/";
 	}
 
 	public static class PickThing {

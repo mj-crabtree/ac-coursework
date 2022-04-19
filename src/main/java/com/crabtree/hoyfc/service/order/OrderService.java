@@ -1,18 +1,24 @@
 package com.crabtree.hoyfc.service.order;
 
+import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
+import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
+import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.OrderComparatorFactory;
 import com.crabtree.hoyfc.repository.OrderRepository;
+import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
 	private final OrderRepository orderRepository;
+	private final InsertionSort insertionSort;
 
-	public OrderService(OrderRepository orderRepository) {
+	public OrderService(OrderRepository orderRepository, InsertionSort insertionSort) {
 		this.orderRepository = orderRepository;
+		this.insertionSort = insertionSort;
 	}
 
 	public DynamicArrayList<CustomerOrder> getOrders() {
@@ -41,5 +47,14 @@ public class OrderService {
 
 	public Integer getPendingOrderCount() {
 		return orderRepository.getPendingCustomerOrdersByDateDescending().size();
+	}
+
+	public void setOrderStatus(CustomerOrder order, OrderStatus status) {
+		orderRepository.setOrderStatus(order, status);
+	}
+
+	public void sort(SortHelper sortingData, DynamicArrayList<CustomerOrder> data) {
+		var comparator = OrderComparatorFactory.getComparator(sortingData.getSortColumn(), sortingData.getSortDirection());
+		insertionSort.sort(data, comparator);
 	}
 }
