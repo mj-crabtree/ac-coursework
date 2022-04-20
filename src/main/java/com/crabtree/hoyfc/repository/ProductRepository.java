@@ -39,6 +39,10 @@ public class ProductRepository {
 	}
 
 	public DynamicArrayList<Product> search(String needle) {
+		return needle.startsWith("FC-") ? searchBySku(needle) : searchByProductName(needle);
+	}
+
+	private DynamicArrayList<Product> searchByProductName(String needle) {
 		DynamicArrayList<Product> result = new DynamicArrayList<>();
 
 		for (Product product : products) {
@@ -56,6 +60,22 @@ public class ProductRepository {
 				result.add(product);
 			}
 			else if (KMPSearch.search(skuHaystack, needle) == 1) {
+				result.add(product);
+			}
+		}
+		return result;
+	}
+
+	private DynamicArrayList<Product> searchBySku(String needle) {
+		DynamicArrayList<Product> result = new DynamicArrayList<>();
+
+		for (Product product : products) {
+			var skuHaystack = product
+					.getProductSku()
+					.getProductSku()
+					.toLowerCase();
+
+			if (KMPSearch.search(skuHaystack, needle.toLowerCase()) == 1) {
 				result.add(product);
 			}
 		}

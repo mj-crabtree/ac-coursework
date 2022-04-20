@@ -56,24 +56,4 @@ public class CustomerController {
 		customerService.sort(sortingData, this.customers);
 		return "redirect:/customers/page/" + pageNumber;
 	}
-
-	@GetMapping(value = "/search/")
-	public String searchCustomers(Model model,
-	                              @RequestParam(name = "term", required = true) String searchTerm,
-	                              @RequestParam(name = "sortColumn", required = false, defaultValue = "id") String sortColumn,
-	                              @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
-
-		// todo: refactor to separate controller
-
-		model.addAttribute("searchTerm", searchTerm);
-
-		// todo: make this sortable and paginated
-		model.addAttribute("customerList", customerService.search(searchTerm));
-		model.addAttribute("maxPages", (int) Math.ceil((customerService.getTotalCustomers() / (double) 15)));
-		model.addAttribute("sortColumn", sortColumn);
-		model.addAttribute("sortDirection", sortDirection);
-		model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
-
-		return "customers/search";
-	}
 }

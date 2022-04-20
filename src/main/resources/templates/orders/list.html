@@ -44,29 +44,29 @@
         <div class="container py-3">
             <table class="table">
                 <tr>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">Order ID</a>
                     </th>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
                     </th>
-                    <th>
-                        <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Date&sortDirection=' + ${sortData.reverseSortDirection()}}">Order Date</a>
+                    <th class="text-center">
+                        <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Date&sortDirection=' + ${sortData.reverseSortDirection()}}">Date</a>
                     </th>
-                    <th>
-                        <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Total&sortDirection=' + ${sortData.reverseSortDirection()}}">Total</a>
+                    <th class="text-center">
+                        <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Total&sortDirection=' + ${sortData.reverseSortDirection()}}">Total Spend</a>
                     </th>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/orders/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Status&sortDirection=' + ${sortData.reverseSortDirection()}}">Status</a>
                     </th>
                     <th></th>
                 </tr>
                 <tr th:each="order, idx : ${orderList}">
-                    <td th:text="${order.getPublicOrderId}"></td>
-                    <td th:text="${customerService.getCustomer(order.getCustomerId() - 1).getCustomerName().getFullName()}"></td>
-                    <td th:text="${#dates.format(order.getOrderDateTime, 'dd-MM-yyyy HH:mm')}"></td>
-                    <td th:text="${#numbers.formatCurrency(order.getTotalOrderCost())}"></td>
-                    <td th:text="${order.getOrderStatus()}"></td>
+                    <td class="text-center" style="font-family: monospace" th:text="${order.getPublicOrderId}"></td>
+                    <td class="text-center" th:text="${customerService.getCustomer(order.getCustomerId() - 1).getCustomerName().getFullName()}"></td>
+                    <td class="text-center" th:text="${#dates.format(order.getOrderDateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td class="text-center" th:text="${#numbers.formatCurrency(order.getTotalOrderCost())}"></td>
+                    <td class="text-center" th:text="${order.getOrderStatus()}"></td>
                     <td><a th:href="'/orders/info/' + ${order.getId()}" class="btn btn-outline"><i class="bi bi-search"></i></a>
                 </tr>
             </table>

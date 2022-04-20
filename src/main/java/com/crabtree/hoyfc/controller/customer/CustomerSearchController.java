@@ -1,9 +1,8 @@
-package com.crabtree.hoyfc.controller.order;
+package com.crabtree.hoyfc.controller.customer;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
-import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
+import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.service.customer.CustomerService;
-import com.crabtree.hoyfc.service.order.OrderService;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pagination.PaginationHelper;
 import org.springframework.stereotype.Controller;
@@ -13,34 +12,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/orders/search")
-public class OrderSearchController {
-
-	private final OrderService orderService;
+@RequestMapping("/customers/search")
+public class CustomerSearchController {
 	private final CustomerService customerService;
 	private final SortHelper sortingData;
-	private DynamicArrayList<CustomerOrder> searchResults;
+	private DynamicArrayList<Customer> searchResults;
 
-	public OrderSearchController(OrderService orderService, CustomerService customerService, SortHelper sortingData) {
-		this.orderService = orderService;
+	public CustomerSearchController(CustomerService customerService, SortHelper sortingData) {
 		this.customerService = customerService;
 		this.sortingData = sortingData;
-		this.searchResults = new DynamicArrayList<>();
+		searchResults = new DynamicArrayList<>();
 	}
 
 	@GetMapping
-	public String searchOrders(Model model, @RequestParam(name = "searchTerm") String searchTerm) {
+	public String searchCustomers(Model model, @RequestParam(name = "searchTerm") String searchTerm) {
 
-		PaginationHelper<CustomerOrder> ph = new PaginationHelper<>();
+		// http://localhost:8080/products/search/?searchTerm=lamp
 
-		this.searchResults = orderService.search(searchTerm.trim());
+		this.searchResults = customerService.search(searchTerm.trim());
 
+		PaginationHelper<Customer> ph = new PaginationHelper<>();
 		var paginationData = ph.paginateCollection(this.searchResults, this.searchResults.count(), 30, 1);
 
 		model.addAttribute("sortData", sortingData);
 		model.addAttribute("paginationData", paginationData);
-		model.addAttribute("orderList", paginationData.getCollection());
+		model.addAttribute("customerList", paginationData.getCollection());
 
-		return "orders/search";
+		return "customers/search";
 	}
 }

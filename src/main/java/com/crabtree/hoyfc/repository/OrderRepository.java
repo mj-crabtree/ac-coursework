@@ -48,6 +48,18 @@ public class OrderRepository {
 	}
 
 	public DynamicArrayList<CustomerOrder> search(String needle) {
+		if (needle.startsWith("HOYFC")) {
+			return searchByUniqueOrderId(needle);
+		}
+
+		if (searchTermIsOrderStatus(needle)) {
+			return searchByOrderStatus(needle);
+		}
+
+		return searchByCustomerName(needle);
+	}
+
+	private DynamicArrayList<CustomerOrder> searchByCustomerName(String needle) {
 		var result = new DynamicArrayList<CustomerOrder>();
 
 		for (CustomerOrder customerOrder : customerOrders) {
@@ -57,11 +69,39 @@ public class OrderRepository {
 					.getFullName()
 					.toLowerCase();
 
-			if (KMPSearch.search(nameHaystack, needle) == 1) {
+			if (KMPSearch.search(nameHaystack, needle.toLowerCase()) == 1) {
 				result.add(customerOrder);
 			}
 		}
 		return result;
+	}
+
+	private DynamicArrayList<CustomerOrder> searchByOrderStatus(String needle) {
+		var result = new DynamicArrayList<CustomerOrder>();
+
+		for (CustomerOrder customerOrder : customerOrders) {
+			var nameHaystack = customerOrder
+					.getOrderStatus()
+					.toString()
+					.toLowerCase();
+
+			if (KMPSearch.search(nameHaystack, needle.toLowerCase()) == 1) {
+				result.add(customerOrder);
+			}
+		}
+		return result;
+	}
+
+	private boolean searchTermIsOrderStatus(String needle) {
+		var statusValues = OrderStatus.values();
+		for (int i = 0; i < statusValues.length; i++) {
+			if (needle
+					.toUpperCase()
+					.equals(statusValues[i].toString())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private CustomerOrder getOrderByIndex(Integer index) {

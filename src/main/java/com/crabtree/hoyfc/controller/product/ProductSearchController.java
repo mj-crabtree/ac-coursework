@@ -28,7 +28,7 @@ public class ProductSearchController {
 	@GetMapping
 	public String searchProducts(Model model, @RequestParam(name = "searchTerm") String searchTerm) {
 
-		this.searchResults = productService.search(searchTerm);
+		this.searchResults = productService.search(searchTerm.trim());
 
 		PaginationHelper<Product> ph = new PaginationHelper<>();
 		var paginationData = ph.paginateCollection(this.searchResults, this.searchResults.count(), 30, 1);

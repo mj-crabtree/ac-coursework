@@ -18,9 +18,9 @@
             <div class="d-flex align-content-center">
                 <form th:action="@{/customers/search/}" class="form-inline my-2 my-md-0">
                     <div class="input-group">
-                        <input type="text" minlength="3" class="form-control" placeholder="Customer Search"
+                        <input type="text" minlength="3" class="form-control" placeholder="Inventory search"
                                aria-label="search"
-                               th:name="term">
+                               th:name="searchTerm">
                         <div class="input-group-append">
                             <input type="submit" class="btn btn-primary" value="Search">
                         </div>
@@ -42,12 +42,14 @@
                         <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
                     </th>
                     <th>
-                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=FirstName&sortDirection=' + ${sortData.reverseSortDirection()}}">First Name</a>
+                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=FirstName&sortDirection=' + ${sortData.reverseSortDirection()}}">First
+                            Name</a>
                     <th>
-                    <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=LastName&sortDirection=' + ${sortData.reverseSortDirection()}}">Last Name</a>
+                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=LastName&sortDirection=' + ${sortData.reverseSortDirection()}}">Last
+                            Name</a>
                     <th>
-                    <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Email&sortDirection=' + ${sortData.reverseSortDirection()}}">Email</a>
-                </th>
+                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Email&sortDirection=' + ${sortData.reverseSortDirection()}}">Email</a>
+                    </th>
                     <th>
                         <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Birthday&sortDirection=' + ${sortData.reverseSortDirection()}}">Birthdate</a>
                     </th>
@@ -59,8 +61,7 @@
                     <td th:text="${customer.getCustomerName().getLastName()}"></td>
                     <td th:text="${customer.email.email}">john@email.com</td>
                     <td th:text="${customer.birthday}">09-03-1987</td>
-                    <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-outline"><i
-                            class="bi bi-search"></i></a>
+                    <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
                 </tr>
             </table>
             <div th:replace="fragments/pagination :: paginationInfo"></div>

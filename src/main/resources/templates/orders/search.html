@@ -3,24 +3,64 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/layout}">
+
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
 <body>
 <section layout:fragment="content">
-    <div th:if="${orderList.isEmpty()}">
-        Not found
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-content-center">
+                <h2 class="display-4">Order Search Results</h2>
+            </div>
+            <div class="d-flex align-content-center">
+                <form th:action="@{/orders/search/}" class="form-inline my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" minlength="3" class="form-control" placeholder="Order search"
+                               aria-label="search"
+                               th:name="searchTerm">
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-primary" value="Search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-content-center">
+                </div>
+                <div th:replace="fragments/pagination :: pagination('/orders/page/')"></div>
+            </div>
+        </div>
+
+        <div class="container py-3">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Total Spend</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                <tr th:each="order : ${orderList}">
+                    <td th:text="${order.getPublicOrderId}"></td>
+                    <td th:text="${order.getOrderCustomer().getCustomerName().getFullName()}"></td>
+                    <td th:text="${#dates.format(order.getOrderDateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${#numbers.formatCurrency(order.getTotalOrderCost())}"></td>
+                    <td th:text="${order.getOrderStatus()}"></td>
+                    <td><a th:href="'/orders/info/' + ${order.id}" class="btn btn-outline"><i
+                            class="bi bi-search"></i></a>
+                </tr>
+            </table>
+            <div th:replace="fragments/pagination :: paginationInfo"></div>
+        </div>
+        <a class="btn btn-primary" href="/orders/">Back</a>
     </div>
-    <table class="table">
-        <tr th:each="order : ${orderList}">
-            <td th:text="${order.getId()}"></td>
-            <td th:text="${order.getPublicOrderId}"></td>
-            <td th:text="${order.getOrderCustomer().getCustomerName().getFullName()}"></td>
-            <td th:text="${order.getOrderDateTime}"></td>
-            <td th:text="${order.getTotalOrderCost()}"></td>
-            <td th:text="${order.getOrderStatus()}"></td>
-        </tr>
-    </table>
 </section>
-</body>
-</html>

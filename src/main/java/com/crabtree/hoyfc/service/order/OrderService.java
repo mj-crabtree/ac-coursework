@@ -33,7 +33,7 @@ public class OrderService {
 	}
 
 	public DynamicArrayList<CustomerOrder> search(String searchTerm) {
-		return searchTerm.startsWith("HOYFC") || NumberUtils.isParsable(searchTerm) ? orderRepository.searchByUniqueOrderId(searchTerm) : orderRepository.search(searchTerm);
+		return orderRepository.search(searchTerm);
 	}
 
 	public CustomerOrder getOrderById(Integer orderId) {

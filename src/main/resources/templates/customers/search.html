@@ -15,8 +15,9 @@
             <div class="d-flex align-content-center">
                 <form th:action="@{/customers/search/}" class="form-inline my-2 my-md-0">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Customer Search" aria-label="search"
-                               th:name="term">
+                        <input type="text" minlength="3" class="form-control" placeholder="Inventory search"
+                               aria-label="search"
+                               th:name="searchTerm">
                         <div class="input-group-append">
                             <input type="submit" class="btn btn-primary" value="Search">
                         </div>
@@ -41,21 +42,18 @@
             <table class="table">
                 <tr>
                     <th>
-                        <a th:href="@{'/customers/page/' + ${currentPageNumber} + '?sortColumn=id&sortDirection=' + ${reverseSortDirection}}">#</a>
+                        ID
                     </th>
                     <th>
-                        <a th:href="@{'/customers/page/' + ${currentPageNumber} + '?sortColumn=firstName&sortDirection=' + ${reverseSortDirection}}">First
-                            Name</a></th>
+                        First Name
                     <th>
-                        <a th:href="@{'/customers/page/' + ${currentPageNumber} + '?sortColumn=lastName&sortDirection=' + ${reverseSortDirection}}">Last
-                            Name</a></th>
+                        Last Name
                     <th>
-                        <a th:href="@{'/customers/page/' + ${currentPageNumber} + '?sortColumn=email&sortDirection=' + ${reverseSortDirection}}">Email</a>
+                        Email
                     </th>
                     <th>
-                        <a th:href="@{'/customers/page/' + ${currentPageNumber} + '?sortColumn=birthday&sortDirection=' + ${reverseSortDirection}}">Birthday</a>
+                        Birthdate
                     </th>
-                    <th></th>
                     <th></th>
                 </tr>
                 <tr th:each="customer : ${customerList}">
@@ -65,7 +63,6 @@
                     <td th:text="${customer.email.email}">john@email.com</td>
                     <td th:text="${customer.birthday}">09-03-1987</td>
                     <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
-                    <td><a th:href="'/customers/delete/' + ${customer.id}" class="btn btn-outline text-danger"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>
             </table>

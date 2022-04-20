@@ -47,19 +47,19 @@
                     <th>
                         <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Name&sortDirection=' + ${sortData.reverseSortDirection()}}">Name</a>
                     </th>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Sku&sortDirection=' + ${sortData.reverseSortDirection()}}">SKU</a>
                     </th>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Type&sortDirection=' + ${sortData.reverseSortDirection()}}">Type</a>
                     </th>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Status&sortDirection=' + ${sortData.reverseSortDirection()}}">Status</a>
                     </th>
-                    <th>
-                        <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Count&sortDirection=' + ${sortData.reverseSortDirection()}}">Count</a>
+                    <th class="text-center">
+                        <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Count&sortDirection=' + ${sortData.reverseSortDirection()}}">In Stock</a>
                     </th>
-                    <th>
+                    <th class="text-center">
                         <a th:href="@{'/products/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Price&sortDirection=' + ${sortData.reverseSortDirection()}}">Price</a>
                     </th>
                     <th></th>
@@ -67,11 +67,11 @@
                 <tr th:each="product : ${productList}">
 <!--                    <td th:text="${product.getId()}"></td>-->
                     <td th:text="${product.getProductName().getProductName()}"></td>
-                    <td th:text="${product.getProductSku().getProductSku}"></td>
-                    <td th:text="${product.getProductType().toString()}"></td>
-                    <td th:text="${product.getProductStatus().toString()}"></td>
-                    <td th:text="${product.getStockCount().getCurrentStock()}"></td>
-                    <td th:text="${#numbers.formatCurrency(product.getProductPrice().getProductPrice())}"></td>
+                    <td class="text-center" style="font-family: monospace" th:text="${product.getProductSku().getProductSku}"></td>
+                    <td class="text-center" th:text="${#strings.capitalizeWords(#strings.toLowerCase(product.getProductType().toString()))}"></td>
+                    <td class="text-center" th:text="${#strings.capitalizeWords(#strings.toLowerCase(product.getProductStatus().toString()))}"></td>
+                    <td class="text-center" th:text="${product.getStockCount().getCurrentStock()}"></td>
+                    <td class="text-center" th:text="${#numbers.formatCurrency(product.getProductPrice().getProductPrice())}"></td>
                     <td><a th:href="'/products/info/' + ${product.getId()}" class="btn btn-outline"><i class="bi bi-search"></i></a>
                 </tr>
             </table>

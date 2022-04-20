@@ -25,7 +25,6 @@
             </div>
             <hr>
             <div th:each="item, itemStat : ${itemsToPick}">
-                <!--                <p th:text="${item.product.id}"></p>-->
                 <div class="row d-flex align-items-center">
                     <div class="col">
                         <p class="h3" th:text="${item.product.productName.getProductName()}"></p>
