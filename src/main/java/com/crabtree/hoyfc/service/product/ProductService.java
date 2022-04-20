@@ -6,8 +6,8 @@ import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.model.product.comparatorFactory.ProductComparatorFactory;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductParameters;
 import com.crabtree.hoyfc.model.product.editProduct.EditProductFormData;
-import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.repository.ProductRepository;
+import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +57,7 @@ public class ProductService {
 	}
 
 	public Product getProductByIndex(int index) {
-		return productRepository.getById(index);
+		return productRepository.getByIndex(index);
 	}
 
 	public void updateProduct(EditProductFormData productFormData) {
@@ -67,5 +67,9 @@ public class ProductService {
 
 	public void deductFromStockCount(Integer productId, Integer quantity) {
 		this.productRepository.deductFromStockCount(productId, quantity);
+	}
+
+	public Product getByProductId(Integer productId) {
+		return this.productRepository.getByProductId(productId);
 	}
 }

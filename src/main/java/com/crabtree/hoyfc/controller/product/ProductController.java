@@ -50,7 +50,7 @@ public class ProductController {
 	@GetMapping(value = "/info/{productId}")
 	public String viewProductInfo(Model model, @PathVariable(value = "productId") Integer productId) {
 
-		var chosenProduct = productService.getProductByIndex(productId - 1);
+		var chosenProduct = productService.getByProductId(productId);
 		var chosenProductFormData = EditProductFormData.fromProduct(chosenProduct);
 
 		model.addAttribute("productTypesList", ProductType.values());
@@ -74,7 +74,6 @@ public class ProductController {
 	                           @RequestParam(name = "sortColumn") String sortColumn,
 	                           @RequestParam(name = "sortDirection") String sortDirection) {
 
-		var x = model.getAttribute("paginationData");
 		this.sortingData.setSortColumn(sortColumn);
 		this.sortingData.setSortDirection(SortDirection.valueOf(sortDirection.toUpperCase()));
 

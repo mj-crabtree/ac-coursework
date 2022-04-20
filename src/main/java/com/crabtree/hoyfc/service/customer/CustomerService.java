@@ -1,10 +1,13 @@
 package com.crabtree.hoyfc.service.customer;
 
+import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
+import com.crabtree.hoyfc.model.customer.comparatorFactory.CustomerComparatorFactory;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
 import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.repository.CustomerRepository;
+import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,10 +15,12 @@ public class CustomerService {
 
 	private final CustomerRepository customerRepository;
 	private final CustomerIdService customerIdService;
+	private final InsertionSort insertionSort;
 
-	public CustomerService(CustomerRepository customerRepository, CustomerIdService customerIdService) {
+	public CustomerService(CustomerRepository customerRepository, CustomerIdService customerIdService, InsertionSort insertionSort) {
 		this.customerRepository = customerRepository;
 		this.customerIdService = customerIdService;
+		this.insertionSort = insertionSort;
 	}
 
 	public void createCustomer(CreateCustomerParameters customer) {
@@ -33,11 +38,11 @@ public class CustomerService {
 	}
 
 	public Customer getCustomer(Integer id) {
-		return customerRepository.getById(id);
+		return customerRepository.getCustomerByIndex(id);
 	}
 
 	public Customer updateCustomer(Integer id, Customer request) {
-		Customer customerById = customerRepository.getById(id);
+		Customer customerById = customerRepository.getCustomerById(id);
 
 		customerById.setCustomerName(request.getCustomerName());
 		customerById.setEmail(request.getEmail());
@@ -57,11 +62,12 @@ public class CustomerService {
 		return customerRepository.count();
 	}
 
-	public DynamicArrayList<Customer> getSortedPaginatedCustomers(Integer pageNumber, Integer pageSize, String sortColumn, String sortDirection) {
-		return customerRepository.getSortedPaginatedCustomers(pageNumber, pageSize, sortColumn, sortDirection);
-	}
-
 	public DynamicArrayList<Customer> search(String searchTerm) {
 		return customerRepository.search(searchTerm);
+	}
+
+	public void sort(SortHelper sortingData, DynamicArrayList<Customer> data) {
+		var comparator = CustomerComparatorFactory.getComparator(sortingData.getSortColumn(), sortingData.getSortDirection());
+		insertionSort.sort(data, comparator);
 	}
 }

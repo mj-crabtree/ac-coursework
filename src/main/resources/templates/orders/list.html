@@ -61,7 +61,7 @@
                     </th>
                     <th></th>
                 </tr>
-                <tr th:each="order : ${orderList}">
+                <tr th:each="order, idx : ${orderList}">
                     <td th:text="${order.getPublicOrderId}"></td>
                     <td th:text="${customerService.getCustomer(order.getCustomerId() - 1).getCustomerName().getFullName()}"></td>
                     <td th:text="${#dates.format(order.getOrderDateTime, 'dd-MM-yyyy HH:mm')}"></td>

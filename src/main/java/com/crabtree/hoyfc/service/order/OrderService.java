@@ -5,7 +5,6 @@ import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
-import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.OrderComparatorFactory;
 import com.crabtree.hoyfc.repository.OrderRepository;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -46,15 +45,20 @@ public class OrderService {
 	}
 
 	public Integer getPendingOrderCount() {
-		return orderRepository.getPendingCustomerOrdersByDateDescending().size();
+		return orderRepository
+				.getPendingCustomerOrdersByDateDescending()
+				.size();
 	}
 
 	public void setOrderStatus(CustomerOrder order, OrderStatus status) {
 		orderRepository.setOrderStatus(order, status);
 	}
 
-	public void sort(SortHelper sortingData, DynamicArrayList<CustomerOrder> data) {
-		var comparator = OrderComparatorFactory.getComparator(sortingData.getSortColumn(), sortingData.getSortDirection());
-		insertionSort.sort(data, comparator);
+	public void sort(SortHelper sortingData) {
+		this.orderRepository.sort(sortingData);
 	}
+
+	// public CustomerOrder binarySearchByOrderId(Integer orderId) {
+	// 	var bs = Bin
+	// }
 }

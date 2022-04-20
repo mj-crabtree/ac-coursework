@@ -2,17 +2,23 @@ package com.crabtree.hoyfc.repository;
 
 import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
 import com.crabtree.customDSA.algorithms.search.recursiveBinarySearch.RecursiveBinarySearch;
+import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
 import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
+import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.OrderComparatorFactory;
+import com.crabtree.hoyfc.service.pageSort.SortDirection;
+import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderRepository {
 	private final DynamicArrayList<CustomerOrder> customerOrders;
+	private final InsertionSort insertionSort;
 
-	public OrderRepository() {
+	public OrderRepository(InsertionSort insertionSort) {
+		this.insertionSort = insertionSort;
 		this.customerOrders = new DynamicArrayList<>();
 	}
 
@@ -36,7 +42,7 @@ public class OrderRepository {
 			return result;
 		}
 		else {
-			result.add(customerOrders.get(index));
+			result.add(customerOrders.getByIndex(index));
 			return result;
 		}
 	}
@@ -58,15 +64,21 @@ public class OrderRepository {
 		return result;
 	}
 
+	private CustomerOrder getOrderByIndex(Integer index) {
+		return this.customerOrders.getByIndex(index);
+	}
+
 	public CustomerOrder getOrderById(Integer orderId) {
-		return this.customerOrders.get(orderId - 1);
+		var bs = new RecursiveBinarySearch();
+		return getOrderByIndex(bs.orderIdSearch(this.customerOrders, orderId));
 	}
 
 	public DequeImpl<CustomerOrder> getPendingCustomerOrdersByDateDescending() {
+		insertionSort.sort(this.customerOrders, OrderComparatorFactory.getComparator("Status", SortDirection.ASC));
 		var result = new DequeImpl<CustomerOrder>();
 		for (int i = customerOrders.count() - 1; i >= 0; i--) {
-			var order = getOrderById(i);
-			if (getOrderById(i).getOrderStatus() == OrderStatus.PENDING) {
+			var order = getOrderById(i+1);
+			if (order.getOrderStatus() == OrderStatus.PENDING) {
 				result.addFirst(order);
 			}
 			else {
@@ -80,5 +92,10 @@ public class OrderRepository {
 		var updatedOrder = getOrderById(order.getId());
 		updatedOrder.setOrderStatus(status);
 		this.customerOrders.put(order.getId() -1, updatedOrder);
+	}
+
+	public void sort(SortHelper sortingData) {
+		var comparator = OrderComparatorFactory.getComparator(sortingData.getSortColumn(), sortingData.getSortDirection());
+		insertionSort.sort(this.customerOrders, comparator);
 	}
 }

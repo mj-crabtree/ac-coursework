@@ -27,7 +27,7 @@ public class DynamicArrayList<T> extends AbstractDynamicDataStructure<T> impleme
 	}
 
 	public T remove(int index) {
-		T removedElement = get(index);
+		T removedElement = getByIndex(index);
 		removeItem(this.collection, index);
 
 		if (isUnderloaded()) {
@@ -52,8 +52,8 @@ public class DynamicArrayList<T> extends AbstractDynamicDataStructure<T> impleme
 	public DynamicArrayList<T> subList(Integer firstElement, Integer lastElement) {
 		DynamicArrayList<T> output = new DynamicArrayList<>();
 		for (int i = firstElement; i < lastElement; i++) {
-			if (this.get(i) != null) {
-				output.add(this.get(i));
+			if (this.getByIndex(i) != null) {
+				output.add(this.getByIndex(i));
 			}
 			else {
 				return output;
@@ -98,7 +98,7 @@ public class DynamicArrayList<T> extends AbstractDynamicDataStructure<T> impleme
 
 		@Override
 		public T next() {
-			T element = DynamicArrayList.this.get(this.position);
+			T element = DynamicArrayList.this.getByIndex(this.position);
 			this.position++;
 			return element;
 		}

@@ -34,7 +34,7 @@ public class OrderController {
 	public String showOrders() {
 		this.sortingData.setSortColumn("Id");
 		this.sortingData.setSortDirection(SortDirection.DESC);
-		orderService.sort(this.sortingData, this.orders);
+		orderService.sort(this.sortingData);
 		return "redirect:page/1";
 	}
 
@@ -54,6 +54,7 @@ public class OrderController {
 	@GetMapping(value = "/info/{orderId}")
 	public String viewOrderInfo(Model model, @PathVariable(value = "orderId") Integer orderId) {
 		var order = orderService.getOrderById(orderId);
+		// var searched = orderService.binarySearch(orderId);
 
 		model.addAttribute("order", order);
 		model.addAttribute("orderItems", order.getLineItems());
@@ -67,7 +68,7 @@ public class OrderController {
 	                         @RequestParam(name = "sortDirection") String sortDirection) {
 		this.sortingData.setSortColumn(sortColumn);
 		this.sortingData.setSortDirection(SortDirection.valueOf(sortDirection.toUpperCase()));
-		orderService.sort(sortingData, this.orders);
+		orderService.sort(sortingData);
 		return "redirect:/orders/page/" + pageNumber;
 	}
 }

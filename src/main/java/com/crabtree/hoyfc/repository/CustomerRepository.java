@@ -1,16 +1,13 @@
 package com.crabtree.hoyfc.repository;
 
 import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
-import com.crabtree.customDSA.algorithms.sort.InsertionSort.InsertionSort;
+import com.crabtree.customDSA.algorithms.search.recursiveBinarySearch.RecursiveBinarySearch;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
-import com.crabtree.hoyfc.model.customer.comparatorFactory.CustomerComparatorFactory;
-import com.crabtree.hoyfc.service.pagination.Pagination;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
-// todo: make interface
 @Service
 public class CustomerRepository {
 	private final DynamicArrayList<Customer> customers;
@@ -19,9 +16,13 @@ public class CustomerRepository {
 		this.customers = new DynamicArrayList<>();
 	}
 
-	public Customer getById(int id) {
-		// todo: refactor me
-		return this.customers.get(id);
+	public Customer getCustomerByIndex(int index) {
+		return this.customers.getByIndex(index);
+	}
+
+	public Customer getCustomerById(int customerId) {
+		var bs = new RecursiveBinarySearch();
+		return getCustomerByIndex(bs.customerIdSearch(this.customers, customerId));
 	}
 
 	public Customer save(Customer customer) {
@@ -34,15 +35,6 @@ public class CustomerRepository {
 
 	public Integer count() {
 		return this.customers.count();
-	}
-
-	public DynamicArrayList<Customer> getSortedPaginatedCustomers(int pageNumber, int pageSize, String sortColumn, String sortDirection) {
-		var comparator = CustomerComparatorFactory.getComparator(sortColumn, sortDirection);
-
-		var is = new InsertionSort();
-		is.sort(customers, comparator);
-
-		return (DynamicArrayList<Customer>) Pagination.paginateCollection(this.customers, pageNumber, pageSize);
 	}
 
 	public DynamicArrayList<Customer> search(String needle) {

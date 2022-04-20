@@ -13,7 +13,7 @@ public abstract class AbstractDynamicDataStructure<T> implements DynamicDataStru
 		this.currentCapacity = 0;
 	}
 
-	public T get(int index) {
+	public T getByIndex(int index) {
 		return (T) this.collection[index];
 	}
 

@@ -1,6 +1,7 @@
 package com.crabtree.hoyfc.repository;
 
 import com.crabtree.customDSA.algorithms.search.KMPSearch.KMPSearch;
+import com.crabtree.customDSA.algorithms.search.recursiveBinarySearch.RecursiveBinarySearch;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.model.product.StockCount;
@@ -21,8 +22,8 @@ public class ProductRepository {
 		return this.products.add(product);
 	}
 
-	public Product getById(int id) {
-		return this.products.get(id);
+	public Product getByIndex(int id) {
+		return this.products.getByIndex(id);
 	}
 
 	public DynamicArrayList<Product> getProducts() {
@@ -62,7 +63,7 @@ public class ProductRepository {
 	}
 
 	public void deductFromStockCount(Integer productId, Integer quantity) {
-		var product = getById(productId -1);
+		var product = getByIndex(productId -1);
 		var oldCount = product
 				.getStockCount().getCurrentStock();
 
@@ -73,5 +74,10 @@ public class ProductRepository {
 				.getRestockTrigger()));
 
 		update(product);
+	}
+
+	public Product getByProductId(Integer productId) {
+		var bs = new RecursiveBinarySearch();
+		return getByIndex(bs.productIdSearch(this.products, productId));
 	}
 }

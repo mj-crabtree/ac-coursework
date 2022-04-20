@@ -3,6 +3,9 @@ package com.crabtree.hoyfc.controller.customer;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.service.customer.CustomerService;
+import com.crabtree.hoyfc.service.pageSort.SortDirection;
+import com.crabtree.hoyfc.service.pageSort.SortHelper;
+import com.crabtree.hoyfc.service.pagination.PaginationHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CustomerController {
 	private final CustomerService customerService;
 	private final DynamicArrayList<Customer> customers;
+	private final SortHelper sortingData;
 
-
-	public CustomerController(CustomerService customerService) {
+	public CustomerController(CustomerService customerService, SortHelper sortingData) {
 		this.customerService = customerService;
 		this.customers = customerService.getCustomers();
+		this.sortingData = sortingData;
 	}
 
 	@GetMapping
@@ -28,21 +32,29 @@ public class CustomerController {
 	}
 
 	@GetMapping(value = "/page/{pageNumber}")
-	public String listCustomers(Model model,
-	                            @PathVariable(name = "pageNumber", required = false) Integer pageNumber,
-	                            @RequestParam(name = "sortColumn", required = false, defaultValue = "id") String sortColumn,
-	                            @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
+	public String listCustomers(Model model, @PathVariable(name = "pageNumber") Integer pageNumber) {
 
-		// todo: refactor to use new PaginationHelper class
+		PaginationHelper<Customer> ph = new PaginationHelper<>();
+		var paginationData = ph.paginateCollection(this.customers, this.customers.count(), 15, pageNumber);
 
-		model.addAttribute("currentPageNumber", pageNumber);
-		model.addAttribute("customerList", customerService.getSortedPaginatedCustomers(pageNumber, 15, sortColumn, sortDirection));
-		model.addAttribute("maxPages", (int) Math.ceil((customerService.getTotalCustomers() / (double) 15)));
-		model.addAttribute("sortColumn", sortColumn);
-		model.addAttribute("sortDirection", sortDirection);
-		model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
+		model.addAttribute("sortData", sortingData);
+		model.addAttribute("paginationData", paginationData);
+		model.addAttribute("customerList", paginationData.getCollection());
 
 		return "customers/list";
+	}
+
+	@GetMapping(value = "sort")
+	public String sortCustomers(Model model,
+	                            @RequestParam(name = "p") Integer pageNumber,
+	                            @RequestParam(name = "sortColumn") String sortColumn,
+	                            @RequestParam(name = "sortDirection") String sortDirection) {
+
+		this.sortingData.setSortColumn(sortColumn);
+		this.sortingData.setSortDirection(SortDirection.valueOf(sortDirection.toUpperCase()));
+
+		customerService.sort(sortingData, this.customers);
+		return "redirect:/customers/page/" + pageNumber;
 	}
 
 	@GetMapping(value = "/search/")
@@ -50,6 +62,8 @@ public class CustomerController {
 	                              @RequestParam(name = "term", required = true) String searchTerm,
 	                              @RequestParam(name = "sortColumn", required = false, defaultValue = "id") String sortColumn,
 	                              @RequestParam(name = "sortDirection", required = false, defaultValue = "asc") String sortDirection) {
+
+		// todo: refactor to separate controller
 
 		model.addAttribute("searchTerm", searchTerm);
 

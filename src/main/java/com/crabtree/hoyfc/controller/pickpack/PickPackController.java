@@ -1,5 +1,7 @@
 package com.crabtree.hoyfc.controller.pickpack;
 
+import com.crabtree.customDSA.dataStructures.deque.Deque;
+import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
@@ -25,6 +27,7 @@ public class PickPackController {
 	private final PickPackService pickPackService;
 	private final SortHelper sortingData;
 	private DynamicArrayList<CustomerOrder> pickedOrders;
+	private DequeImpl<CustomerOrder> pendingCustomerOrders;
 
 	public PickPackController(OrderService orderService, ProductService productService, PickPackService pickPackService, SortHelper sortingData) {
 		this.productService = productService;
@@ -32,20 +35,21 @@ public class PickPackController {
 		this.orderService = orderService;
 		this.sortingData = sortingData;
 		this.pickedOrders = new DynamicArrayList<>();
+		this.pendingCustomerOrders = new DequeImpl<>();
 	}
 
 	@GetMapping
 	public String showPickPack() {
+		this.pendingCustomerOrders = orderService.getPendingCustomerOrdersByDateDescending();
 		return "redirect:start";
 	}
 
 	@GetMapping("start")
 	public String listPendingOrders(Model model) {
 
-		var pendingOrders = orderService.getPendingCustomerOrdersByDateDescending();
 		var pickList = new PickList();
 		model.addAttribute("pickList", pickList);
-		model.addAttribute("pendingOrders", pendingOrders);
+		model.addAttribute("pendingOrders", pendingCustomerOrders);
 
 		return "pickpack/start";
 	}

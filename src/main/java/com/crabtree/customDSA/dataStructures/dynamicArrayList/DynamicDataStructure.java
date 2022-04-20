@@ -7,7 +7,7 @@ public interface DynamicDataStructure<T> {
 
 	void removeAll();
 
-	T get(int index);
+	T getByIndex(int index);
 
 	boolean isOverloaded();
 

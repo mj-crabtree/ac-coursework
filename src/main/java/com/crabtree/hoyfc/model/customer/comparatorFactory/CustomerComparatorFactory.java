@@ -1,56 +1,67 @@
 package com.crabtree.hoyfc.model.customer.comparatorFactory;
 
 import com.crabtree.hoyfc.model.customer.Customer;
+import com.crabtree.hoyfc.service.pageSort.SortDirection;
 
 import java.util.Comparator;
 
 public class CustomerComparatorFactory {
 
-	public static <T extends Customer> Comparator<T> getComparator(String sortColumn, String sortDirection) {
+	public static Comparator<Customer> getComparator(String sortColumn, SortDirection sortDirection) {
 		switch (sortColumn) {
-			case "id":
+			case "Id":
 				return getIdComparator(sortDirection);
-			case "firstName":
+			case "FirstName":
 				return getFirstNameComparator(sortDirection);
-			case "lastName":
+			case "LastName":
 				return getLastNameComparator(sortDirection);
-			case "email":
+			case "Email":
 				return getEmailComparator(sortDirection);
-			case "birthday":
+			case "Birthday":
 				return getBirthdayComparator(sortDirection);
 			default:
 				throw new IllegalStateException("Unexpected value: " + sortColumn);
 		}
 	}
 
-	private static <T extends Customer> Comparator<T> getBirthdayComparator(String direction) {
-		return direction.equals("asc") ? BirthdayComparator.ascending() : BirthdayComparator.descending();
+	private static Comparator<Customer> getBirthdayComparator(SortDirection direction) {
+		return direction
+				.getDirection()
+				.equals("ASC") ? BirthdayComparator.ascending() : BirthdayComparator.descending();
 	}
 
-	private static <T extends Customer> Comparator<T> getEmailComparator(String direction) {
-		return direction.equals("asc") ? EmailComparator.ascending() : EmailComparator.descending();
+	private static Comparator<Customer> getEmailComparator(SortDirection direction) {
+		return direction
+				.getDirection()
+				.equals("ASC") ? EmailComparator.ascending() : EmailComparator.descending();
 	}
 
-	private static <T extends Customer> Comparator<T> getLastNameComparator(String direction) {
-		return direction.equals("asc") ? LastNameComparator.ascending() : LastNameComparator.descending();
+	private static Comparator<Customer> getLastNameComparator(SortDirection direction) {
+		return direction
+				.getDirection()
+				.equals("ASC") ? LastNameComparator.ascending() : LastNameComparator.descending();
 	}
 
-	private static <T extends Customer> Comparator<T> getFirstNameComparator(String direction) {
-		return direction.equals("asc") ? FirstNameComparator.ascending() : FirstNameComparator.descending();
+	private static Comparator<Customer> getFirstNameComparator(SortDirection direction) {
+		return direction
+				.getDirection()
+				.equals("ASC") ? FirstNameComparator.ascending() : FirstNameComparator.descending();
 	}
 
-	private static <T extends Customer> Comparator<T> getIdComparator(String direction) {
-		return direction.equals("asc") ? IdComparator.ascending() : IdComparator.descending();
+	private static Comparator<Customer> getIdComparator(SortDirection direction) {
+		return direction
+				.getDirection()
+				.equals("ASC") ? IdComparator.ascending() : IdComparator.descending();
 	}
 
 	private static class BirthdayComparator {
-		public static <T extends Customer> Comparator<T> descending() {
+		public static Comparator<Customer> descending() {
 			return (o1, o2) -> o1
 					.getBirthday()
 					.compareTo(o2.getBirthday());
 		}
 
-		public static <T extends Customer> Comparator<T> ascending() {
+		public static Comparator<Customer> ascending() {
 			return (o1, o2) -> o2
 					.getBirthday()
 					.compareTo(o1.getBirthday());
@@ -58,7 +69,7 @@ public class CustomerComparatorFactory {
 	}
 
 	private static class EmailComparator {
-		public static <T extends Customer> Comparator<T> descending() {
+		public static Comparator<Customer> descending() {
 			return (o1, o2) -> o1
 					.getEmail()
 					.asString()
@@ -67,7 +78,7 @@ public class CustomerComparatorFactory {
 							.asString());
 		}
 
-		public static <T extends Customer> Comparator<T> ascending() {
+		public static Comparator<Customer> ascending() {
 			return (o1, o2) -> o2
 					.getEmail()
 					.asString()
@@ -78,7 +89,7 @@ public class CustomerComparatorFactory {
 	}
 
 	private static class LastNameComparator {
-		public static <T extends Customer> Comparator<T> ascending() {
+		public static Comparator<Customer> ascending() {
 			return (o1, o2) -> o1
 					.getCustomerName()
 					.getLastName()
@@ -87,7 +98,7 @@ public class CustomerComparatorFactory {
 							.getLastName());
 		}
 
-		public static <T extends Customer> Comparator<T> descending() {
+		public static Comparator<Customer> descending() {
 			return (o1, o2) -> o2
 					.getCustomerName()
 					.getLastName()
@@ -98,7 +109,7 @@ public class CustomerComparatorFactory {
 	}
 
 	private static class FirstNameComparator {
-		public static <T extends Customer> Comparator<T> ascending() {
+		public static Comparator<Customer> ascending() {
 			return (o1, o2) -> o1
 					.getCustomerName()
 					.getFirstName()
@@ -107,7 +118,7 @@ public class CustomerComparatorFactory {
 							.getFirstName());
 		}
 
-		public static <T extends Customer> Comparator<T> descending() {
+		public static Comparator<Customer> descending() {
 			return (o1, o2) -> o2
 					.getCustomerName()
 					.getFirstName()
@@ -118,13 +129,13 @@ public class CustomerComparatorFactory {
 	}
 
 	private static class IdComparator {
-		public static <T extends Customer> Comparator<T> ascending() {
+		public static Comparator<Customer> ascending() {
 			return (o1, o2) -> o1
 					.getId()
 					.compareTo(o2.getId());
 		}
 
-		public static <T extends Customer> Comparator<T> descending() {
+		public static Comparator<Customer> descending() {
 			return (o1, o2) -> o2
 					.getId()
 					.compareTo(o1.getId());

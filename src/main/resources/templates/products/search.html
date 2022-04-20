@@ -44,38 +44,27 @@
         <div class="container py-3">
             <table class="table">
                 <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        SKU
-                    </th>
-                    <th>
-                        Type
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Count
-                    </th>
-                    <th>
-                        Price
-                    </th>
+                    <th>Name</th>
+                    <th>SKU</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Count</th>
+                    <th>Price</th>
                     <th></th>
                 </tr>
                 <tr th:each="product : ${productList}">
-                    <!--                    <td th:text="${product.getId()}"></td>-->
                     <td th:text="${product.getProductName().getProductName()}"></td>
                     <td th:text="${product.getProductSku().getProductSku}"></td>
                     <td th:text="${product.getProductType().toString()}"></td>
                     <td th:text="${product.getProductStatus().toString()}"></td>
                     <td th:text="${product.getStockCount().getCurrentStock()}"></td>
                     <td th:text="${#numbers.formatCurrency(product.getProductPrice().getProductPrice())}"></td>
-                    <td><a th:href="'/products/info/' + ${product.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
+                    <td><a th:href="'/products/info/' + ${product.id}" class="btn btn-outline"><i
+                            class="bi bi-search"></i></a>
                 </tr>
             </table>
             <div th:replace="fragments/pagination :: paginationInfo"></div>
         </div>
+        <a class="btn btn-primary" href="/products/">Back</a>
     </div>
 </section>
