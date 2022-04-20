@@ -38,7 +38,18 @@
                 <div th:replace="fragments/pagination :: pagination('/orders/page/')"></div>
             </div>
         </div>
-
+        <div th:if="${orderList.isEmpty()}">
+            <div class="d-flex justify-content-center py-5">
+                <h2 class="display-5 text-center">No records found!</h2>
+            </div>
+            <div class="d-flex justify-content-center">
+                <h2 class="display-4 text-center">🦗</h2>
+            </div>
+            <div class="d-flex justify-content-center py-5">
+                <a class="btn btn-lg btn-outline-secondary" href="/customers/">Back</a>
+            </div>
+        </div>
+        <div th:unless="${orderList.isEmpty()}">
         <div class="container py-3">
             <table class="table">
                 <tr>
@@ -60,7 +71,7 @@
                 </tr>
             </table>
             <div th:replace="fragments/pagination :: paginationInfo"></div>
+            <a class="btn btn-primary" href="/orders/">Back</a>
         </div>
-        <a class="btn btn-primary" href="/orders/">Back</a>
     </div>
 </section>

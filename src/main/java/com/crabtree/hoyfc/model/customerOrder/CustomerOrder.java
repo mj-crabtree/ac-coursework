@@ -3,7 +3,6 @@ package com.crabtree.hoyfc.model.customerOrder;
 import com.crabtree.hoyfc.model.baseEntity.BaseEntity;
 import com.crabtree.hoyfc.model.customer.Customer;
 import lombok.Data;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;

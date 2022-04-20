@@ -12,7 +12,6 @@ import com.crabtree.hoyfc.service.order.OrderService;
 import com.crabtree.hoyfc.service.order.OrderShippingCostService;
 import com.crabtree.hoyfc.service.product.ProductService;
 import com.github.javafaker.Faker;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -20,8 +19,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -40,31 +40,42 @@
                 <div th:replace="fragments/pagination :: pagination('/products/page/')"></div>
             </div>
         </div>
-
         <div class="container py-3">
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>SKU</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Count</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-                <tr th:each="product : ${productList}">
-                    <td th:text="${product.getProductName().getProductName()}"></td>
-                    <td th:text="${product.getProductSku().getProductSku}"></td>
-                    <td th:text="${product.getProductType().toString()}"></td>
-                    <td th:text="${product.getProductStatus().toString()}"></td>
-                    <td th:text="${product.getStockCount().getCurrentStock()}"></td>
-                    <td th:text="${#numbers.formatCurrency(product.getProductPrice().getProductPrice())}"></td>
-                    <td><a th:href="'/products/info/' + ${product.id}" class="btn btn-outline"><i
-                            class="bi bi-search"></i></a>
-                </tr>
-            </table>
-            <div th:replace="fragments/pagination :: paginationInfo"></div>
+            <div th:if="${productList.isEmpty()}">
+                <div class="d-flex justify-content-center py-5">
+                    <h2 class="display-5 text-center">No records found!</h2>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <h2 class="display-4 text-center">🦗</h2>
+                </div>
+                <div class="d-flex justify-content-center py-5">
+                    <a class="btn btn-lg btn-outline-secondary" href="/products/">Back</a>
+                </div>
+            </div>
+            <div th:unless="${productList.isEmpty()}">
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>SKU</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Count</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="product : ${productList}">
+                        <td th:text="${product.getProductName().getProductName()}"></td>
+                        <td th:text="${product.getProductSku().getProductSku}"></td>
+                        <td th:text="${product.getProductType().toString()}"></td>
+                        <td th:text="${product.getProductStatus().toString()}"></td>
+                        <td th:text="${product.getStockCount().getCurrentStock()}"></td>
+                        <td th:text="${#numbers.formatCurrency(product.getProductPrice().getProductPrice())}"></td>
+                        <td><a th:href="'/products/info/' + ${product.id}" class="btn btn-outline"><i
+                                class="bi bi-search"></i></a>
+                    </tr>
+                </table>
+                <div th:replace="fragments/pagination :: paginationInfo"></div>
+                <a class="btn btn-primary" href="/products/">Back</a>
+            </div>
         </div>
-        <a class="btn btn-primary" href="/products/">Back</a>
-    </div>
 </section>

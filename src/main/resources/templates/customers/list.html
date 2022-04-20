@@ -18,7 +18,7 @@
             <div class="d-flex align-content-center">
                 <form th:action="@{/customers/search/}" class="form-inline my-2 my-md-0">
                     <div class="input-group">
-                        <input type="text" minlength="3" class="form-control" placeholder="Inventory search"
+                        <input type="text" minlength="3" class="form-control" placeholder="Customer search"
                                aria-label="search"
                                th:name="searchTerm">
                         <div class="input-group-append">
@@ -36,35 +36,48 @@
             </div>
         </div>
         <div class="container py-3">
-            <table class="table">
-                <tr>
-                    <th>
-                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
-                    </th>
-                    <th>
-                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=FirstName&sortDirection=' + ${sortData.reverseSortDirection()}}">First
-                            Name</a>
-                    <th>
-                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=LastName&sortDirection=' + ${sortData.reverseSortDirection()}}">Last
-                            Name</a>
-                    <th>
-                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Email&sortDirection=' + ${sortData.reverseSortDirection()}}">Email</a>
-                    </th>
-                    <th>
-                        <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Birthday&sortDirection=' + ${sortData.reverseSortDirection()}}">Birthdate</a>
-                    </th>
-                    <th></th>
-                </tr>
-                <tr th:each="customer : ${customerList}">
-                    <td th:text="${customer.id}"></td>
-                    <td th:text="${customer.getCustomerName().getFirstName()}"></td>
-                    <td th:text="${customer.getCustomerName().getLastName()}"></td>
-                    <td th:text="${customer.email.email}">john@email.com</td>
-                    <td th:text="${customer.birthday}">09-03-1987</td>
-                    <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
-                </tr>
-            </table>
-            <div th:replace="fragments/pagination :: paginationInfo"></div>
+            <div th:if="${customerList.isEmpty()}">
+                <div class="d-flex justify-content-center py-5">
+                    <h2 class="display-5 text-center">No records found!</h2>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <h2 class="display-4 text-center">🦗</h2>
+                </div>
+                <div class="d-flex justify-content-center py-5">
+                    <a class="btn btn-lg btn-outline-secondary" href="/customers/">Back</a>
+                </div>
+            </div>
+            <div th:unless="${customerList.isEmpty()}">
+                <table class="table">
+                    <tr>
+                        <th>
+                            <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Id&sortDirection=' + ${sortData.reverseSortDirection()}}">#</a>
+                        </th>
+                        <th>
+                            <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=FirstName&sortDirection=' + ${sortData.reverseSortDirection()}}">First
+                                Name</a>
+                        <th>
+                            <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=LastName&sortDirection=' + ${sortData.reverseSortDirection()}}">Last
+                                Name</a>
+                        <th>
+                            <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Email&sortDirection=' + ${sortData.reverseSortDirection()}}">Email</a>
+                        </th>
+                        <th>
+                            <a th:href="@{'/customers/sort?p=' + ${paginationData.getPageNumber()} + '&sortColumn=Birthday&sortDirection=' + ${sortData.reverseSortDirection()}}">Birthdate</a>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="customer : ${customerList}">
+                        <td th:text="${customer.id}"></td>
+                        <td th:text="${customer.getCustomerName().getFirstName()}"></td>
+                        <td th:text="${customer.getCustomerName().getLastName()}"></td>
+                        <td th:text="${customer.email.email}">john@email.com</td>
+                        <td th:text="${customer.birthday}">09-03-1987</td>
+                        <td><a th:href="'/customers/info/' + ${customer.id}" class="btn btn-outline"><i class="bi bi-search"></i></a>
+                    </tr>
+                </table>
+                <div th:replace="fragments/pagination :: paginationInfo"></div>
+            </div>
         </div>
     </div>
 </section>

@@ -10,6 +10,7 @@ import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
 import com.crabtree.hoyfc.model.customerOrder.comparatorFactory.OrderComparatorFactory;
 import com.crabtree.hoyfc.service.pageSort.SortDirection;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -52,11 +53,29 @@ public class OrderRepository {
 			return searchByUniqueOrderId(needle);
 		}
 
+		if (StringUtils.isNumeric(needle)) {
+			return searchByOrderIdDigits(needle);
+		}
+
 		if (searchTermIsOrderStatus(needle)) {
 			return searchByOrderStatus(needle);
 		}
 
 		return searchByCustomerName(needle);
+	}
+
+	private DynamicArrayList<CustomerOrder> searchByOrderIdDigits(String needle) {
+		var result = new DynamicArrayList<CustomerOrder>();
+		for (CustomerOrder customerOrder : customerOrders) {
+			var idHaystack = customerOrder
+					.getPublicOrderId()
+					.toLowerCase();
+
+			if (KMPSearch.search(idHaystack, needle.toLowerCase()) == 1) {
+				result.add(customerOrder);
+			}
+		}
+		return result;
 	}
 
 	private DynamicArrayList<CustomerOrder> searchByCustomerName(String needle) {

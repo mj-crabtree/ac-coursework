@@ -17,7 +17,7 @@
         <form th:action="@{/pickpack/commit}" th:object="${form}" method="post">
             <div class="row d-flex justify-content-between py-4">
                 <div class="col">
-                    <a href="/orders/" class="btn btn-outline-secondary btn-lg">Back</a>
+                    <a href="/pickpack/start" class="btn btn-outline-secondary">Back</a>
                 </div>
                 <div class="col">
                     <button type="button" onclick="selectAll()" class="btn btn-primary btn-lg float-right">Select All</button>
@@ -47,8 +47,8 @@
                 </div>
                 <hr>
             </div>
-            <div class="row d-flex justify-content-end py-4">
-                <button type="submit" class="btn btn-primary btn-lg align-self-end">Picked!</button>
+            <div class="col ">
+                <button type="submit" class="btn btn-primary btn-lg float-right my-3">Picked!</button>
             </div>
         </form>
     </div>

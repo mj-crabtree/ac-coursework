@@ -2,7 +2,6 @@ package com.crabtree.hoyfc.model.product.comparatorFactory;
 
 import com.crabtree.hoyfc.model.product.Product;
 import com.crabtree.hoyfc.service.pageSort.SortDirection;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 
 import java.util.Comparator;
 
