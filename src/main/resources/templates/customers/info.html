@@ -1,0 +1,80 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<section layout:fragment="content">
+    <div class="container">
+        <h2 class="display-4">Customer Details</h2>
+        <a href="/customers/" class="btn btn-primary my-3">Back</a>
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="h3 py-2">Details</h3>
+                    <p class="text-capitalize"
+                       th:text="${customer.getCustomerName().getFullName()}"></p>
+                    <p class="" th:text="${customer.getEmail().asString()}"></p>
+                </div>
+                <div class="col-md-6">
+                    <h3 class=" h3 text-right py-2">Address</h3>
+                    <p class="text-capitalize text-right"
+                       th:text="${customer.getAddress().getBuildingNumber()} + ' ' + ${customer.getAddress().getFirstLine()}"></p>
+                    <p class="text-capitalize text-right"
+                       th:text="${customer.getAddress().getTownCity()} + ' ' + ${customer.getAddress().getPostalCode()}"></p>
+                    <p class="text-capitalize text-right"
+                       th:text="${customer.getAddress().getCountry()}"></p>
+                </div>
+            </div>
+            <h2 class="pb-2 border-bottom">Order History</h2>
+            <div th:each="order : ${customer.getOrderHistory()}">
+                <div class="container card my-5">
+                    <div class="row d-flex align-items-center m-3">
+                        <div class="col">
+                            <h3 class="h3 py-3 align-middle" th:text="${order.getPublicOrderId()}"></h3>
+                        </div>
+                        <div class="col">
+                            <h4 class="h4 float-right" th:text="${#dates.format(order.getOrderDateTime(), 'dd-MM-yyyy')}"></h4>
+                        </div>
+                        <table class="table m-3">
+                            <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Product</td>
+                                <td>SKU</td>
+                                <td>Count</td>
+                                <td>Price</td>
+                                <td>Total</td>
+                            </tr>
+                            </thead>
+                            <tr th:each="lineItem, idx : ${order.getLineItems()}">
+                                <td th:text="${idx.count}"></td>
+                                <td th:text="${lineItem.getProduct().productName.getProductName()}"></td>
+                                <td style="font-family: monospace"
+                                    th:text="${lineItem.getProduct().getProductSku().getProductSku()}"></td>
+                                <td th:text="${lineItem.getCount()}"></td>
+                                <td th:text="${#numbers.formatCurrency(lineItem.getProduct().getProductPrice().getProductPrice())}"></td>
+                                <td th:text="${#numbers.formatCurrency(lineItem.getTotalCost())}"></td>
+                            </tr>
+                        </table>
+                        <div class="container m-3">
+                            <p class="text-right font-weight-bold"
+                               th:text="'Items: ' + ${#numbers.formatCurrency(order.getLineItemsTotalCost())}"></p>
+                            <p class="text-right font-weight-bold"
+                               th:text="'Shipping: ' + ${#numbers.formatCurrency(order.getShippingCost())}"></p>
+                            <h4 class="h4 text-right"
+                                th:text="'Total: ' + ${#numbers.formatCurrency(order.getTotalOrderCost())}"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

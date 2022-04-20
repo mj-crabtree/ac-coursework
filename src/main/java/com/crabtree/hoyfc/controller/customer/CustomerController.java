@@ -56,4 +56,11 @@ public class CustomerController {
 		customerService.sort(sortingData, this.customers);
 		return "redirect:/customers/page/" + pageNumber;
 	}
+
+	@GetMapping(value = "info/{customerId}")
+	public String getCustomerInfo(Model model, @PathVariable(value = "customerId") Integer customerId) {
+		var chosenCustomer = customerService.getCustomerById(customerId);
+		model.addAttribute("customer", chosenCustomer);
+		return "customers/info";
+	}
 }

@@ -41,6 +41,10 @@ public class CustomerService {
 		return customerRepository.getCustomerByIndex(id);
 	}
 
+	public Customer getCustomerById(Integer id) {
+		return customerRepository.getCustomerById(id);
+	}
+
 	public Customer updateCustomer(Integer id, Customer request) {
 		Customer customerById = customerRepository.getCustomerById(id);
 
