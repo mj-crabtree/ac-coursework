@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class PickPackRepository {
-	private OrderService orderService;
+	private final OrderService orderService;
 
 	public PickPackRepository(OrderService orderService) {
 		this.orderService = orderService;

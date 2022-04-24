@@ -1,8 +1,6 @@
 package com.crabtree.customDSA.dataStructures.hashMap;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class HashMap<K, V> implements CustomMap<K, V> {
 
@@ -185,24 +183,6 @@ public class HashMap<K, V> implements CustomMap<K, V> {
 			return size;
 		}
 
-		@Override
-		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			for (int key = 0; key < collection.length; key++) {
-				List<HashMapKeyValuePair<K, V>> list = Collections.singletonList(collection[key]);
-				for (int item = 0; item < list.size(); item++) {
-					HashMapKeyValuePair<K, V> p = list.get(item);
-					V value = p.value;
-					if (value != null) builder
-							.append(key)
-							.append("=")
-							.append(value)
-							.append(", ");
-				}
-			}
-			return builder.toString();
-		}
-
 		private V put(HashMap.HashMapKeyValuePair<K, V> newPair) {
 			V previousEntry = null;
 			int index = indexOf(newPair.key);
@@ -262,7 +242,6 @@ public class HashMap<K, V> implements CustomMap<K, V> {
 			HashMap.HashMapKeyValuePair<K, V>[] previousCollection = this.collection;
 
 			int largerSize = getLargerSize(collection.length);
-			//System.out.println("increase from "+array.length+" to "+length);
 			initialiseCollection(largerSize);
 
 			populateNewCollection(previousCollection);
@@ -272,7 +251,6 @@ public class HashMap<K, V> implements CustomMap<K, V> {
 			HashMapKeyValuePair<K, V>[] previousCollection = this.collection;
 
 			int smallerSize = getSmallerSize(collection.length);
-			//System.out.println("reduce from "+array.length+" to "+length);
 			initialiseCollection(smallerSize);
 
 			// Re-hash old data

@@ -133,10 +133,10 @@ public class OrderRepository {
 	}
 
 	public DequeImpl<CustomerOrder> getPendingCustomerOrdersByDateDescending() {
-		insertionSort.sort(this.customerOrders, OrderComparatorFactory.getComparator("Status", SortDirection.ASC));
+		insertionSort.sort(this.customerOrders, OrderComparatorFactory.getComparator("Status", SortDirection.DESC));
 		var result = new DequeImpl<CustomerOrder>();
 		for (int i = customerOrders.count() - 1; i >= 0; i--) {
-			var order = getOrderById(i+1);
+			var order = getOrderById(i + 1);
 			if (order.getOrderStatus() == OrderStatus.PENDING) {
 				result.addFirst(order);
 			}
@@ -150,7 +150,7 @@ public class OrderRepository {
 	public void setOrderStatus(CustomerOrder order, OrderStatus status) {
 		var updatedOrder = getOrderById(order.getId());
 		updatedOrder.setOrderStatus(status);
-		this.customerOrders.put(order.getId() -1, updatedOrder);
+		this.customerOrders.put(order.getId() - 1, updatedOrder);
 	}
 
 	public void sort(SortHelper sortingData) {

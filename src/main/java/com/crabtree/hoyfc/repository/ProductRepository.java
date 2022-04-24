@@ -56,10 +56,10 @@ public class ProductRepository {
 					.getProductSku()
 					.toLowerCase();
 
-			if (KMPSearch.search(nameHaystack, needle) == 1) {
+			if (KMPSearch.search(nameHaystack, needle.toLowerCase()) == 1) {
 				result.add(product);
 			}
-			else if (KMPSearch.search(skuHaystack, needle) == 1) {
+			else if (KMPSearch.search(skuHaystack, needle.toLowerCase()) == 1) {
 				result.add(product);
 			}
 		}
@@ -83,15 +83,18 @@ public class ProductRepository {
 	}
 
 	public void deductFromStockCount(Integer productId, Integer quantity) {
-		var product = getByIndex(productId -1);
+		var product = getByProductId(productId);
 		var oldCount = product
-				.getStockCount().getCurrentStock();
-
-		var newcount = oldCount -= quantity;
-
-		product.setStockCount(new StockCount(newcount, product
 				.getStockCount()
-				.getRestockTrigger()));
+				.getCurrentStock();
+		var rt = product
+				.getStockCount()
+				.getRestockTrigger();
+
+
+		var newcount = oldCount - quantity;
+		var newStockCount = new StockCount(newcount, rt);
+		product.setStockCount(newStockCount);
 
 		update(product);
 	}

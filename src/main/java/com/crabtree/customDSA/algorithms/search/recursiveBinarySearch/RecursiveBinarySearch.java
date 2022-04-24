@@ -13,6 +13,10 @@ import com.crabtree.hoyfc.service.pageSort.SortDirection;
 
 public class RecursiveBinarySearch {
 
+	public Integer testSearch(int[] data, Integer key) {
+		return testSearch(data, key, 0, data.length);
+	}
+
 	public int productIdSearch(DynamicDataStructure<Product> collection, Integer key) {
 		var is = new InsertionSort();
 		is.sort(collection, ProductComparatorFactory.getComparator("Id", SortDirection.ASC));
@@ -112,6 +116,23 @@ public class RecursiveBinarySearch {
 		}
 		else {
 			return searchForCustomerId(collection, key, median + 1, right);
+		}
+	}
+
+	private Integer testSearch(int[] data, Integer key, int left, int right) {
+		if (right <= left) return -1;
+
+		int median = (left + right) >>> 1;
+		int comparison = Integer.compare(key, data[median]);
+
+		if (comparison == 0) {
+			return median;
+		}
+		else if (comparison < 0) {
+			return testSearch(data, key, left, median);
+		}
+		else {
+			return testSearch(data, key, median + 1, right);
 		}
 	}
 }

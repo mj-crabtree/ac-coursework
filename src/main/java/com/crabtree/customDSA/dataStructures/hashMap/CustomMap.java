@@ -1,15 +1,15 @@
 package com.crabtree.customDSA.dataStructures.hashMap;
 
 public interface CustomMap<K, V> {
-	public V put(K key, V value);
+	V put(K key, V value);
 
-	public V get(K key);
+	V get(K key);
 
-	public V remove(K key);
+	V remove(K key);
 
-	public void clear();
+	void clear();
 
-	public boolean contains(K key);
+	boolean contains(K key);
 
-	public int size();
+	int size();
 }

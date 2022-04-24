@@ -9,5 +9,4 @@ public class HoyfcApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HoyfcApplication.class, args);
 	}
-
 }

@@ -5,8 +5,8 @@ import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.model.customer.comparatorFactory.CustomerComparatorFactory;
 import com.crabtree.hoyfc.model.customer.createCustomer.CreateCustomerParameters;
-import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.repository.CustomerRepository;
+import com.crabtree.hoyfc.service.factory.ModelFactory;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import org.springframework.stereotype.Service;
 

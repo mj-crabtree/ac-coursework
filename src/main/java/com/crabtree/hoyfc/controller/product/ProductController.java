@@ -70,7 +70,7 @@ public class ProductController {
 	@GetMapping(value = "sort")
 	// http://localhost:8080/products/sort?sortColumn=Name&sortDirection=ASC
 	public String sortProducts(Model model,
-							   @RequestParam(name = "p") Integer pageNumber,
+	                           @RequestParam(name = "p") Integer pageNumber,
 	                           @RequestParam(name = "sortColumn") String sortColumn,
 	                           @RequestParam(name = "sortDirection") String sortDirection) {
 

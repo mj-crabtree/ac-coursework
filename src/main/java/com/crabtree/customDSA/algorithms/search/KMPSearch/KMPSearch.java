@@ -6,6 +6,14 @@ public class KMPSearch {
 	}
 
 	private static int knuthMorrisPratt(String haystack, String needle) {
+		if (haystack == null || haystack.isEmpty() || haystack.isBlank()) {
+			throw new IllegalArgumentException("Haystack cannot be null or empty");
+		}
+		if (needle == null || needle.isEmpty() || needle.isBlank()) {
+			throw new IllegalArgumentException("Needle cannot be null or empty");
+		}
+
+
 		int haystackLength = haystack.length();
 		int needleLength = needle.length();
 

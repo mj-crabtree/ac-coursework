@@ -61,7 +61,7 @@ public class OrderComparatorFactory {
 				.equals("ASC") ? OrderIdComparator.ascending() : OrderIdComparator.descending();
 	}
 
-	private static class OrderStatusComparator {
+	protected static class OrderStatusComparator {
 		public static Comparator<CustomerOrder> ascending() {
 			return (o1, o2) -> {
 				int result = o1
@@ -95,7 +95,7 @@ public class OrderComparatorFactory {
 		}
 	}
 
-	private static class OrderTotalComparator {
+	protected static class OrderTotalComparator {
 		public static Comparator<CustomerOrder> ascending() {
 			return (o1, o2) -> o1
 					.getTotalOrderCost()
@@ -109,7 +109,7 @@ public class OrderComparatorFactory {
 		}
 	}
 
-	private static class OrderDateComparator {
+	protected static class OrderDateComparator {
 		public static Comparator<CustomerOrder> ascending() {
 			return (o1, o2) -> o1
 					.getOrderDateTime()
@@ -123,7 +123,7 @@ public class OrderComparatorFactory {
 		}
 	}
 
-	private static class OrderNameComparator {
+	protected static class OrderNameComparator {
 		public static Comparator<CustomerOrder> ascending() {
 			return (o1, o2) -> o1
 					.getOrderCustomer()
@@ -147,7 +147,7 @@ public class OrderComparatorFactory {
 		}
 	}
 
-	private static class OrderIdComparator {
+	protected static class OrderIdComparator {
 		public static Comparator<CustomerOrder> ascending() {
 			return (o1, o2) -> o1
 					.getPublicOrderId()
@@ -161,7 +161,7 @@ public class OrderComparatorFactory {
 		}
 	}
 
-	private static class OrderInternalIdComparator {
+	protected static class OrderInternalIdComparator {
 		public static Comparator<CustomerOrder> ascending() {
 			return (o1, o2) -> o1
 					.getId()
