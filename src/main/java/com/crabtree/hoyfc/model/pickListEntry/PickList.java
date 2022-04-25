@@ -1,4 +1,4 @@
-package com.crabtree.hoyfc.controller.pickpack;
+package com.crabtree.hoyfc.model.pickListEntry;
 
 import java.util.ArrayList;
 import java.util.List;

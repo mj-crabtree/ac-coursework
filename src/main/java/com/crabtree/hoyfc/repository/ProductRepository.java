@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Locale;
 
 @Service
-public class ProductRepository {
+public class ProductRepository implements CustomRepository {
 
 	private final DynamicArrayList<Product> products;
 
@@ -82,6 +82,11 @@ public class ProductRepository {
 		return result;
 	}
 
+	public Product getByProductId(Integer productId) {
+		var bs = new RecursiveBinarySearch();
+		return getByIndex(bs.productIdSearch(this.products, productId));
+	}
+
 	public void deductFromStockCount(Integer productId, Integer quantity) {
 		var product = getByProductId(productId);
 		var oldCount = product
@@ -97,10 +102,5 @@ public class ProductRepository {
 		product.setStockCount(newStockCount);
 
 		update(product);
-	}
-
-	public Product getByProductId(Integer productId) {
-		var bs = new RecursiveBinarySearch();
-		return getByIndex(bs.productIdSearch(this.products, productId));
 	}
 }

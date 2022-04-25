@@ -19,7 +19,7 @@ class RecursiveBinarySearchTest {
 
 	@Test
 	@DisplayName("Should return -1 if item is not found")
-	public void shouldReturn1IfItemIsNotFound() {
+	public void ShouldReturnNegativeOneIfItemIsNotFound() {
 		var expected = -1;
 		var actual = recursiveBinarySearch.testSearch(this.data, -1);
 		Assertions.assertEquals(expected, actual);

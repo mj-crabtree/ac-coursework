@@ -1,6 +1,7 @@
 package com.crabtree.hoyfc.controller.customer;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
+import com.crabtree.hoyfc.controller.CustomController;
 import com.crabtree.hoyfc.model.customer.Customer;
 import com.crabtree.hoyfc.service.customer.CustomerService;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/customers/search")
-public class CustomerSearchController {
+public class CustomerSearchController implements CustomController {
 	private final CustomerService customerService;
 	private final SortHelper sortingData;
 	private DynamicArrayList<Customer> searchResults;

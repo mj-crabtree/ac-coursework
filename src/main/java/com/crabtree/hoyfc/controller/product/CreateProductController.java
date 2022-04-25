@@ -1,5 +1,6 @@
 package com.crabtree.hoyfc.controller.product;
 
+import com.crabtree.hoyfc.controller.CustomController;
 import com.crabtree.hoyfc.model.product.ProductStatus;
 import com.crabtree.hoyfc.model.product.ProductType;
 import com.crabtree.hoyfc.model.product.createProduct.CreateProductFormData;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/newproduct")
-public class CreateProductController {
+public class CreateProductController implements CustomController {
 
 	private final ProductService productService;
 

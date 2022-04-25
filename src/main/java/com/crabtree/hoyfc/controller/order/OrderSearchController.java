@@ -1,6 +1,7 @@
 package com.crabtree.hoyfc.controller.order;
 
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
+import com.crabtree.hoyfc.controller.CustomController;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.service.customer.CustomerService;
 import com.crabtree.hoyfc.service.order.OrderService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/orders/search")
-public class OrderSearchController {
+public class OrderSearchController implements CustomController {
 
 	private final OrderService orderService;
 	private final CustomerService customerService;

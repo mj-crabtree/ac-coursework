@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderRepository {
+public class OrderRepository implements CustomRepository {
 	private final DynamicArrayList<CustomerOrder> customerOrders;
 	private final InsertionSort insertionSort;
 

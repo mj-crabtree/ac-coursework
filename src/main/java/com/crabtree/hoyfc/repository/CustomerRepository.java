@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Locale;
 
 @Service
-public class CustomerRepository {
+public class CustomerRepository implements CustomRepository {
 	private final DynamicArrayList<Customer> customers;
 
 	public CustomerRepository() {

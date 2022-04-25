@@ -2,8 +2,8 @@ package com.crabtree.hoyfc.service.pickPack;
 
 import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
-import com.crabtree.hoyfc.controller.pickpack.PickList;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
+import com.crabtree.hoyfc.model.pickListEntry.PickList;
 import com.crabtree.hoyfc.model.pickListEntry.PickListEntry;
 import com.crabtree.hoyfc.repository.PickPackRepository;
 import com.crabtree.hoyfc.service.order.OrderService;

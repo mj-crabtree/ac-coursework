@@ -2,8 +2,10 @@ package com.crabtree.hoyfc.controller.pickpack;
 
 import com.crabtree.customDSA.dataStructures.deque.DequeImpl;
 import com.crabtree.customDSA.dataStructures.dynamicArrayList.DynamicArrayList;
+import com.crabtree.hoyfc.controller.CustomController;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.model.customerOrder.OrderStatus;
+import com.crabtree.hoyfc.model.pickListEntry.PickList;
 import com.crabtree.hoyfc.service.order.OrderService;
 import com.crabtree.hoyfc.service.pageSort.SortHelper;
 import com.crabtree.hoyfc.service.pickPack.PickPackService;
@@ -20,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/pickpack")
-public class PickPackController {
+public class PickPackController implements CustomController {
 	private final OrderService orderService;
 	private final ProductService productService;
 	private final PickPackService pickPackService;

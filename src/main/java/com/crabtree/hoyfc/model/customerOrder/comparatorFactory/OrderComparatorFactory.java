@@ -1,11 +1,12 @@
 package com.crabtree.hoyfc.model.customerOrder.comparatorFactory;
 
+import com.crabtree.hoyfc.model.CustomComparator;
 import com.crabtree.hoyfc.model.customerOrder.CustomerOrder;
 import com.crabtree.hoyfc.service.pageSort.SortDirection;
 
 import java.util.Comparator;
 
-public class OrderComparatorFactory {
+public class OrderComparatorFactory implements CustomComparator {
 	public static Comparator<CustomerOrder> getComparator(String sortColumn, SortDirection sortDirection) {
 		switch (sortColumn) {
 			case "InternalId":
