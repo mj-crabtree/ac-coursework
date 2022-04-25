@@ -27,7 +27,6 @@ public class ProductBootstrap implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Hello World from product");
 		for (int i = 0; i < 100; i++) {
 			CreateProductParameters parameters = newRandomProductParameters();
 			var product = productService.makeProduct(parameters);

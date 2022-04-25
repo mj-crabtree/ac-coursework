@@ -29,12 +29,10 @@ public class CustomerBootstrap implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Hello World from customer");
 		for (int i = 0; i < 100; i++) {
 			CreateCustomerParameters parameters = newRandomUserParameters();
 			customerService.createCustomer(parameters);
 		}
-		System.out.println();
 	}
 
 	private CreateCustomerParameters newRandomUserParameters() {

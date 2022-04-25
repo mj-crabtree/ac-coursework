@@ -73,7 +73,6 @@ public class OrdersBootstrap implements CommandLineRunner {
 
 	private CustomerOrder buildNewCustomerOrder(Customer customer, int lineItems) {
 
-		// todo: tidy this up!
 		var customerOrder = new CustomerOrder();
 		customerOrder.setId(orderService.getOrderCount() + 1);
 		customerOrder.setPublicOrderId(OrderIdService.getNextOrderId());
