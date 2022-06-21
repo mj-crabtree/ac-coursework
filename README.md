@@ -1,4 +1,4 @@
-# Algorithms & Collections Coursework, Spring '22
+# Algorithms & Collections Coursework
 
 ## Overview
 An inventory management proof of concept web application built with Spring MVC for (and alongside) a [small business](https://hoyfc.com/) focusing on: 
